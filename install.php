@@ -51,6 +51,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $dbname = trim($_POST['dbname'] ?? '');
     $username = trim($_POST['username'] ?? '');
     $password = $_POST['password'] ?? '';
+    $dbtype = trim($_POST['dbtype'] ?? 'mysql'); // 'mysql' or 'pgsql'
+    $port = trim($_POST['port'] ?? ($dbtype === 'pgsql' ? '5432' : '3306'));
     
     // Validate inputs
     if (empty($dbname)) {
@@ -62,19 +64,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     if (empty($errors)) {
         try {
-            // Connect to database
-            $dsn = "mysql:host=$host;charset=utf8mb4";
-            $pdo = new PDO($dsn, $username, $password);
-            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            if ($dbtype === 'pgsql') {
+                // PostgreSQL connection - connect directly to database
+                $dsn = "pgsql:host=$host;port=$port;dbname=$dbname";
+                $pdo = new PDO($dsn, $username, $password);
+                $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                
+                // Read and execute PostgreSQL SQL file
+                $sqlFile = __DIR__ . '/database_pgsql.sql';
+            } else {
+                // MySQL connection
+                $dsn = "mysql:host=$host;charset=utf8mb4";
+                $pdo = new PDO($dsn, $username, $password);
+                $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                
+                // Create database if not exists (MySQL only)
+                $pdo->exec("CREATE DATABASE IF NOT EXISTS `$dbname` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci");
+                $pdo->exec("USE `$dbname`");
+                
+                // Read and execute MySQL SQL file
+                $sqlFile = __DIR__ . '/database.sql';
+            }
             
-            // Create database if not exists
-            $pdo->exec("CREATE DATABASE IF NOT EXISTS `$dbname` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci");
-            $pdo->exec("USE `$dbname`");
-            
-            // Read and execute SQL file
-            $sqlFile = __DIR__ . '/database.sql';
             if (!file_exists($sqlFile)) {
-                throw new Exception('database.sql file not found!');
+                throw new Exception("SQL file not found: $sqlFile");
             }
             
             $sql = file_get_contents($sqlFile);
@@ -84,7 +97,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             
             foreach ($statements as $statement) {
                 if (!empty($statement) && substr($statement, 0, 2) !== '--') {
-                    $pdo->exec($statement);
+                    try {
+                        $pdo->exec($statement);
+                    } catch (PDOException $e) {
+                        // Ignore "already exists" errors
+                        if (strpos($e->getMessage(), 'already exists') === false && 
+                            strpos($e->getMessage(), 'duplicate') === false) {
+                            throw $e;
+                        }
+                    }
                 }
             }
             
@@ -92,40 +113,56 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $configContent = "<?php
 /**
  * Database Configuration
+ * Supports both MySQL and PostgreSQL for cloud deployment (Render.com, etc.)
  */
 
-define('DB_HOST', '$host');
-define('DB_NAME', '$dbname');
-define('DB_USER', '$username');
-define('DB_PASS', '$password');
+// Read from environment variables if available (for Render.com, Docker, etc.)
+// Otherwise use default values
+\$dbHost = getenv('DB_HOST') ?: '$host';
+\$dbName = getenv('DB_NAME') ?: '$dbname';
+\$dbUser = getenv('DB_USER') ?: '$username';
+\$dbPass = getenv('DB_PASS') ?: '$password';
+\$dbPort = getenv('DB_PORT') ?: '$port';
+\$dbType = getenv('DB_TYPE') ?: '$dbtype'; // 'mysql' or 'pgsql'
+
+// Define constants for backward compatibility
+define('DB_HOST', \$dbHost);
+define('DB_NAME', \$dbName);
+define('DB_USER', \$dbUser);
+define('DB_PASS', \$dbPass);
+define('DB_TYPE', \$dbType);
 
 // Create PDO connection
 try {
-    \$pdo = new PDO(
-        'mysql:host=' . DB_HOST . ';dbname=' . DB_NAME . ';charset=utf8mb4',
-        DB_USER,
-        DB_PASS,
-        [
-            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-            PDO::ATTR_EMULATE_PREPARES => false
-        ]
-    );
+    if (\$dbType === 'pgsql') {
+        // PostgreSQL connection
+        \$dsn = \"pgsql:host=\$dbHost;port=\$dbPort;dbname=\$dbName\";
+    } else {
+        // MySQL connection
+        \$dsn = \"mysql:host=\$dbHost;port=\$dbPort;dbname=\$dbName;charset=utf8mb4\";
+    }
+    
+    \$pdo = new PDO(\$dsn, \$dbUser, \$dbPass, [
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+        PDO::ATTR_EMULATE_PREPARES => false
+    ]);
 } catch (PDOException \$e) {
-    die('Database connection failed: ' . \$e->getMessage());
+    die('Database connection failed: ' . \$e->getMessage() . '<br>Host: ' . \$dbHost . '<br>Type: ' . \$dbType);
 }
 
 // Session configuration
 ini_set('session.cookie_httponly', 1);
 ini_set('session.use_only_cookies', 1);
-ini_set('session.cookie_secure', 0); // Set to 1 if using HTTPS
+ini_set('session.cookie_secure', 1); // Use 1 for HTTPS on Render
 
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// Site URL
-define('SITE_URL', 'http://' . \$_SERVER['HTTP_HOST'] . dirname(\$_SERVER['PHP_SELF']));
+// Site URL - detect HTTPS
+\$protocol = (!empty(\$_SERVER['HTTPS']) && \$_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
+define('SITE_URL', \$protocol . '://' . \$_SERVER['HTTP_HOST'] . dirname(\$_SERVER['PHP_SELF']));
 ";
             
             $configDir = __DIR__ . '/includes';
@@ -236,11 +273,30 @@ define('SITE_URL', 'http://' . \$_SERVER['HTTP_HOST'] . dirname(\$_SERVER['PHP_S
                     <form method="POST" action="">
                         <div class="space-y-4">
                             <div>
+                                <label class="block text-gray-700 font-medium mb-2">Database Type</label>
+                                <select name="dbtype" id="dbtype" 
+                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                        onchange="updatePort()">
+                                    <option value="mysql">MySQL</option>
+                                    <option value="pgsql">PostgreSQL</option>
+                                </select>
+                                <p class="text-sm text-gray-500 mt-1">Select your database type</p>
+                            </div>
+                            
+                            <div>
                                 <label class="block text-gray-700 font-medium mb-2">Database Host</label>
                                 <input type="text" name="host" value="localhost" 
                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                                        required>
-                                <p class="text-sm text-gray-500 mt-1">Usually "localhost" for shared hosting</p>
+                                <p class="text-sm text-gray-500 mt-1">For Render.com: Use hostname from Internal Database URL (e.g., dpg-xxxxx-a.oregon-postgres.render.com)</p>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-gray-700 font-medium mb-2">Database Port</label>
+                                <input type="text" name="port" id="port" value="3306" 
+                                       class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                       required>
+                                <p class="text-sm text-gray-500 mt-1">MySQL: 3306, PostgreSQL: 5432</p>
                             </div>
                             
                             <div>
@@ -249,7 +305,7 @@ define('SITE_URL', 'http://' . \$_SERVER['HTTP_HOST'] . dirname(\$_SERVER['PHP_S
                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                                        placeholder="anthem_school_db"
                                        required>
-                                <p class="text-sm text-gray-500 mt-1">Your database name from cPanel</p>
+                                <p class="text-sm text-gray-500 mt-1">Your database name</p>
                             </div>
                             
                             <div>
@@ -269,7 +325,8 @@ define('SITE_URL', 'http://' . \$_SERVER['HTTP_HOST'] . dirname(\$_SERVER['PHP_S
                             
                             <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
                                 <p class="text-sm text-yellow-800">
-                                    <strong>Note:</strong> Make sure you have created the database in your hosting control panel (cPanel/Plesk) before running this installation.
+                                    <strong>Note:</strong> 
+                                    <span id="db-note">For MySQL: Make sure you have created the database in your hosting control panel before running this installation.</span>
                                 </p>
                             </div>
                             
@@ -287,6 +344,22 @@ define('SITE_URL', 'http://' . \$_SERVER['HTTP_HOST'] . dirname(\$_SERVER['PHP_S
             <p>Anthem Public School © <?php echo date('Y'); ?></p>
         </div>
     </div>
+    
+    <script>
+        function updatePort() {
+            const dbType = document.getElementById('dbtype').value;
+            const portField = document.getElementById('port');
+            const noteField = document.getElementById('db-note');
+            
+            if (dbType === 'pgsql') {
+                portField.value = '5432';
+                noteField.textContent = 'For PostgreSQL (Render.com): Use the Internal Database URL hostname. The database should already exist.';
+            } else {
+                portField.value = '3306';
+                noteField.textContent = 'For MySQL: Make sure you have created the database in your hosting control panel before running this installation.';
+            }
+        }
+    </script>
 </body>
 </html>
 
