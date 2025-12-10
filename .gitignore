@@ -1,0 +1,36 @@
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Installation lock
+install.lock
+
+# Uploads (if you want to exclude from git)
+# uploads/*
+
+# OS files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# IDE files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+tmp/
+temp/
+
+# Database backups
+*.sql.backup
+*.sql.gz
+

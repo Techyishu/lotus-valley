@@ -1,0 +1,11 @@
+.git
+.gitignore
+README.md
+.DS_Store
+*.log
+node_modules
+.vscode
+.idea
+*.md
+install.lock
+

@@ -1,12 +1,15 @@
 <?php
 /**
  * Database Configuration
+ * Supports environment variables for cloud deployment (Render.com, etc.)
  */
 
-define('DB_HOST', 'localhost');
-define('DB_NAME', 'anthem_school_db');
-define('DB_USER', 'anthem');
-define('DB_PASS', 'anthem123');
+// Read from environment variables if available (for Render.com, Docker, etc.)
+// Otherwise use default values
+define('DB_HOST', getenv('DB_HOST') ?: 'localhost');
+define('DB_NAME', getenv('DB_NAME') ?: 'anthem_school_db');
+define('DB_USER', getenv('DB_USER') ?: 'anthem');
+define('DB_PASS', getenv('DB_PASS') ?: 'anthem123');
 
 // Create PDO connection
 try {
