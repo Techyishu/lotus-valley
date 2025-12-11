@@ -5,8 +5,19 @@ global $pdo;
 
 // Handle status update
 if (isset($_POST['update_status']) && verifyCSRFToken($_POST['csrf_token'])) {
-    $stmt = $pdo->prepare("UPDATE testimonials SET status = ?, is_featured = ? WHERE id = ?");
-    $stmt->execute([$_POST['status'], (int)($_POST['is_featured'] ?? 0), (int)$_POST['id']]);
+    // Handle boolean for PostgreSQL vs MySQL
+    $dbType = defined('DB_TYPE') ? DB_TYPE : 'mysql';
+    $isFeaturedValue = isset($_POST['is_featured']) ? 1 : 0;
+    
+    if ($dbType === 'pgsql') {
+        // PostgreSQL: use boolean casting in SQL
+        $stmt = $pdo->prepare("UPDATE testimonials SET status = ?, is_featured = ?::boolean WHERE id = ?");
+        $stmt->execute([$_POST['status'], $isFeaturedValue, (int)$_POST['id']]);
+    } else {
+        // MySQL: use integer
+        $stmt = $pdo->prepare("UPDATE testimonials SET status = ?, is_featured = ? WHERE id = ?");
+        $stmt->execute([$_POST['status'], $isFeaturedValue, (int)$_POST['id']]);
+    }
     echo "<script>showToast('Testimonial updated', 'success');</script>";
 }
 
@@ -66,7 +77,11 @@ $testimonials = $stmt->fetchAll();
                         <option value="rejected" <?php echo $test['status'] === 'rejected' ? 'selected' : ''; ?>>Rejected</option>
                     </select>
                     <label class="flex items-center text-sm">
-                        <input type="checkbox" name="is_featured" value="1" <?php echo $test['is_featured'] ? 'checked' : ''; ?> class="mr-2">Featured
+                        <?php 
+                        // Handle boolean for PostgreSQL (returns true/false) vs MySQL (returns 1/0)
+                        $isChecked = ($test['is_featured'] === true || $test['is_featured'] === 't' || $test['is_featured'] == 1);
+                        ?>
+                        <input type="checkbox" name="is_featured" value="1" <?php echo $isChecked ? 'checked' : ''; ?> class="mr-2">Featured
                     </label>
                     <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm">Update</button>
                     <a href="?delete=<?php echo $test['id']; ?>&token=<?php echo generateCSRFToken(); ?>" 

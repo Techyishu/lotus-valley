@@ -189,7 +189,11 @@ function getAnnouncements($limit = null, $status = 'published') {
 function getEvents($limit = null, $status = 'upcoming') {
     global $pdo;
     try {
-        $sql = "SELECT * FROM events WHERE status = ? AND event_date >= CURDATE() ORDER BY event_date ASC";
+        // PostgreSQL uses CURRENT_DATE, MySQL uses CURDATE()
+        $dbType = defined('DB_TYPE') ? DB_TYPE : 'mysql';
+        $dateFunction = ($dbType === 'pgsql') ? 'CURRENT_DATE' : 'CURDATE()';
+        
+        $sql = "SELECT * FROM events WHERE status = ? AND event_date >= $dateFunction ORDER BY event_date ASC";
         $params = [$status];
         
         if ($limit) {
@@ -211,25 +215,30 @@ function getEvents($limit = null, $status = 'upcoming') {
 function getTestimonials($featured = false, $limit = null) {
     global $pdo;
     try {
+        // Handle boolean for PostgreSQL vs MySQL
+        $dbType = defined('DB_TYPE') ? DB_TYPE : 'mysql';
+        
         $sql = "SELECT * FROM testimonials WHERE status = 'approved'";
+        $params = [];
         
         if ($featured) {
-            $sql .= " AND is_featured = 1";
+            // PostgreSQL needs boolean cast, MySQL uses integer
+            if ($dbType === 'pgsql') {
+                $sql .= " AND is_featured = true";
+            } else {
+                $sql .= " AND is_featured = 1";
+            }
         }
         
         $sql .= " ORDER BY created_at DESC";
         
         if ($limit) {
             $sql .= " LIMIT ?";
+            $params[] = $limit;
         }
         
         $stmt = $pdo->prepare($sql);
-        
-        if ($limit) {
-            $stmt->execute([$limit]);
-        } else {
-            $stmt->execute();
-        }
+        $stmt->execute($params);
         
         return $stmt->fetchAll();
     } catch (PDOException $e) {

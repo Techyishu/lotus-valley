@@ -33,7 +33,10 @@ try {
     $recentAnnouncements = $stmt->fetchAll();
     
     // Get upcoming events
-    $stmt = $pdo->query("SELECT * FROM events WHERE event_date >= CURDATE() ORDER BY event_date ASC LIMIT 5");
+    // PostgreSQL uses CURRENT_DATE, MySQL uses CURDATE()
+    $dbType = defined('DB_TYPE') ? DB_TYPE : 'mysql';
+    $dateFunction = ($dbType === 'pgsql') ? 'CURRENT_DATE' : 'CURDATE()';
+    $stmt = $pdo->query("SELECT * FROM events WHERE event_date >= $dateFunction ORDER BY event_date ASC LIMIT 5");
     $upcomingEvents = $stmt->fetchAll();
     
 } catch (PDOException $e) {
