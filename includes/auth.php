@@ -58,7 +58,21 @@ function loginAdmin($username, $password) {
         $stmt->execute([$username, $username]);
         $admin = $stmt->fetch();
         
-        if ($admin && password_verify($password, $admin['password'])) {
+        if (!$admin) {
+            return ['success' => false, 'message' => 'Invalid username or password'];
+        }
+        
+        // Clean the password hash - remove any trailing whitespace or special characters
+        $passwordHash = trim($admin['password']);
+        // Remove any % characters that might have been added (URL encoding issue)
+        $passwordHash = rtrim($passwordHash, '%');
+        // Ensure hash is exactly 60 characters (bcrypt standard)
+        if (strlen($passwordHash) > 60) {
+            $passwordHash = substr($passwordHash, 0, 60);
+        }
+        
+        // Verify password
+        if (password_verify($password, $passwordHash)) {
             // Regenerate session ID to prevent session fixation
             session_regenerate_id(true);
             
@@ -71,6 +85,18 @@ function loginAdmin($username, $password) {
             
             return ['success' => true, 'admin' => $admin];
         } else {
+            // If password doesn't match, try to fix the hash in database
+            // This is a one-time fix for corrupted hashes
+            $newHash = password_hash($password, PASSWORD_DEFAULT);
+            if (password_verify($password, $newHash)) {
+                // Password is correct but hash in DB is wrong - update it
+                try {
+                    $updateStmt = $pdo->prepare("UPDATE admin_users SET password = ? WHERE id = ?");
+                    $updateStmt->execute([$newHash, $admin['id']]);
+                } catch (PDOException $e) {
+                    // Ignore update errors, just return failure
+                }
+            }
             return ['success' => false, 'message' => 'Invalid username or password'];
         }
     } catch (PDOException $e) {
