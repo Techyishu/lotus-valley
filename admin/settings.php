@@ -28,9 +28,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         ];
         
         try {
+            // PostgreSQL doesn't support ON UPDATE CURRENT_TIMESTAMP, so update manually
+            $dbType = defined('DB_TYPE') ? DB_TYPE : 'mysql';
+            
             foreach ($updates as $key => $value) {
-                $stmt = $pdo->prepare("UPDATE site_settings SET setting_value = ? WHERE setting_key = ?");
-                $stmt->execute([$value, $key]);
+                if ($dbType === 'pgsql') {
+                    // PostgreSQL: manually update timestamp
+                    $stmt = $pdo->prepare("UPDATE site_settings SET setting_value = ?, updated_at = CURRENT_TIMESTAMP WHERE setting_key = ?");
+                    $stmt->execute([$value, $key]);
+                } else {
+                    // MySQL: ON UPDATE CURRENT_TIMESTAMP handles it automatically
+                    $stmt = $pdo->prepare("UPDATE site_settings SET setting_value = ? WHERE setting_key = ?");
+                    $stmt->execute([$value, $key]);
+                }
             }
             
             $message = 'Settings updated successfully';

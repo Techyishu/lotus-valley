@@ -78,7 +78,13 @@ function getToppers($year = null, $limit = null) {
         $sql .= " ORDER BY percentage DESC, year DESC";
         
         if ($limit) {
-            $sql .= " LIMIT ?";
+            // PostgreSQL requires explicit cast for LIMIT parameter
+            $dbType = defined('DB_TYPE') ? DB_TYPE : 'mysql';
+            if ($dbType === 'pgsql') {
+                $sql .= " LIMIT ?::integer";
+            } else {
+                $sql .= " LIMIT ?";
+            }
             $params[] = $limit;
         }
         
@@ -107,7 +113,13 @@ function getStaff($department = null, $limit = null) {
         $sql .= " ORDER BY display_order ASC, name ASC";
         
         if ($limit) {
-            $sql .= " LIMIT ?";
+            // PostgreSQL requires explicit cast for LIMIT parameter
+            $dbType = defined('DB_TYPE') ? DB_TYPE : 'mysql';
+            if ($dbType === 'pgsql') {
+                $sql .= " LIMIT ?::integer";
+            } else {
+                $sql .= " LIMIT ?";
+            }
             $params[] = $limit;
         }
         
@@ -136,7 +148,13 @@ function getGalleryImages($category = null, $limit = null) {
         $sql .= " ORDER BY uploaded_at DESC";
         
         if ($limit) {
-            $sql .= " LIMIT ?";
+            // PostgreSQL requires explicit cast for LIMIT parameter
+            $dbType = defined('DB_TYPE') ? DB_TYPE : 'mysql';
+            if ($dbType === 'pgsql') {
+                $sql .= " LIMIT ?::integer";
+            } else {
+                $sql .= " LIMIT ?";
+            }
             $params[] = $limit;
         }
         
@@ -171,7 +189,13 @@ function getAnnouncements($limit = null, $status = 'published') {
         $params = [$status];
         
         if ($limit) {
-            $sql .= " LIMIT ?";
+            // PostgreSQL requires explicit cast for LIMIT parameter
+            $dbType = defined('DB_TYPE') ? DB_TYPE : 'mysql';
+            if ($dbType === 'pgsql') {
+                $sql .= " LIMIT ?::integer";
+            } else {
+                $sql .= " LIMIT ?";
+            }
             $params[] = $limit;
         }
         
@@ -197,7 +221,12 @@ function getEvents($limit = null, $status = 'upcoming') {
         $params = [$status];
         
         if ($limit) {
-            $sql .= " LIMIT ?";
+            // PostgreSQL requires explicit cast for LIMIT parameter
+            if ($dbType === 'pgsql') {
+                $sql .= " LIMIT ?::integer";
+            } else {
+                $sql .= " LIMIT ?";
+            }
             $params[] = $limit;
         }
         
@@ -233,7 +262,12 @@ function getTestimonials($featured = false, $limit = null) {
         $sql .= " ORDER BY created_at DESC";
         
         if ($limit) {
-            $sql .= " LIMIT ?";
+            // PostgreSQL requires explicit cast for LIMIT parameter
+            if ($dbType === 'pgsql') {
+                $sql .= " LIMIT ?::integer";
+            } else {
+                $sql .= " LIMIT ?";
+            }
             $params[] = $limit;
         }
         
@@ -388,21 +422,42 @@ function searchContent($query, $limit = 10) {
     $searchTerm = '%' . $query . '%';
     $results = [];
     
+    // Detect database type for compatibility
+    $dbType = defined('DB_TYPE') ? DB_TYPE : 'mysql';
+    
     try {
-        // Search toppers
-        $stmt = $pdo->prepare("SELECT 'topper' as type, id, name as title, CONCAT(marks, ' - ', class, ' (', year, ')') as description FROM toppers WHERE name LIKE ? LIMIT 5");
-        $stmt->execute([$searchTerm]);
-        $results = array_merge($results, $stmt->fetchAll());
-        
-        // Search staff
-        $stmt = $pdo->prepare("SELECT 'staff' as type, id, name as title, CONCAT(designation, ' - ', department) as description FROM staff WHERE name LIKE ? OR designation LIKE ? LIMIT 5");
-        $stmt->execute([$searchTerm, $searchTerm]);
-        $results = array_merge($results, $stmt->fetchAll());
-        
-        // Search announcements
-        $stmt = $pdo->prepare("SELECT 'announcement' as type, id, title, LEFT(content, 100) as description FROM announcements WHERE status = 'published' AND (title LIKE ? OR content LIKE ?) LIMIT 5");
-        $stmt->execute([$searchTerm, $searchTerm]);
-        $results = array_merge($results, $stmt->fetchAll());
+        // PostgreSQL uses || for concatenation, MySQL uses CONCAT()
+        if ($dbType === 'pgsql') {
+            // Search toppers - PostgreSQL
+            $stmt = $pdo->prepare("SELECT 'topper' as type, id, name as title, (marks || ' - ' || class || ' (' || year || ')') as description FROM toppers WHERE name LIKE ? LIMIT 5");
+            $stmt->execute([$searchTerm]);
+            $results = array_merge($results, $stmt->fetchAll());
+            
+            // Search staff - PostgreSQL
+            $stmt = $pdo->prepare("SELECT 'staff' as type, id, name as title, (designation || ' - ' || department) as description FROM staff WHERE name LIKE ? OR designation LIKE ? LIMIT 5");
+            $stmt->execute([$searchTerm, $searchTerm]);
+            $results = array_merge($results, $stmt->fetchAll());
+            
+            // Search announcements - PostgreSQL uses SUBSTRING() instead of LEFT()
+            $stmt = $pdo->prepare("SELECT 'announcement' as type, id, title, SUBSTRING(content, 1, 100) as description FROM announcements WHERE status = 'published' AND (title LIKE ? OR content LIKE ?) LIMIT 5");
+            $stmt->execute([$searchTerm, $searchTerm]);
+            $results = array_merge($results, $stmt->fetchAll());
+        } else {
+            // Search toppers - MySQL
+            $stmt = $pdo->prepare("SELECT 'topper' as type, id, name as title, CONCAT(marks, ' - ', class, ' (', year, ')') as description FROM toppers WHERE name LIKE ? LIMIT 5");
+            $stmt->execute([$searchTerm]);
+            $results = array_merge($results, $stmt->fetchAll());
+            
+            // Search staff - MySQL
+            $stmt = $pdo->prepare("SELECT 'staff' as type, id, name as title, CONCAT(designation, ' - ', department) as description FROM staff WHERE name LIKE ? OR designation LIKE ? LIMIT 5");
+            $stmt->execute([$searchTerm, $searchTerm]);
+            $results = array_merge($results, $stmt->fetchAll());
+            
+            // Search announcements - MySQL
+            $stmt = $pdo->prepare("SELECT 'announcement' as type, id, title, LEFT(content, 100) as description FROM announcements WHERE status = 'published' AND (title LIKE ? OR content LIKE ?) LIMIT 5");
+            $stmt->execute([$searchTerm, $searchTerm]);
+            $results = array_merge($results, $stmt->fetchAll());
+        }
         
         return array_slice($results, 0, $limit);
     } catch (PDOException $e) {

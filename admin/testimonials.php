@@ -7,16 +7,17 @@ global $pdo;
 if (isset($_POST['update_status']) && verifyCSRFToken($_POST['csrf_token'])) {
     // Handle boolean for PostgreSQL vs MySQL
     $dbType = defined('DB_TYPE') ? DB_TYPE : 'mysql';
-    $isFeaturedValue = isset($_POST['is_featured']) ? 1 : 0;
     
     if ($dbType === 'pgsql') {
-        // PostgreSQL: use boolean casting in SQL
+        // PostgreSQL: use boolean true/false
+        $isFeatured = isset($_POST['is_featured']) ? 'true' : 'false';
         $stmt = $pdo->prepare("UPDATE testimonials SET status = ?, is_featured = ?::boolean WHERE id = ?");
-        $stmt->execute([$_POST['status'], $isFeaturedValue, (int)$_POST['id']]);
+        $stmt->execute([$_POST['status'], $isFeatured, (int)$_POST['id']]);
     } else {
-        // MySQL: use integer
+        // MySQL: use integer 1/0
+        $isFeatured = isset($_POST['is_featured']) ? 1 : 0;
         $stmt = $pdo->prepare("UPDATE testimonials SET status = ?, is_featured = ? WHERE id = ?");
-        $stmt->execute([$_POST['status'], $isFeaturedValue, (int)$_POST['id']]);
+        $stmt->execute([$_POST['status'], (int)$isFeatured, (int)$_POST['id']]);
     }
     echo "<script>showToast('Testimonial updated', 'success');</script>";
 }
