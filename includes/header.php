@@ -1,4 +1,9 @@
 <?php
+// Prevent caching - send no-cache headers
+header("Cache-Control: no-cache, no-store, must-revalidate, max-age=0");
+header("Pragma: no-cache");
+header("Expires: 0");
+
 if (!isset($pageTitle)) {
     $pageTitle = 'Welcome';
 }
@@ -10,6 +15,9 @@ $currentPage = basename($_SERVER['PHP_SELF']);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
     <title><?php echo clean($pageTitle); ?> - <?php echo clean($schoolName); ?></title>
     <meta name="description" content="<?php echo clean(getSiteSetting('about_text', 'Anthem International School - Prosperity with Purity - Excellence in Education')); ?>">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -91,11 +99,11 @@ $currentPage = basename($_SERVER['PHP_SELF']);
                     <span class="flex items-center text-gold font-medium">
                         <i class="fas fa-award mr-2"></i>CBSE Affiliated
                     </span>
-                    <a href="tel:<?php echo clean(getSiteSetting('school_phone')); ?>" class="hover:text-gold transition">
-                        <i class="fas fa-phone mr-2"></i><?php echo clean(getSiteSetting('school_phone', '+91-9876543210')); ?>
+                    <a href="tel:9896421785" class="hover:text-gold transition">
+                        <i class="fas fa-phone mr-2"></i>9896421785 / 8950081785
                     </a>
-                    <a href="mailto:<?php echo clean(getSiteSetting('school_email')); ?>" class="hover:text-gold transition">
-                        <i class="fas fa-envelope mr-2"></i><?php echo clean(getSiteSetting('school_email', 'info@anthemschool.com')); ?>
+                    <a href="mailto:anthemschool55@gmail.com" class="hover:text-gold transition">
+                        <i class="fas fa-envelope mr-2"></i>anthemschool55@gmail.com
                     </a>
                 </div>
                 <div class="flex items-center space-x-4">
@@ -162,7 +170,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
                     </button>
                     
                     <!-- Admission Button -->
-                    <a href="admission.php" class="bg-gradient-to-r from-maroon to-red-700 text-white px-6 py-2.5 rounded-full hover:from-red-700 hover:to-maroon transition shadow-lg font-semibold">
+                    <a href="admission.php" class="bg-gradient-to-r from-maroon to-red-700 px-6 py-2.5 rounded-full hover:from-red-700 hover:to-maroon transition shadow-lg font-semibold" style="color: var(--maroon-red);">
                         <i class="fas fa-graduation-cap mr-2"></i>Admission
                     </a>
                 </div>

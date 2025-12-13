@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         if (empty($errors)) {
             // Send email to admin
-            $adminEmail = getSiteSetting('school_email', 'info@anthemschool.com');
+            $adminEmail = getSiteSetting('school_email', 'anthemschool55@gmail.com');
             $emailSubject = "Contact Form: " . $subject;
             $emailBody = "
                 <h2>New Contact Form Submission</h2>
@@ -89,8 +89,8 @@ include 'includes/header.php';
                     <i class="fas fa-phone text-3xl"></i>
                 </div>
                 <h3 class="text-xl font-bold mb-3">Call Us</h3>
-                <a href="tel:<?php echo clean($settings['school_phone'] ?? ''); ?>" class="text-green-100 hover:text-white">
-                    <?php echo clean($settings['school_phone'] ?? '+91-9876543210'); ?>
+                <a href="tel:9896421785" class="text-green-100 hover:text-white">
+                    9896421785 / 8950081785
                 </a>
             </div>
             
@@ -99,8 +99,8 @@ include 'includes/header.php';
                     <i class="fas fa-envelope text-3xl"></i>
                 </div>
                 <h3 class="text-xl font-bold mb-3">Email Us</h3>
-                <a href="mailto:<?php echo clean($settings['school_email'] ?? ''); ?>" class="text-purple-100 hover:text-white break-all">
-                    <?php echo clean($settings['school_email'] ?? 'info@anthemschool.com'); ?>
+                <a href="mailto:anthemschool55@gmail.com" class="text-purple-100 hover:text-white break-all">
+                    anthemschool55@gmail.com
                 </a>
             </div>
         </div>
@@ -138,7 +138,7 @@ include 'includes/header.php';
                             <label class="block text-gray-700 font-medium mb-2">Phone *</label>
                             <input type="tel" name="phone" required
                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
-                                   placeholder="+91-9876543210">
+                                   placeholder="9896421785">
                         </div>
                     </div>
                     

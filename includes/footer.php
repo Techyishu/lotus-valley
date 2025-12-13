@@ -18,11 +18,6 @@
                     <p class="text-sm leading-relaxed text-gray-400">
                         <?php echo clean(getSiteSetting('about_text', 'Committed to excellence in education and holistic development of students.')); ?>
                     </p>
-                    <div class="mt-4 flex items-center space-x-2">
-                        <span class="inline-flex items-center bg-gold bg-opacity-20 text-gold px-3 py-1 rounded-full text-xs font-semibold">
-                            <i class="fas fa-award mr-2"></i>CBSE Affiliated
-                        </span>
-                    </div>
                 </div>
 
                 <!-- Quick Links -->
@@ -70,26 +65,20 @@
                         <span class="w-8 h-1 bg-gold mr-3"></span>Contact Us
                     </h3>
                     <ul class="space-y-4 text-sm">
-                        <li class="flex items-start group">
-                            <div class="w-10 h-10 bg-maroon bg-opacity-20 rounded-lg flex items-center justify-center mr-3 flex-shrink-0 group-hover:bg-maroon transition">
-                                <i class="fas fa-map-marker-alt text-gold"></i>
-                            </div>
-                            <span class="text-gray-400 group-hover:text-white transition"><?php echo clean(getSiteSetting('school_address', 'Education City, New Delhi')); ?></span>
-                        </li>
                         <li class="flex items-center group">
                             <div class="w-10 h-10 bg-maroon bg-opacity-20 rounded-lg flex items-center justify-center mr-3 flex-shrink-0 group-hover:bg-maroon transition">
                                 <i class="fas fa-phone text-gold"></i>
                             </div>
-                            <a href="tel:<?php echo clean(getSiteSetting('school_phone')); ?>" class="text-gray-400 hover:text-gold transition">
-                                <?php echo clean(getSiteSetting('school_phone', '+91-9876543210')); ?>
+                            <a href="tel:9896421785" class="text-gray-400 hover:text-gold transition">
+                                9896421785 / 8950081785
                             </a>
                         </li>
                         <li class="flex items-center group">
                             <div class="w-10 h-10 bg-maroon bg-opacity-20 rounded-lg flex items-center justify-center mr-3 flex-shrink-0 group-hover:bg-maroon transition">
                                 <i class="fas fa-envelope text-gold"></i>
                             </div>
-                            <a href="mailto:<?php echo clean(getSiteSetting('school_email')); ?>" class="text-gray-400 hover:text-gold transition">
-                                <?php echo clean(getSiteSetting('school_email', 'info@anthemschool.com')); ?>
+                            <a href="mailto:anthemschool55@gmail.com" class="text-gray-400 hover:text-gold transition">
+                                anthemschool55@gmail.com
                             </a>
                         </li>
                         <li class="flex items-center group">
@@ -164,7 +153,7 @@
 
     <!-- Scroll to Top Button -->
     <button onclick="scrollToTop()" id="scrollTopBtn" 
-            class="hidden fixed bottom-8 right-8 bg-gradient-to-r from-maroon to-red-700 text-white w-12 h-12 rounded-full shadow-2xl hover:from-red-700 hover:to-maroon transition z-40" style="color: var(--navy-blue); background-color: rgba(208, 217, 245, 1);" aria-label="Scroll to top">
+            class="hidden fixed bottom-8 right-8 bg-gradient-to-r from-maroon to-red-700 text-white w-12 h-12 rounded-full shadow-2xl hover:from-red-700 hover:to-maroon transition z-40" aria-label="Scroll to top">
         <i class="fas fa-arrow-up"></i>
     </button>
 

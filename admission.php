@@ -42,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 ]);
                 
                 // Send email to admin
-                $adminEmail = getSiteSetting('school_email', 'info@anthemschool.com');
+                $adminEmail = getSiteSetting('school_email', 'anthemschool55@gmail.com');
                 $emailSubject = "New Admission Inquiry: " . $studentName;
                 $emailBody = "
                     <h2>New Admission Inquiry Received</h2>
@@ -234,7 +234,7 @@ include 'includes/header.php';
                                     <label class="block text-gray-700 font-medium mb-2">Phone Number *</label>
                                     <input type="tel" name="phone" required
                                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
-                                           placeholder="+91-9876543210">
+                                           placeholder="9896421785">
                                 </div>
                             </div>
                         </div>

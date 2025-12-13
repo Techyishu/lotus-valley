@@ -191,11 +191,11 @@ include 'includes/header.php';
 <section class="py-16 md:py-24 bg-white">
     <div class="container mx-auto px-4">
         <div class="text-center mb-16">
-            <span class="inline-block bg-navy bg-opacity-10 text-navy px-4 py-2 rounded-full text-sm font-semibold mb-4" style="color: var(--tw-ring-offset-color);">
+            <span class="inline-block bg-navy px-4 py-2 rounded-full text-sm font-semibold mb-4 text-white">
                 Why Choose Us
             </span>
-            <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
-                Building <span class="gradient-text-school">Future Leaders</span>
+            <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
+                <span class="text-navy">Building</span> <span class="text-maroon">Future</span> <span class="gradient-text-school">Leaders</span>
             </h2>
             <p class="text-gray-600 max-w-2xl mx-auto text-lg">
                 We provide world-class education with a perfect blend of academics, sports, and extracurricular activities.
@@ -204,32 +204,32 @@ include 'includes/header.php';
         
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <div class="group text-center p-8 rounded-2xl bg-gradient-to-br from-gray-50 to-white border border-gray-100 card-hover">
-                <div class="w-20 h-20 mx-auto mb-6 rounded-2xl flex items-center justify-center transform group-hover:rotate-6 transition-transform" style="background: linear-gradient(135deg, rgba(19, 3, 252, 1) 0%, rgba(19, 3, 252, 1) 100%);">
-                    <i class="fas fa-book-open text-3xl" style="color: var(--navy-dark) !important;"></i>
+                <div class="w-20 h-20 mx-auto mb-6 rounded-2xl flex items-center justify-center transform group-hover:rotate-6 transition-transform" style="background: linear-gradient(135deg, #1e3a8a, #2563eb);">
+                    <i class="fas fa-book-open text-3xl" style="color: #ffffff;"></i>
                 </div>
                 <h3 class="text-xl font-bold text-gray-900 mb-3">Quality Education</h3>
                 <p class="text-gray-600">CBSE curriculum with innovative teaching methods and personalized attention</p>
             </div>
             
             <div class="group text-center p-8 rounded-2xl bg-gradient-to-br from-gray-50 to-white border border-gray-100 card-hover">
-                <div class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-maroon to-red-600 rounded-2xl flex items-center justify-center transform group-hover:rotate-6 transition-transform">
-                    <i class="fas fa-chalkboard-teacher text-3xl" style="color: #ffffff !important;"></i>
+                <div class="w-20 h-20 mx-auto mb-6 rounded-2xl flex items-center justify-center transform group-hover:rotate-6 transition-transform" style="background: linear-gradient(135deg, #b91c1c, #dc2626);">
+                    <i class="fas fa-chalkboard-teacher text-3xl" style="color: #ffffff;"></i>
                 </div>
                 <h3 class="text-xl font-bold text-gray-900 mb-3">Expert Faculty</h3>
                 <p class="text-gray-600"><?php echo clean($settings['faculty_count'] ?? '150'); ?>+ experienced teachers dedicated to student success</p>
             </div>
             
             <div class="group text-center p-8 rounded-2xl bg-gradient-to-br from-gray-50 to-white border border-gray-100 card-hover">
-                <div class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-gold to-yellow-500 rounded-2xl flex items-center justify-center transform group-hover:rotate-6 transition-transform">
-                    <i class="fas fa-microscope text-3xl" style="color: var(--gold-light) !important;"></i>
+                <div class="w-20 h-20 mx-auto mb-6 rounded-2xl flex items-center justify-center transform group-hover:rotate-6 transition-transform" style="background: linear-gradient(135deg, #d4af37, #eab308);">
+                    <i class="fas fa-microscope text-3xl" style="color: #ffffff;"></i>
                 </div>
                 <h3 class="text-xl font-bold text-gray-900 mb-3">Modern Infrastructure</h3>
                 <p class="text-gray-600">State-of-the-art labs, smart classrooms, and sports facilities</p>
             </div>
             
             <div class="group text-center p-8 rounded-2xl bg-gradient-to-br from-gray-50 to-white border border-gray-100 card-hover">
-                <div class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-green-600 to-emerald-500 rounded-2xl flex items-center justify-center transform group-hover:rotate-6 transition-transform">
-                    <i class="fas fa-trophy text-3xl" style="color: #ffffff !important;"></i>
+                <div class="w-20 h-20 mx-auto mb-6 rounded-2xl flex items-center justify-center transform group-hover:rotate-6 transition-transform" style="background: linear-gradient(135deg, #16a34a, #10b981);">
+                    <i class="fas fa-trophy text-3xl" style="color: #ffffff;"></i>
                 </div>
                 <h3 class="text-xl font-bold text-gray-900 mb-3">Holistic Development</h3>
                 <p class="text-gray-600">Sports, arts, music, and leadership programs for complete growth</p>
@@ -242,7 +242,7 @@ include 'includes/header.php';
 <section class="py-16 md:py-24 bg-gradient-to-br from-gray-50 to-blue-50">
     <div class="container mx-auto px-4">
         <div class="text-center mb-16">
-            <span class="inline-block bg-maroon bg-opacity-10 text-maroon px-4 py-2 rounded-full text-sm font-semibold mb-4">
+            <span class="inline-block bg-maroon px-4 py-2 rounded-full text-sm font-semibold mb-4 text-white">
                 Our Leadership
             </span>
             <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
@@ -307,16 +307,16 @@ include 'includes/header.php';
                 <div class="grid grid-cols-2 gap-4">
                     <img src="assets/images/logo.jpg" alt="School Leadership" class="rounded-2xl shadow-xl w-full h-48 md:h-64 object-cover">
                     <img src="assets/images/about-school.jpg" alt="School Staff" class="rounded-2xl shadow-xl w-full h-48 md:h-64 object-cover mt-8">
-                    <img src="assets/images/school-building.jpg" alt="School Event" class="rounded-2xl shadow-xl w-full h-48 md:h-64 object-cover col-span-2">
+                    <img src="assets/images/school-building.jpg" alt="School Event" class="rounded-2xl shadow-xl w-full h-48 md:h-64 object-cover object-top col-span-2 block" style="display: block; opacity: 1; visibility: visible; object-position: top center;" onerror="this.style.display='block'; this.style.opacity='1'; this.style.visibility='visible'; this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'600\' height=\'400\'%3E%3Crect fill=\'%234F46E5\' width=\'600\' height=\'400\'/%3E%3Ctext fill=\'%23ffffff\' font-family=\'Arial\' font-size=\'24\' x=\'50%25\' y=\'50%25\' text-anchor=\'middle\' dy=\'.3em\'%3ESchool Building%3C/text%3E%3C/svg%3E';">
                 </div>
-                <div class="absolute -bottom-6 -right-6 bg-gradient-to-br from-navy to-blue-600 text-white p-6 rounded-2xl shadow-2xl">
+                <div class="absolute -bottom-6 -right-6 bg-gradient-to-br from-navy to-blue-600 text-white p-6 rounded-2xl shadow-2xl" style="background-color: var(--maroon-red);">
                     <div class="text-4xl font-bold" style="color: #d4af37;"><?php echo clean($settings['years_established'] ?? '25'); ?>+</div>
                     <div class="text-sm text-blue-100">Years of Excellence</div>
                 </div>
             </div>
             
             <div class="space-y-6 order-1 lg:order-2">
-                <span class="inline-block bg-navy bg-opacity-10 text-navy px-4 py-2 rounded-full text-sm font-semibold" style="color: #1e3a8a;">
+                <span class="inline-block bg-navy px-4 py-2 rounded-full text-sm font-semibold text-white">
                     About Our School
                 </span>
                 <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
@@ -328,8 +328,8 @@ include 'includes/header.php';
                 
                 <div class="grid grid-cols-2 gap-6 py-6">
                     <div class="flex items-start space-x-4">
-                        <div class="w-12 h-12 bg-navy bg-opacity-10 rounded-xl flex items-center justify-center flex-shrink-0">
-                            <i class="fas fa-award text-navy text-xl"></i>
+                        <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-award text-xl" style="color: #1e3a8a;"></i>
                         </div>
                         <div>
                             <h4 class="font-bold text-gray-900">CBSE Affiliated</h4>
@@ -337,8 +337,8 @@ include 'includes/header.php';
                         </div>
                     </div>
                     <div class="flex items-start space-x-4">
-                        <div class="w-12 h-12 bg-maroon bg-opacity-10 rounded-xl flex items-center justify-center flex-shrink-0">
-                            <i class="fas fa-users text-maroon text-xl"></i>
+                        <div class="w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-users text-xl" style="color: #b91c1c;"></i>
                         </div>
                         <div>
                             <h4 class="font-bold text-gray-900">Expert Faculty</h4>
@@ -346,8 +346,8 @@ include 'includes/header.php';
                         </div>
                     </div>
                     <div class="flex items-start space-x-4">
-                        <div class="w-12 h-12 bg-gold bg-opacity-20 rounded-xl flex items-center justify-center flex-shrink-0">
-                            <i class="fas fa-flask text-yellow-600 text-xl"></i>
+                        <div class="w-12 h-12 bg-yellow-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-flask text-xl" style="color: #92400e;"></i>
                         </div>
                         <div>
                             <h4 class="font-bold text-gray-900">Smart Labs</h4>
@@ -355,8 +355,8 @@ include 'includes/header.php';
                         </div>
                     </div>
                     <div class="flex items-start space-x-4">
-                        <div class="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0" style="background-color: var(--navy-dark);">
-                            <i class="fas fa-bus text-green-600 text-xl"></i>
+                        <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-bus text-xl" style="color: #16a34a;"></i>
                         </div>
                         <div>
                             <h4 class="font-bold text-gray-900">Transport</h4>
@@ -365,7 +365,7 @@ include 'includes/header.php';
                     </div>
                 </div>
                 
-                <a href="about.php" class="inline-flex items-center bg-gradient-to-r from-navy to-blue-600 font-semibold px-8 py-4 rounded-full hover:from-blue-600 hover:to-navy transition-all shadow-lg" style="color: var(--gold);">
+                <a href="about.php" class="inline-flex items-center bg-navy text-white font-semibold px-8 py-4 rounded-full hover:bg-navy-dark transition-all shadow-lg">
                     Learn More About Us <i class="fas fa-arrow-right ml-2"></i>
                 </a>
             </div>
@@ -490,7 +490,7 @@ include 'includes/header.php';
             <div>
                 <div class="flex items-center justify-between mb-8">
                     <h3 class="text-2xl md:text-3xl font-bold text-gray-900">
-                        <i class="fas fa-bullhorn text-maroon mr-3"></i>
+                        <i class="fas fa-bullhorn mr-3" style="color: #b91c1c;"></i>
                         Announcements
                     </h3>
                 </div>
@@ -523,7 +523,7 @@ include 'includes/header.php';
             <div>
                 <div class="flex items-center justify-between mb-8">
                     <h3 class="text-2xl md:text-3xl font-bold text-gray-900">
-                        <i class="fas fa-calendar-alt text-navy mr-3"></i>
+                        <i class="fas fa-calendar-alt mr-3" style="color: #1e3a8a;"></i>
                         Upcoming Events
                     </h3>
                 </div>
@@ -605,26 +605,26 @@ include 'includes/header.php';
 
 <!-- Testimonials Section -->
 <?php if (!empty($testimonials)): ?>
-<section class="py-16 md:py-24 bg-gradient-to-br from-gray-900 to-navy-dark">
+<section class="py-16 md:py-24 bg-white">
     <div class="container mx-auto px-4">
         <div class="text-center mb-16">
-            <span class="inline-block px-4 py-2 rounded-full text-sm font-semibold mb-4" style="background-color: rgba(212, 175, 55, 0.2); color: #d4af37;">
+            <span class="inline-block bg-gold px-4 py-2 rounded-full text-sm font-semibold mb-4 text-white">
                 Testimonials
             </span>
-            <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
+            <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
                 What Parents <span style="color: #d4af37;">Say</span>
             </h2>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             <?php foreach ($testimonials as $testimonial): ?>
-            <div class="bg-white bg-opacity-5 backdrop-blur-lg rounded-3xl p-8 border border-white border-opacity-10 card-hover">
+            <div class="bg-gradient-to-br from-gray-50 to-white rounded-3xl p-8 border border-gray-200 shadow-lg card-hover">
                 <div class="flex items-center mb-6">
                     <?php for ($i = 1; $i <= 5; $i++): ?>
-                        <i class="fas fa-star text-lg" style="color: <?php echo $i <= $testimonial['rating'] ? '#d4af37' : '#4b5563'; ?>;"></i>
+                        <i class="fas fa-star text-lg" style="color: <?php echo $i <= $testimonial['rating'] ? '#d4af37' : '#d1d5db'; ?>;"></i>
                     <?php endfor; ?>
                 </div>
-                <p class="text-gray-300 mb-6 leading-relaxed">"<?php echo clean($testimonial['content']); ?>"</p>
+                <p class="text-gray-700 mb-6 leading-relaxed">"<?php echo clean($testimonial['content']); ?>"</p>
                 <div class="flex items-center">
                     <?php if ($testimonial['photo']): ?>
                         <img src="uploads/testimonials/<?php echo clean($testimonial['photo']); ?>" 
@@ -636,7 +636,7 @@ include 'includes/header.php';
                         </div>
                     <?php endif; ?>
                     <div>
-                        <h4 class="font-bold text-white"><?php echo clean($testimonial['name']); ?></h4>
+                        <h4 class="font-bold text-gray-900"><?php echo clean($testimonial['name']); ?></h4>
                         <p class="text-sm" style="color: #d4af37;"><?php echo clean($testimonial['role']); ?></p>
                     </div>
                 </div>
@@ -648,20 +648,20 @@ include 'includes/header.php';
 <?php endif; ?>
 
 <!-- CTA Section -->
-<section class="py-16 md:py-24 bg-gradient-to-r from-maroon via-red-700 to-maroon relative overflow-hidden">
+<section class="py-16 md:py-24 bg-white relative overflow-hidden">
     <div class="absolute inset-0 hero-pattern opacity-10"></div>
     <div class="container mx-auto px-4 text-center relative z-10">
-        <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6" style="color: var(--maroon-red);">
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
             Begin Your Journey to <span style="color: #d4af37;">Excellence</span>
         </h2>
-        <p class="text-xl text-red-100 mb-10 max-w-2xl mx-auto" style="color: var(--navy-dark);">
+        <p class="text-xl text-gray-700 mb-10 max-w-2xl mx-auto">
             Join the Anthem family and give your child the gift of quality education
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
             <a href="admission.php" class="inline-flex items-center justify-center px-10 py-5 rounded-full font-bold text-lg hover:bg-yellow-400 transition shadow-2xl transform hover:scale-105" style="background-color: #d4af37; color: #172554;">
                 <i class="fas fa-graduation-cap mr-3"></i>Apply for Admission
             </a>
-            <a href="contact.php" class="inline-flex items-center justify-center bg-white bg-opacity-20 backdrop-blur text-white px-10 py-5 rounded-full font-bold text-lg border-2 border-white hover:bg-white hover:text-maroon transition" style="background-color: rgba(19, 3, 252, 1);">
+            <a href="contact.php" class="inline-flex items-center justify-center bg-navy text-white px-10 py-5 rounded-full font-bold text-lg border-2 border-navy hover:bg-navy-dark transition">
                 <i class="fas fa-phone mr-3"></i>Contact Us
             </a>
         </div>
