@@ -2,16 +2,23 @@
 /**
  * Database Configuration
  * Supports both MySQL and PostgreSQL for cloud deployment (Render.com, etc.)
+ * 
+ * SECURITY: Database credentials are set via environment variables in .htaccess
+ * This file reads from environment variables only - no hardcoded credentials.
  */
 
-// Read from environment variables if available (for Render.com, Docker, etc.)
-// Otherwise use default values
+// Read from environment variables (set in .htaccess or hosting control panel)
 $dbHost = getenv('DB_HOST') ?: 'localhost';
-$dbName = getenv('DB_NAME') ?: 'u532478260_anthem_school';
-$dbUser = getenv('DB_USER') ?: 'u532478260_anthem';
-$dbPass = getenv('DB_PASS') ?: 'Ishansingh123@';
+$dbName = getenv('DB_NAME');
+$dbUser = getenv('DB_USER');
+$dbPass = getenv('DB_PASS');
 $dbPort = getenv('DB_PORT') ?: '3306';
 $dbType = getenv('DB_TYPE') ?: 'mysql'; // 'mysql' or 'pgsql'
+
+// Validate that required environment variables are set
+if (empty($dbName) || empty($dbUser) || empty($dbPass)) {
+    die('Database configuration error: Required environment variables (DB_NAME, DB_USER, DB_PASS) are not set. Please configure them in .htaccess or your hosting control panel.');
+}
 
 // Define constants for backward compatibility
 define('DB_HOST', $dbHost);
