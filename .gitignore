@@ -3,6 +3,9 @@
 .env.local
 .env.*.local
 
+# .htaccess with database credentials (server-specific)
+.htaccess
+
 # Installation lock
 install.lock
 
