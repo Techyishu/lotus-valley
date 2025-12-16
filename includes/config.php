@@ -7,9 +7,9 @@
 // Read from environment variables if available (for Render.com, Docker, etc.)
 // Otherwise use default values
 $dbHost = getenv('DB_HOST') ?: 'localhost';
-$dbName = getenv('DB_NAME') ?: 'anthem_school_db';
-$dbUser = getenv('DB_USER') ?: 'anthem';
-$dbPass = getenv('DB_PASS') ?: 'anthem123';
+$dbName = getenv('DB_NAME') ?: 'u532478260_anthem_school';
+$dbUser = getenv('DB_USER') ?: 'u532478260_anthem';
+$dbPass = getenv('DB_PASS') ?: 'Ishansingh123@';
 $dbPort = getenv('DB_PORT') ?: '3306';
 $dbType = getenv('DB_TYPE') ?: 'mysql'; // 'mysql' or 'pgsql'
 
