@@ -5,9 +5,6 @@ global $pdo;
 
 // Handle upload
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['upload']) && verifyCSRFToken($_POST['csrf_token'])) {
-    $title = trim($_POST['title']);
-    $category = trim($_POST['category']);
-    
     if (isset($_FILES['images'])) {
         foreach ($_FILES['images']['tmp_name'] as $key => $tmp_name) {
             if ($_FILES['images']['error'][$key] === UPLOAD_ERR_OK) {
@@ -17,10 +14,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['upload']) && verifyCS
                     'size' => $_FILES['images']['size'][$key],
                     'error' => $_FILES['images']['error'][$key]
                 ], '../uploads/gallery');
-                
+
                 if ($upload['success']) {
-                    $stmt = $pdo->prepare("INSERT INTO gallery (title, image, category) VALUES (?, ?, ?)");
-                    $stmt->execute([$title, $upload['filename'], $category]);
+                    $stmt = $pdo->prepare("INSERT INTO gallery (image) VALUES (?)");
+                    $stmt->execute([$upload['filename']]);
                 }
             }
         }
@@ -30,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['upload']) && verifyCS
 
 // Handle delete
 if (isset($_GET['delete']) && isset($_GET['token']) && verifyCSRFToken($_GET['token'])) {
-    $id = (int)$_GET['delete'];
+    $id = (int) $_GET['delete'];
     $stmt = $pdo->prepare("SELECT image FROM gallery WHERE id = ?");
     $stmt->execute([$id]);
     $img = $stmt->fetch();
@@ -44,12 +41,12 @@ if (isset($_GET['delete']) && isset($_GET['token']) && verifyCSRFToken($_GET['to
 
 $stmt = $pdo->query("SELECT * FROM gallery ORDER BY uploaded_at DESC");
 $images = $stmt->fetchAll();
-$categories = getGalleryCategories();
 ?>
 
 <div class="mb-6 flex justify-between items-center">
     <h2 class="text-2xl font-bold text-gray-800">Gallery Images</h2>
-    <button onclick="document.getElementById('uploadModal').classList.remove('hidden')" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700">
+    <button onclick="document.getElementById('uploadModal').classList.remove('hidden')"
+        class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700">
         <i class="fas fa-plus mr-2"></i>Upload Images
     </button>
 </div>
@@ -58,13 +55,14 @@ $categories = getGalleryCategories();
     <?php foreach ($images as $image): ?>
         <div class="relative group">
             <img src="../uploads/gallery/<?php echo clean($image['image']); ?>" class="w-full h-32 object-cover rounded-lg">
-            <div class="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
-                <a href="?delete=<?php echo $image['id']; ?>&token=<?php echo generateCSRFToken(); ?>" 
-                   onclick="return confirmDelete()" class="text-white hover:text-red-300">
+            <div
+                class="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+                <a href="?delete=<?php echo $image['id']; ?>&token=<?php echo generateCSRFToken(); ?>"
+                    onclick="return confirmDelete()" class="text-white hover:text-red-300">
                     <i class="fas fa-trash text-xl"></i>
                 </a>
             </div>
-            <p class="text-xs text-gray-600 mt-1"><?php echo clean($image['category']); ?></p>
+
         </div>
     <?php endforeach; ?>
 </div>
@@ -76,23 +74,18 @@ $categories = getGalleryCategories();
         <form method="POST" enctype="multipart/form-data" class="space-y-4">
             <input type="hidden" name="csrf_token" value="<?php echo generateCSRFToken(); ?>">
             <input type="hidden" name="upload" value="1">
-            <div><label class="block font-medium mb-2">Title</label>
-                <input type="text" name="title" required class="w-full px-4 py-2 border rounded-lg"></div>
-            <div><label class="block font-medium mb-2">Category</label>
-                <input type="text" name="category" list="categories" required class="w-full px-4 py-2 border rounded-lg">
-                <datalist id="categories">
-                    <?php foreach ($categories as $cat): ?><option value="<?php echo clean($cat); ?>"><?php endforeach; ?>
-                </datalist></div>
+
             <div><label class="block font-medium mb-2">Images</label>
-                <input type="file" name="images[]" multiple accept="image/*" required class="w-full px-4 py-2 border rounded-lg"></div>
+                <input type="file" name="images[]" multiple accept="image/*" required
+                    class="w-full px-4 py-2 border rounded-lg">
+            </div>
             <div class="flex space-x-4">
                 <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded-lg">Upload</button>
-                <button type="button" onclick="document.getElementById('uploadModal').classList.add('hidden')" 
-                        class="bg-gray-300 text-gray-700 px-6 py-2 rounded-lg">Cancel</button>
+                <button type="button" onclick="document.getElementById('uploadModal').classList.add('hidden')"
+                    class="bg-gray-300 text-gray-700 px-6 py-2 rounded-lg">Cancel</button>
             </div>
         </form>
     </div>
 </div>
 
 <?php require_once 'includes/admin_footer.php'; ?>
-

@@ -774,14 +774,12 @@ include 'includes/header.php';
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <?php foreach ($galleryImages as $image): ?>
                     <div class="relative group overflow-hidden rounded-2xl aspect-square card-hover">
-                        <img src="uploads/gallery/<?php echo clean($image['image']); ?>"
-                            alt="<?php echo clean($image['title']); ?>"
+                        <img src="uploads/gallery/<?php echo clean($image['image']); ?>" alt="Gallery Image"
                             class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
                         <div
                             class="absolute inset-0 bg-gradient-to-t from-navy via-transparent to-transparent opacity-0 group-hover:opacity-90 transition duration-300">
-                            <div class="absolute bottom-0 left-0 right-0 p-4 text-white">
-                                <p class="font-semibold"><?php echo clean($image['title']); ?></p>
-                                <p class="text-xs text-blue-200"><?php echo clean($image['category']); ?></p>
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <i class="fas fa-search-plus text-white text-3xl"></i>
                             </div>
                         </div>
                     </div>
