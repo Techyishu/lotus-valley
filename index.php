@@ -467,7 +467,7 @@ include 'includes/header.php';
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             <div class="relative order-2 lg:order-1">
                 <div class="grid grid-cols-2 gap-4">
-                    <img src="assets/images/logo.jpg" alt="School Leadership"
+                    <img src="assets/images/WhatsApp Image 2025-12-19 at 18.42.31.jpeg" alt="School Leadership"
                         class="rounded-2xl shadow-xl w-full h-48 md:h-64 object-cover">
                     <img src="assets/images/about-school.jpg" alt="School Staff"
                         class="rounded-2xl shadow-xl w-full h-48 md:h-64 object-cover mt-8">
@@ -479,7 +479,8 @@ include 'includes/header.php';
                 <div class="absolute -bottom-6 -right-6 bg-gradient-to-br from-navy to-blue-600 text-white p-6 rounded-2xl shadow-2xl"
                     style="background-color: var(--maroon-red);">
                     <div class="text-4xl font-bold" style="color: #d4af37;">
-                        <?php echo clean($settings['years_established'] ?? '25'); ?>+</div>
+                        <?php echo clean($settings['years_established'] ?? '25'); ?>+
+                    </div>
                     <div class="text-sm text-blue-100">Years of Excellence</div>
                 </div>
             </div>
@@ -585,10 +586,12 @@ include 'includes/header.php';
                                         style="color: #d4af37;"></i><?php echo clean($topper['marks']); ?></p>
                                 <p><i class="fas fa-graduation-cap mr-2"
                                         style="color: #1e3a8a;"></i><?php echo clean($topper['class']); ?> •
-                                    <?php echo clean($topper['board']); ?></p>
+                                    <?php echo clean($topper['board']); ?>
+                                </p>
                                 <?php if ($topper['achievement']): ?>
                                     <p class="font-semibold pt-2" style="color: #b91c1c;">
-                                        <?php echo clean($topper['achievement']); ?></p>
+                                        <?php echo clean($topper['achievement']); ?>
+                                    </p>
                                 <?php endif; ?>
                             </div>
                         </div>
@@ -718,7 +721,8 @@ include 'includes/header.php';
                                     <div
                                         class="bg-gradient-to-br from-navy to-blue-600 text-white p-4 rounded-xl text-center min-w-[70px]">
                                         <div class="text-2xl font-bold">
-                                            <?php echo date('d', strtotime($event['event_date'])); ?></div>
+                                            <?php echo date('d', strtotime($event['event_date'])); ?>
+                                        </div>
                                         <div class="text-xs uppercase"><?php echo date('M', strtotime($event['event_date'])); ?>
                                         </div>
                                     </div>
