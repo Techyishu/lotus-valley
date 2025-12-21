@@ -140,9 +140,9 @@ $currentPage = basename($_SERVER['PHP_SELF']);
             <div class="flex justify-between items-center py-3">
                 <!-- Logo -->
                 <a href="index.php" class="flex items-center space-x-3" aria-label="Home">
-                    <img src="assets/images/logo.png" alt="<?php echo clean($schoolName); ?>" class="h-14 md:h-16 w-auto object-contain">
+                    <img src="assets/images/logo.png" alt="<?php echo clean($schoolName); ?>" class="h-24 md:h-32 w-auto object-contain">
                     <div class="flex flex-col">
-                        <span class="text-xl md:text-2xl font-bold leading-tight">
+                        <span class="text-sm md:text-base font-bold leading-tight">
                             <span style="color: #b91c1c;">Anthem</span> <span style="color: #1e3a8a;">International</span> <span style="color: #b91c1c;">School</span>
                         </span>
                     </div>
