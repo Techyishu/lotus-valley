@@ -18,34 +18,41 @@ include 'includes/header.php';
 ?>
 
 <!-- Page Header -->
-<section class="bg-gradient-to-r from-purple-600 to-indigo-600 text-white py-16">
-    <div class="container mx-auto px-4">
-        <nav class="text-sm mb-4">
-            <a href="index.php" class="hover:text-purple-200">Home</a>
-            <span class="mx-2">/</span>
+<section class="page-header" style="background: linear-gradient(135deg, #F59E0B, #D97706);">
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="index.php">Home</a>
+            <span>/</span>
             <span>Faculty</span>
-        </nav>
-        <h1 class="text-4xl md:text-5xl font-bold">Our Dedicated Faculty</h1>
-        <p class="text-xl text-purple-100 mt-4">Meet the passionate educators shaping future leaders</p>
+        </div>
+        <h1>Meet Our <span style="color: white;">Dedicated Faculty</span></h1>
+        <p>Passionate educators committed to shaping future leaders</p>
+    </div>
+    <div class="wave-bottom">
+        <svg viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 64C240 96 480 96 720 64C960 32 1200 32 1440 64V80H0V64Z" fill="#F5F7FB" />
+        </svg>
     </div>
 </section>
 
 <!-- Filter Section -->
-<section class="py-8 bg-white shadow-sm sticky top-16 z-40">
-    <div class="container mx-auto px-4">
+<section
+    style="padding: 1rem 0; background: white; box-shadow: var(--shadow-sm); border-bottom: 1px solid var(--border-light); position: sticky; top: 60px; z-index: 40;">
+    <div class="container">
         <div class="flex flex-wrap items-center justify-between gap-4">
-            <h2 class="text-xl font-bold text-gray-800">
-                <i class="fas fa-filter text-purple-600 mr-2"></i>
+            <h3 class="flex items-center gap-3">
+                <div class="icon-box icon-box-sm" style="background: #F59E0B;"><i class="fas fa-filter"></i></div>
                 Filter by Department
-            </h2>
+            </h3>
             <div class="flex flex-wrap gap-2">
-                <a href="staff.php" 
-                   class="px-4 py-2 rounded-full <?php echo !$filterDept ? 'bg-purple-600 text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'; ?> transition">
+                <a href="staff.php" class="btn btn-pill <?php echo !$filterDept ? 'btn-secondary' : 'btn-outline'; ?>"
+                    style="padding: 0.5rem 1.25rem; font-size: 0.875rem;">
                     All Departments
                 </a>
                 <?php foreach ($departments as $dept): ?>
-                    <a href="staff.php?dept=<?php echo urlencode($dept); ?>" 
-                       class="px-4 py-2 rounded-full <?php echo $filterDept == $dept ? 'bg-purple-600 text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'; ?> transition">
+                    <a href="staff.php?dept=<?php echo urlencode($dept); ?>"
+                        class="btn btn-pill <?php echo $filterDept == $dept ? 'btn-secondary' : 'btn-outline'; ?>"
+                        style="padding: 0.5rem 1.25rem; font-size: 0.875rem;">
                         <?php echo clean($dept); ?>
                     </a>
                 <?php endforeach; ?>
@@ -55,103 +62,75 @@ include 'includes/header.php';
 </section>
 
 <!-- Staff Grid -->
-<section class="py-16">
-    <div class="container mx-auto px-4">
+<section class="section bg-light">
+    <div class="container">
         <?php if (empty($staff)): ?>
-            <div class="text-center py-16">
-                <i class="fas fa-user-slash text-gray-400 text-6xl mb-4"></i>
-                <h3 class="text-2xl font-bold text-gray-600 mb-2">No Staff Members Found</h3>
-                <p class="text-gray-500">Try selecting a different department</p>
+            <div class="text-center" style="padding: 4rem 0;">
+                <div
+                    style="width: 8rem; height: 8rem; background: var(--border-light); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 2rem;">
+                    <i class="fas fa-user-slash" style="font-size: 3rem; color: var(--text-muted);"></i>
+                </div>
+                <h3 style="margin-bottom: 1rem;">No Staff Members Found</h3>
+                <p style="color: var(--text-muted);">Try selecting a different department</p>
             </div>
         <?php else: ?>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+                style="grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));">
                 <?php foreach ($staff as $member): ?>
-                <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover-lift">
-                    <!-- Photo Section -->
-                    <div class="relative h-64 bg-gradient-to-br from-purple-400 to-indigo-500">
-                        <?php if ($member['photo']): ?>
-                            <img src="uploads/staff/<?php echo clean($member['photo']); ?>" 
-                                 alt="<?php echo clean($member['name']); ?>" 
-                                 class="w-full h-full object-cover">
-                        <?php else: ?>
-                            <div class="w-full h-full flex items-center justify-center">
-                                <i class="fas fa-user-tie text-white text-6xl"></i>
+                    <div class="card">
+                        <!-- Photo Section -->
+                        <div
+                            style="height: 220px; background: linear-gradient(135deg, #F59E0B, #D97706); position: relative; overflow: hidden;">
+                            <?php if ($member['photo']): ?>
+                                <img src="uploads/staff/<?php echo clean($member['photo']); ?>"
+                                    alt="<?php echo clean($member['name']); ?>"
+                                    style="width: 100%; height: 100%; object-fit: cover;">
+                            <?php else: ?>
+                                <div
+                                    style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
+                                    <i class="fas fa-user-tie" style="font-size: 4rem; color: rgba(255,255,255,0.5);"></i>
+                                </div>
+                            <?php endif; ?>
+                            <!-- Overlay with name -->
+                            <div
+                                style="position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); padding: 2rem 1.5rem 1rem;">
+                                <h4 style="color: white; margin: 0;"><?php echo clean($member['name']); ?></h4>
+                                <p style="color: rgba(255,255,255,0.8); font-size: 0.875rem; margin: 0.25rem 0 0;">
+                                    <?php echo clean($member['department']); ?></p>
                             </div>
-                        <?php endif; ?>
-                    </div>
-                    
-                    <!-- Details Section -->
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold text-gray-800 mb-1"><?php echo clean($member['name']); ?></h3>
-                        <p class="text-purple-600 font-semibold mb-2"><?php echo clean($member['designation']); ?></p>
-                        <p class="text-sm text-gray-600 mb-4">
-                            <i class="fas fa-building text-indigo-600 mr-2"></i>
-                            <?php echo clean($member['department']); ?>
-                        </p>
-                        
-                        <?php if ($member['qualification']): ?>
-                        <div class="mb-3">
-                            <p class="text-xs text-gray-500 mb-1">Qualification</p>
-                            <p class="text-sm text-gray-700"><?php echo clean($member['qualification']); ?></p>
                         </div>
-                        <?php endif; ?>
-                        
-                        <?php if ($member['experience']): ?>
-                        <div class="mb-3">
-                            <p class="text-xs text-gray-500 mb-1">Experience</p>
-                            <p class="text-sm font-semibold text-gray-700">
-                                <i class="fas fa-briefcase text-green-600 mr-1"></i>
-                                <?php echo clean($member['experience']); ?>
+
+                        <!-- Details Section -->
+                        <div class="card-body">
+                            <span class="badge badge-secondary mb-4"><?php echo clean($member['department']); ?></span>
+
+                            <h4 style="font-size: 1rem; margin-bottom: 0.5rem;">
+                                <?php echo clean($member['position'] ?? 'Teacher'); ?></h4>
+
+                            <p style="color: var(--text-muted); font-size: 0.875rem; margin-bottom: 1rem; line-height: 1.6;">
+                                <?php echo clean($member['bio'] ?? 'Dedicated educator committed to student success and excellence in teaching.'); ?>
                             </p>
-                        </div>
-                        <?php endif; ?>
-                        
-                        <?php if ($member['specialization']): ?>
-                        <div class="bg-purple-50 rounded-lg p-3 mb-3">
-                            <p class="text-xs text-purple-600 font-semibold mb-1">Specialization</p>
-                            <p class="text-sm text-gray-700"><?php echo clean($member['specialization']); ?></p>
-                        </div>
-                        <?php endif; ?>
-                        
-                        <?php if ($member['email'] || $member['phone']): ?>
-                        <div class="border-t pt-3 space-y-2">
-                            <?php if ($member['email']): ?>
-                            <a href="mailto:<?php echo clean($member['email']); ?>" 
-                               class="flex items-center text-sm text-gray-600 hover:text-purple-600 transition">
-                                <i class="fas fa-envelope mr-2"></i>
-                                <?php echo clean($member['email']); ?>
-                            </a>
+
+                            <?php if (!empty($member['qualifications'])): ?>
+                                <div class="flex items-center gap-2"
+                                    style="font-size: 0.875rem; color: var(--text-muted); margin-bottom: 0.5rem;">
+                                    <i class="fas fa-graduation-cap" style="color: #F59E0B;"></i>
+                                    <span><?php echo clean($member['qualifications']); ?></span>
+                                </div>
                             <?php endif; ?>
-                            
-                            <?php if ($member['phone']): ?>
-                            <a href="tel:<?php echo clean($member['phone']); ?>" 
-                               class="flex items-center text-sm text-gray-600 hover:text-purple-600 transition">
-                                <i class="fas fa-phone mr-2"></i>
-                                <?php echo clean($member['phone']); ?>
-                            </a>
+
+                            <?php if (!empty($member['experience'])): ?>
+                                <div class="flex items-center gap-2" style="font-size: 0.875rem; color: var(--text-muted);">
+                                    <i class="fas fa-clock" style="color: var(--color-primary);"></i>
+                                    <span><?php echo clean($member['experience']); ?> Experience</span>
+                                </div>
                             <?php endif; ?>
                         </div>
-                        <?php endif; ?>
                     </div>
-                </div>
                 <?php endforeach; ?>
             </div>
         <?php endif; ?>
     </div>
 </section>
 
-<!-- CTA Section -->
-<section class="py-16 bg-gradient-to-r from-purple-600 to-indigo-600 text-white">
-    <div class="container mx-auto px-4 text-center">
-        <h2 class="text-3xl md:text-4xl font-bold mb-4">Join Our Team of Excellence</h2>
-        <p class="text-xl text-purple-100 mb-8 max-w-2xl mx-auto">
-            We are always looking for passionate educators to join our family
-        </p>
-        <a href="contact.php" class="inline-flex items-center bg-white text-purple-600 px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition shadow-lg">
-            Contact Us <i class="fas fa-arrow-right ml-2"></i>
-        </a>
-    </div>
-</section>
-
 <?php include 'includes/footer.php'; ?>
-

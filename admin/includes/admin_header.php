@@ -14,131 +14,489 @@ if (!isset($pageTitle)) {
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo clean($pageTitle); ?> - Admin Panel</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title><?php echo clean($pageTitle); ?> - Admin Panel | Lotus Valley School</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: 'Poppins', sans-serif;
+        /* Admin Panel Specific Styles */
+        .admin-layout {
+            display: flex;
+            min-height: 100vh;
         }
+
+        /* Sidebar */
+        .admin-sidebar {
+            width: 260px;
+            background: linear-gradient(180deg, #0F766E 0%, #064E4A 100%);
+            color: white;
+            flex-shrink: 0;
+            display: none;
+            flex-direction: column;
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            z-index: 50;
+            overflow-y: auto;
+        }
+
+        @media (min-width: 1024px) {
+            .admin-sidebar {
+                display: flex;
+            }
+        }
+
+        .admin-sidebar.mobile-open {
+            display: flex;
+        }
+
+        .sidebar-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .sidebar-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .sidebar-logo-img {
+            width: 50px;
+            height: 50px;
+            background: white;
+            border-radius: 0.75rem;
+            padding: 0.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .sidebar-logo-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .sidebar-logo-text {
+            flex: 1;
+        }
+
+        .sidebar-logo-text h2 {
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: white;
+            margin: 0;
+            line-height: 1.2;
+        }
+
+        .sidebar-logo-text span {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Navigation */
+        .sidebar-nav {
+            flex: 1;
+            padding: 1rem 0.75rem;
+        }
+
+        .nav-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .nav-section-title {
+            font-size: 0.6875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: rgba(255, 255, 255, 0.4);
+            padding: 0 0.75rem;
+            margin-bottom: 0.5rem;
+        }
+
         .sidebar-link {
-            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9375rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            margin-bottom: 0.25rem;
         }
+
         .sidebar-link:hover {
-            background: rgba(255, 255, 255, 0.1);
-            transform: translateX(5px);
+            background: rgba(255, 255, 255, 0.08);
+            color: white;
         }
+
         .sidebar-link.active {
-            background: rgba(255, 255, 255, 0.15);
-            border-left: 4px solid #fff;
+            background: var(--color-primary);
+            color: white;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);
+        }
+
+        .sidebar-link i {
+            width: 1.25rem;
+            text-align: center;
+            font-size: 1rem;
+        }
+
+        .sidebar-link .badge {
+            margin-left: auto;
+            background: var(--color-secondary);
+            color: #1a1a1a;
+            font-size: 0.6875rem;
+            padding: 0.125rem 0.5rem;
+            border-radius: 9999px;
+            font-weight: 600;
+        }
+
+        /* Sidebar Footer */
+        .sidebar-footer {
+            padding: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .admin-profile {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 0.75rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .admin-avatar {
+            width: 2.5rem;
+            height: 2.5rem;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+        }
+
+        .admin-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .admin-name {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: white;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .admin-role {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .logout-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            width: 100%;
+            padding: 0.625rem;
+            background: rgba(239, 68, 68, 0.2);
+            color: #FCA5A5;
+            border: none;
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .logout-btn:hover {
+            background: rgba(239, 68, 68, 0.3);
+            color: white;
+        }
+
+        /* Main Content */
+        .admin-main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: var(--bg-light);
+            min-width: 0;
+        }
+
+        @media (min-width: 1024px) {
+            .admin-main {
+                margin-left: 260px;
+            }
+        }
+
+        /* Top Header */
+        .admin-header {
+            background: white;
+            padding: 1rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--border-light);
+            position: sticky;
+            top: 0;
+            z-index: 40;
+        }
+
+        .admin-header-left {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .mobile-menu-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 2.5rem;
+            height: 2.5rem;
+            background: var(--bg-light);
+            border: none;
+            border-radius: 0.5rem;
+            color: var(--text-heading);
+            cursor: pointer;
+        }
+
+        @media (min-width: 1024px) {
+            .mobile-menu-btn {
+                display: none;
+            }
+        }
+
+        .page-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-heading);
+        }
+
+        .admin-header-right {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .header-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 2.5rem;
+            height: 2.5rem;
+            background: var(--bg-light);
+            border: none;
+            border-radius: 0.5rem;
+            color: var(--text-body);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .header-btn:hover {
+            background: var(--color-primary);
+            color: white;
+        }
+
+        .header-btn.primary {
+            background: var(--color-primary);
+            color: white;
+        }
+
+        /* Content Area */
+        .admin-content {
+            flex: 1;
+            padding: 1.5rem;
+            overflow-y: auto;
+        }
+
+        /* Mobile Overlay */
+        .sidebar-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 45;
+        }
+
+        .sidebar-overlay.active {
+            display: block;
+        }
+
+        /* Admin Cards */
+        .admin-card {
+            background: white;
+            border-radius: 1rem;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-light);
+        }
+
+        .admin-card-header {
+            padding: 1.25rem 1.5rem;
+            border-bottom: 1px solid var(--border-light);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .admin-card-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--text-heading);
+        }
+
+        .admin-card-body {
+            padding: 1.5rem;
         }
     </style>
 </head>
-<body class="bg-gray-100">
-    <div class="flex h-screen overflow-hidden">
+
+<body>
+    <div class="admin-layout">
+        <!-- Mobile Overlay -->
+        <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleMobileSidebar()"></div>
+
         <!-- Sidebar -->
-        <aside class="w-64 bg-gradient-to-b from-blue-600 to-indigo-700 text-white flex-shrink-0 hidden md:block overflow-y-auto">
-            <div class="p-6">
-                <div class="mb-8">
-                    <img src="../assets/images/logo.png" alt="Anthem School" class="h-16 w-auto object-contain mx-auto">
-                    <div class="text-center mt-3">
-                        <h2 class="font-bold text-lg">Admin Panel</h2>
+        <aside class="admin-sidebar" id="adminSidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">
+                    <div class="sidebar-logo-img">
+                        <img src="../assets/images/logo.png" alt="Lotus Valley">
+                    </div>
+                    <div class="sidebar-logo-text">
+                        <h2>Lotus Valley</h2>
+                        <span>Admin Panel</span>
                     </div>
                 </div>
+            </div>
 
-                <nav class="space-y-1">
-                    <a href="dashboard.php" class="sidebar-link <?php echo $currentPage === 'dashboard.php' ? 'active' : ''; ?> flex items-center px-4 py-3 rounded">
-                        <i class="fas fa-home w-6"></i>
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <div class="nav-section-title">Main</div>
+                    <a href="dashboard.php"
+                        class="sidebar-link <?php echo $currentPage === 'dashboard.php' ? 'active' : ''; ?>">
+                        <i class="fas fa-home"></i>
                         <span>Dashboard</span>
                     </a>
-                    
-                    <a href="toppers.php" class="sidebar-link <?php echo $currentPage === 'toppers.php' || $currentPage === 'add_topper.php' || $currentPage === 'edit_topper.php' ? 'active' : ''; ?> flex items-center px-4 py-3 rounded">
-                        <i class="fas fa-trophy w-6"></i>
+                </div>
+
+                <div class="nav-section">
+                    <div class="nav-section-title">Content Management</div>
+                    <a href="toppers.php"
+                        class="sidebar-link <?php echo in_array($currentPage, ['toppers.php', 'add_topper.php', 'edit_topper.php']) ? 'active' : ''; ?>">
+                        <i class="fas fa-trophy"></i>
                         <span>Toppers</span>
                     </a>
-                    
-                    <a href="staff.php" class="sidebar-link <?php echo $currentPage === 'staff.php' || $currentPage === 'add_staff.php' || $currentPage === 'edit_staff.php' ? 'active' : ''; ?> flex items-center px-4 py-3 rounded">
-                        <i class="fas fa-user-tie w-6"></i>
+                    <a href="staff.php"
+                        class="sidebar-link <?php echo in_array($currentPage, ['staff.php', 'add_staff.php', 'edit_staff.php']) ? 'active' : ''; ?>">
+                        <i class="fas fa-user-tie"></i>
                         <span>Staff</span>
                     </a>
-                    
-                    <a href="gallery.php" class="sidebar-link <?php echo $currentPage === 'gallery.php' || $currentPage === 'add_gallery.php' ? 'active' : ''; ?> flex items-center px-4 py-3 rounded">
-                        <i class="fas fa-images w-6"></i>
+                    <a href="gallery.php"
+                        class="sidebar-link <?php echo in_array($currentPage, ['gallery.php', 'add_gallery.php']) ? 'active' : ''; ?>">
+                        <i class="fas fa-images"></i>
                         <span>Gallery</span>
                     </a>
-                    
-                    <a href="announcements.php" class="sidebar-link <?php echo $currentPage === 'announcements.php' || $currentPage === 'add_announcement.php' || $currentPage === 'edit_announcement.php' ? 'active' : ''; ?> flex items-center px-4 py-3 rounded">
-                        <i class="fas fa-bullhorn w-6"></i>
-                        <span>Announcements</span>
-                    </a>
-                    
-                    <a href="events.php" class="sidebar-link <?php echo $currentPage === 'events.php' || $currentPage === 'add_event.php' || $currentPage === 'edit_event.php' ? 'active' : ''; ?> flex items-center px-4 py-3 rounded">
-                        <i class="fas fa-calendar-alt w-6"></i>
-                        <span>Events</span>
-                    </a>
-                    
-                    <a href="testimonials.php" class="sidebar-link <?php echo $currentPage === 'testimonials.php' ? 'active' : ''; ?> flex items-center px-4 py-3 rounded">
-                        <i class="fas fa-star w-6"></i>
+                    <a href="testimonials.php"
+                        class="sidebar-link <?php echo $currentPage === 'testimonials.php' ? 'active' : ''; ?>">
+                        <i class="fas fa-star"></i>
                         <span>Testimonials</span>
                     </a>
-                    
-                    <a href="admissions.php" class="sidebar-link <?php echo $currentPage === 'admissions.php' ? 'active' : ''; ?> flex items-center px-4 py-3 rounded">
-                        <i class="fas fa-envelope w-6"></i>
-                        <span>Admission Inquiries</span>
+                </div>
+
+                <div class="nav-section">
+                    <div class="nav-section-title">Updates</div>
+                    <a href="announcements.php"
+                        class="sidebar-link <?php echo in_array($currentPage, ['announcements.php', 'add_announcement.php', 'edit_announcement.php']) ? 'active' : ''; ?>">
+                        <i class="fas fa-bullhorn"></i>
+                        <span>Announcements</span>
                     </a>
-                    
-                    <a href="settings.php" class="sidebar-link <?php echo $currentPage === 'settings.php' ? 'active' : ''; ?> flex items-center px-4 py-3 rounded">
-                        <i class="fas fa-cog w-6"></i>
-                        <span>Settings</span>
+                    <a href="events.php"
+                        class="sidebar-link <?php echo in_array($currentPage, ['events.php', 'add_event.php', 'edit_event.php']) ? 'active' : ''; ?>">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Events</span>
                     </a>
-                </nav>
+                </div>
+
+                <div class="nav-section">
+                    <div class="nav-section-title">Inquiries</div>
+                    <a href="admissions.php"
+                        class="sidebar-link <?php echo $currentPage === 'admissions.php' ? 'active' : ''; ?>">
+                        <i class="fas fa-envelope"></i>
+                        <span>Admissions</span>
+                    </a>
+                </div>
+
+                <div class="nav-section">
+                    <div class="nav-section-title">Settings</div>
+                    <a href="settings.php"
+                        class="sidebar-link <?php echo $currentPage === 'settings.php' ? 'active' : ''; ?>">
+                        <i class="fas fa-cog"></i>
+                        <span>Site Settings</span>
+                    </a>
+                </div>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="admin-profile">
+                    <div class="admin-avatar">
+                        <?php echo strtoupper(substr($admin['username'] ?? 'A', 0, 1)); ?>
+                    </div>
+                    <div class="admin-info">
+                        <div class="admin-name"><?php echo clean($admin['username'] ?? 'Admin'); ?></div>
+                        <div class="admin-role">Administrator</div>
+                    </div>
+                </div>
+                <a href="logout.php" class="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </a>
             </div>
         </aside>
 
         <!-- Main Content -->
-        <div class="flex-1 flex flex-col overflow-hidden">
-            <!-- Top Bar -->
-            <header class="bg-white shadow-sm z-10">
-                <div class="flex items-center justify-between px-6 py-4">
-                    <div class="flex items-center">
-                        <button onclick="toggleMobileSidebar()" class="md:hidden mr-4 text-gray-600 hover:text-gray-800">
-                            <i class="fas fa-bars text-xl"></i>
-                        </button>
-                        <h1 class="text-2xl font-bold text-gray-800"><?php echo clean($pageTitle); ?></h1>
-                    </div>
+        <div class="admin-main">
+            <!-- Header -->
+            <header class="admin-header">
+                <div class="admin-header-left">
+                    <button class="mobile-menu-btn" onclick="toggleMobileSidebar()">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <h1 class="page-title"><?php echo clean($pageTitle); ?></h1>
+                </div>
 
-                    <div class="flex items-center space-x-4">
-                        <a href="../index.php" target="_blank" class="text-gray-600 hover:text-blue-600 transition">
-                            <i class="fas fa-external-link-alt mr-2"></i>
-                            <span class="hidden sm:inline">View Website</span>
-                        </a>
-                        
-                        <div class="relative">
-                            <button onclick="toggleProfileMenu()" class="flex items-center space-x-2 text-gray-700 hover:text-blue-600 transition">
-                                <div class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-white">
-                                    <i class="fas fa-user"></i>
-                                </div>
-                                <span class="hidden sm:inline font-medium"><?php echo clean($admin['username']); ?></span>
-                                <i class="fas fa-chevron-down text-sm"></i>
-                            </button>
-                            
-                            <div id="profileMenu" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-xl py-2 z-50">
-                                <a href="settings.php" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">
-                                    <i class="fas fa-cog mr-2"></i>Settings
-                                </a>
-                                <a href="logout.php" class="block px-4 py-2 text-red-600 hover:bg-gray-100">
-                                    <i class="fas fa-sign-out-alt mr-2"></i>Logout
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+                <div class="admin-header-right">
+                    <a href="../" target="_blank" class="header-btn" title="View Website">
+                        <i class="fas fa-external-link-alt"></i>
+                    </a>
+                    <button class="header-btn primary" title="Notifications">
+                        <i class="fas fa-bell"></i>
+                    </button>
                 </div>
             </header>
 
-            <!-- Page Content -->
-            <main class="flex-1 overflow-y-auto p-6">
+            <!-- Content Area -->
+            <main class="admin-content">
 
+                <script>
+                    function toggleMobileSidebar() {
+                        const sidebar = document.getElementById('adminSidebar');
+                        const overlay = document.getElementById('sidebarOverlay');
+                        sidebar.classList.toggle('mobile-open');
+                        overlay.classList.toggle('active');
+                    }
+                </script>

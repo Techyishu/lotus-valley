@@ -1,179 +1,162 @@
-    <!-- Footer -->
-    <footer class="bg-navy-dark text-gray-300 mt-0">
-        <!-- Top Wave -->
-        <div class="bg-white">
-            <svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full">
-                <path d="M0 60L60 52.5C120 45 240 30 360 22.5C480 15 600 15 720 20C840 25 960 35 1080 37.5C1200 40 1320 35 1380 32.5L1440 30V60H0Z" fill="#172554"/>
-            </svg>
-        </div>
-        
-        <div class="container mx-auto px-4 py-12">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <!-- About Section -->
-                <div>
-                    <div class="mb-6">
-                        <img src="assets/images/logo.png" alt="<?php echo clean(getSiteSetting('school_name', 'Anthem International School')); ?>" class="h-20 w-auto object-contain mb-4 bg-white p-2 rounded-lg">
-                        <p class="text-gold italic text-sm mb-2">"Prosperity with Purity"</p>
-                    </div>
-                    <p class="text-sm leading-relaxed text-gray-400">
-                        <?php echo clean(getSiteSetting('about_text', 'Committed to excellence in education and holistic development of students.')); ?>
-                    </p>
-                </div>
+</main>
 
-                <!-- Quick Links -->
-                <div>
-                    <h3 class="text-white text-lg font-bold mb-6 flex items-center">
-                        <span class="w-8 h-1 bg-gold mr-3"></span>Quick Links
-                    </h3>
-                    <ul class="space-y-3 text-sm">
-                        <li>
-                            <a href="index.php" class="hover:text-gold transition flex items-center group">
-                                <i class="fas fa-chevron-right text-gold mr-2 text-xs group-hover:translate-x-1 transition-transform"></i>Home
-                            </a>
-                        </li>
-                        <li>
-                            <a href="about.php" class="hover:text-gold transition flex items-center group">
-                                <i class="fas fa-chevron-right text-gold mr-2 text-xs group-hover:translate-x-1 transition-transform"></i>About Us
-                            </a>
-                        </li>
-                        <li>
-                            <a href="toppers.php" class="hover:text-gold transition flex items-center group">
-                                <i class="fas fa-chevron-right text-gold mr-2 text-xs group-hover:translate-x-1 transition-transform"></i>Our Toppers
-                            </a>
-                        </li>
-                        <li>
-                            <a href="staff.php" class="hover:text-gold transition flex items-center group">
-                                <i class="fas fa-chevron-right text-gold mr-2 text-xs group-hover:translate-x-1 transition-transform"></i>Faculty
-                            </a>
-                        </li>
-                        <li>
-                            <a href="gallery.php" class="hover:text-gold transition flex items-center group">
-                                <i class="fas fa-chevron-right text-gold mr-2 text-xs group-hover:translate-x-1 transition-transform"></i>Gallery
-                            </a>
-                        </li>
-                        <li>
-                            <a href="admission.php" class="hover:text-gold transition flex items-center group">
-                                <i class="fas fa-chevron-right text-gold mr-2 text-xs group-hover:translate-x-1 transition-transform"></i>Admission
-                            </a>
-                        </li>
-                    </ul>
+<!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <!-- About Section -->
+            <div class="footer-about">
+                <div class="footer-brand">
+                    <img src="assets/images/logo.png"
+                        alt="<?php echo clean(getSiteSetting('school_name', 'Lotus Valley')); ?>"
+                        style="background: white; padding: 0.5rem; border-radius: 0.5rem;">
+                    <h4 style="margin-top: 1rem;">Lotus Valley International School</h4>
                 </div>
-
-                <!-- Contact Info -->
-                <div>
-                    <h3 class="text-white text-lg font-bold mb-6 flex items-center">
-                        <span class="w-8 h-1 bg-gold mr-3"></span>Contact Us
-                    </h3>
-                    <ul class="space-y-4 text-sm">
-                        <li class="flex items-center group">
-                            <div class="w-10 h-10 bg-maroon bg-opacity-20 rounded-lg flex items-center justify-center mr-3 flex-shrink-0 group-hover:bg-maroon transition">
-                                <i class="fas fa-phone text-gold"></i>
-                            </div>
-                            <a href="tel:9896421785" class="text-gray-400 hover:text-gold transition">
-                                9896421785 / 8950081785
-                            </a>
-                        </li>
-                        <li class="flex items-center group">
-                            <div class="w-10 h-10 bg-maroon bg-opacity-20 rounded-lg flex items-center justify-center mr-3 flex-shrink-0 group-hover:bg-maroon transition">
-                                <i class="fas fa-envelope text-gold"></i>
-                            </div>
-                            <a href="mailto:anthemschool55@gmail.com" class="text-gray-400 hover:text-gold transition">
-                                anthemschool55@gmail.com
-                            </a>
-                        </li>
-                        <li class="flex items-center group">
-                            <div class="w-10 h-10 bg-maroon bg-opacity-20 rounded-lg flex items-center justify-center mr-3 flex-shrink-0 group-hover:bg-maroon transition">
-                                <i class="fas fa-clock text-gold"></i>
-                            </div>
-                            <span class="text-gray-400">Mon - Sat: 8:00 AM - 3:00 PM</span>
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- Social & Newsletter -->
-                <div>
-                    <h3 class="text-white text-lg font-bold mb-6 flex items-center">
-                        <span class="w-8 h-1 bg-gold mr-3"></span>Connect With Us
-                    </h3>
-                    <div class="flex space-x-3 mb-6">
-                        <?php if (getSiteSetting('facebook_url')): ?>
-                            <a href="<?php echo clean(getSiteSetting('facebook_url')); ?>" target="_blank" 
-                               class="w-11 h-11 bg-navy-dark border border-gold border-opacity-30 hover:bg-gold hover:text-navy-dark rounded-lg flex items-center justify-center transition" aria-label="Facebook">
-                                <i class="fab fa-facebook-f"></i>
-                            </a>
-                        <?php endif; ?>
-                        <?php if (getSiteSetting('twitter_url')): ?>
-                            <a href="<?php echo clean(getSiteSetting('twitter_url')); ?>" target="_blank" 
-                               class="w-11 h-11 bg-navy-dark border border-gold border-opacity-30 hover:bg-gold hover:text-navy-dark rounded-lg flex items-center justify-center transition" aria-label="Twitter">
-                                <i class="fab fa-twitter"></i>
-                            </a>
-                        <?php endif; ?>
-                        <?php if (getSiteSetting('instagram_url')): ?>
-                            <a href="<?php echo clean(getSiteSetting('instagram_url')); ?>" target="_blank" 
-                               class="w-11 h-11 bg-navy-dark border border-gold border-opacity-30 hover:bg-gold hover:text-navy-dark rounded-lg flex items-center justify-center transition" aria-label="Instagram">
-                                <i class="fab fa-instagram"></i>
-                            </a>
-                        <?php endif; ?>
-                        <?php if (getSiteSetting('youtube_url')): ?>
-                            <a href="<?php echo clean(getSiteSetting('youtube_url')); ?>" target="_blank" 
-                               class="w-11 h-11 bg-navy-dark border border-gold border-opacity-30 hover:bg-gold hover:text-navy-dark rounded-lg flex items-center justify-center transition" aria-label="YouTube">
-                                <i class="fab fa-youtube"></i>
-                            </a>
-                        <?php endif; ?>
-                    </div>
-                    
-                    <!-- Quick Contact CTA -->
-                    <div class="bg-maroon bg-opacity-20 rounded-xl p-4 border border-maroon border-opacity-30">
-                        <h4 class="text-white font-semibold mb-2">Have Questions?</h4>
-                        <p class="text-gray-400 text-sm mb-3">We're here to help you with admissions and queries.</p>
-                        <a href="contact.php" class="inline-flex items-center text-gold font-semibold text-sm hover:text-white transition">
-                            Contact Us <i class="fas fa-arrow-right ml-2"></i>
-                        </a>
-                    </div>
-                    
-                    <div class="mt-6">
-                        <a href="admin/login.php" class="text-xs text-gray-500 hover:text-gold transition">
-                            <i class="fas fa-lock mr-1"></i>Admin Login
-                        </a>
-                    </div>
+                <p>An educational institution with a fresh vision, modern outlook, and a strong academic foundation.
+                    (Under the aegis of Lotus Valley Social & Educational Trust)
+                </p>
+                <div class="flex items-center gap-4 mt-4" style="margin-top: 1rem;">
+                    <span class="badge badge-secondary">
+                        <i class="fas fa-award"></i> CBSE Affiliated
+                    </span>
                 </div>
             </div>
 
-            <!-- Bottom Bar -->
-            <div class="border-t border-gray-800 mt-12 pt-8">
-                <div class="flex flex-col md:flex-row justify-between items-center text-sm">
-                    <p class="text-gray-400">&copy; <?php echo date('Y'); ?> <?php echo clean(getSiteSetting('school_name', 'Anthem International School')); ?>. All rights reserved.</p>
-                    <p class="mt-2 md:mt-0 text-gray-500">
-                        Designed with <i class="fas fa-heart text-maroon"></i> for excellence in education
+            <!-- Quick Links -->
+            <div>
+                <h4>Quick Links</h4>
+                <ul class="footer-links">
+                    <li><a href="index.php"><i class="fas fa-chevron-right"></i> Home</a></li>
+                    <li><a href="about.php"><i class="fas fa-chevron-right"></i> About Us</a></li>
+                    <li><a href="toppers.php"><i class="fas fa-chevron-right"></i> Our Achievers</a></li>
+                    <li><a href="staff.php"><i class="fas fa-chevron-right"></i> Faculty</a></li>
+                    <li><a href="gallery.php"><i class="fas fa-chevron-right"></i> Gallery</a></li>
+                    <li><a href="admission.php"><i class="fas fa-chevron-right"></i> Admissions</a></li>
+                </ul>
+            </div>
+
+            <!-- Contact Info -->
+            <div>
+                <h4>Contact Us</h4>
+                <ul class="footer-contact">
+                    <li>
+                        <div class="icon"><i class="fas fa-phone"></i></div>
+                        <div class="text">
+                            <a href="tel:9896421785">9896421785</a><br>
+                            <a href="tel:8950081785">8950081785</a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="icon"><i class="fas fa-envelope"></i></div>
+                        <div class="text">
+                            <a href="mailto:info@lotusvalley.edu">info@lotusvalley.edu</a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="icon"><i class="fas fa-clock"></i></div>
+                        <div class="text">
+                            Mon - Sat: 8:00 AM - 3:00 PM
+                        </div>
+                    </li>
+                    <li>
+                        <div class="icon"><i class="fas fa-map-marker-alt"></i></div>
+                        <div class="text">
+                            <?php echo clean($settings['school_address'] ?? 'Choura Campus'); ?>
+                        </div>
+                    </li>
+                    <!-- Additional Address Info from Content -->
+                    <li>
+                        <div class="icon"><i class="fas fa-map"></i></div>
+                        <div class="text">
+                            Under the aegis of Lotus Valley Social & Educational Trust
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Connect -->
+            <div>
+                <h4>Connect With Us</h4>
+                <div class="social-links" style="margin-bottom: 1.5rem;">
+                    <?php if (getSiteSetting('facebook_url')): ?>
+                        <a href="<?php echo clean(getSiteSetting('facebook_url')); ?>" target="_blank"
+                            aria-label="Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                    <?php endif; ?>
+                    <?php if (getSiteSetting('instagram_url')): ?>
+                        <a href="<?php echo clean(getSiteSetting('instagram_url')); ?>" target="_blank"
+                            aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    <?php endif; ?>
+                    <?php if (getSiteSetting('youtube_url')): ?>
+                        <a href="<?php echo clean(getSiteSetting('youtube_url')); ?>" target="_blank" aria-label="YouTube">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    <?php endif; ?>
+                </div>
+
+                <!-- Quick Contact CTA -->
+                <div
+                    style="background: linear-gradient(135deg, #0D9488, #0F766E); padding: 1.5rem; border-radius: 1rem;">
+                    <h5 style="color: white; font-size: 1.125rem; margin-bottom: 0.75rem;">
+                        <i class="fas fa-lightbulb" style="margin-right: 0.5rem;"></i>Have Questions?
+                    </h5>
+                    <p style="color: rgba(255,255,255,0.8); font-size: 0.875rem; margin-bottom: 1rem;">
+                        Our team is ready to help with all your queries.
                     </p>
+                    <a href="contact.php" class="btn btn-secondary btn-pill"
+                        style="font-size: 0.875rem; padding: 0.5rem 1rem;">
+                        Get in Touch <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
+                    <a href="admin/login.php" style="font-size: 0.75rem; color: rgba(255,255,255,0.5);">
+                        <i class="fas fa-lock" style="margin-right: 0.375rem;"></i>Admin Access
+                    </a>
                 </div>
             </div>
         </div>
-    </footer>
 
-    <!-- Scroll to Top Button -->
-    <button onclick="scrollToTop()" id="scrollTopBtn" 
-            class="hidden fixed bottom-8 right-8 bg-gradient-to-r from-maroon to-red-700 text-white w-12 h-12 rounded-full shadow-2xl hover:from-red-700 hover:to-maroon transition z-40" aria-label="Scroll to top">
-        <i class="fas fa-arrow-up"></i>
-    </button>
+        <!-- Bottom Bar -->
+        <div class="footer-bottom">
+            <p>&copy; <?php echo date('Y'); ?>
+                <strong><?php echo clean(getSiteSetting('school_name', 'Lotus Valley')); ?></strong>. All rights
+                reserved.
+            </p>
+            <div class="footer-bottom-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+            </div>
+        </div>
+    </div>
+</footer>
 
-    <script>
-        // Scroll to top functionality
-        window.onscroll = function() {
-            const btn = document.getElementById('scrollTopBtn');
-            if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
-                btn.classList.remove('hidden');
-            } else {
-                btn.classList.add('hidden');
-            }
-        };
+<!-- Scroll to Top Button -->
+<button class="scroll-top" id="scrollTopBtn" onclick="scrollToTop()" aria-label="Scroll to top">
+    <i class="fas fa-arrow-up"></i>
+</button>
 
-        function scrollToTop() {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
+<script>
+    // Scroll to top functionality
+    window.onscroll = function () {
+        const btn = document.getElementById('scrollTopBtn');
+        if (document.body.scrollTop > 400 || document.documentElement.scrollTop > 400) {
+            btn.classList.add('visible');
+        } else {
+            btn.classList.remove('visible');
         }
-    </script>
+    };
+
+    function scrollToTop() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    }
+</script>
 </body>
+
 </html>

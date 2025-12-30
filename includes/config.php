@@ -9,16 +9,15 @@
 
 // Read from environment variables (set in .htaccess or hosting control panel)
 $dbHost = getenv('DB_HOST') ?: 'localhost';
-$dbName = getenv('DB_NAME');
-$dbUser = getenv('DB_USER');
-$dbPass = getenv('DB_PASS');
+$dbName = getenv('DB_NAME') ?: 'lotus_valley';
+$dbUser = getenv('DB_USER') ?: 'root';
+$dbPass = getenv('DB_PASS') ?: '';
 $dbPort = getenv('DB_PORT') ?: '3306';
 $dbType = getenv('DB_TYPE') ?: 'mysql'; // 'mysql' or 'pgsql'
 
-// Validate that required environment variables are set
-if (empty($dbName) || empty($dbUser) || empty($dbPass)) {
-    die('Database configuration error: Required environment variables (DB_NAME, DB_USER, DB_PASS) are not set. Please configure them in .htaccess or your hosting control panel.');
-}
+// For local development with PHP built-in server, you can set these defaults:
+// Or create a .env file and modify this section to read from it
+// For production, always use environment variables in .htaccess
 
 // Define constants for backward compatibility
 define('DB_HOST', $dbHost);
@@ -43,7 +42,20 @@ try {
         PDO::ATTR_EMULATE_PREPARES => false
     ]);
 } catch (PDOException $e) {
-    die('Database connection failed: ' . $e->getMessage() . '<br>Host: ' . $dbHost . '<br>Type: ' . $dbType);
+    // Show helpful error message for local development
+    $errorMsg = '<div style="font-family: Arial; padding: 20px; background: #fee; border: 2px solid #c00; margin: 20px; border-radius: 8px;">';
+    $errorMsg .= '<h2 style="color: #c00;">Database Connection Failed</h2>';
+    $errorMsg .= '<p><strong>Error:</strong> ' . htmlspecialchars($e->getMessage()) . '</p>';
+    $errorMsg .= '<p><strong>Host:</strong> ' . htmlspecialchars($dbHost) . '</p>';
+    $errorMsg .= '<p><strong>Database:</strong> ' . htmlspecialchars($dbName) . '</p>';
+    $errorMsg .= '<p><strong>Type:</strong> ' . htmlspecialchars($dbType) . '</p>';
+    $errorMsg .= '<hr><h3>Quick Fix for Local Development:</h3>';
+    $errorMsg .= '<ol>';
+    $errorMsg .= '<li>Create database: <code>CREATE DATABASE lotus_valley;</code></li>';
+    $errorMsg .= '<li>Import schema: <code>mysql lotus_valley < database.sql</code></li>';
+    $errorMsg .= '<li>Or edit <code>includes/config.php</code> with your database credentials</li>';
+    $errorMsg .= '</ol></div>';
+    die($errorMsg);
 }
 
 // Session configuration

@@ -211,7 +211,7 @@ This project is provided as-is for educational and commercial use.
 
 ---
 
-**Developed for Anthem Public School**
+**Developed for Lotus Valley School**
 
 *Version 1.0 - December 2024*
 

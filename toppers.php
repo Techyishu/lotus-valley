@@ -18,34 +18,41 @@ include 'includes/header.php';
 ?>
 
 <!-- Page Header -->
-<section class="bg-gradient-to-r from-yellow-500 to-orange-500 text-white py-8 md:py-16">
-    <div class="container mx-auto px-4">
-        <nav class="text-xs md:text-sm mb-3 md:mb-4">
-            <a href="index.php" class="hover:text-yellow-200">Home</a>
-            <span class="mx-2">/</span>
-            <span>Toppers</span>
-        </nav>
-        <h1 class="text-2xl md:text-4xl lg:text-5xl font-bold">Our Pride - Toppers</h1>
-        <p class="text-sm md:text-xl text-yellow-100 mt-2 md:mt-4">Celebrating academic excellence</p>
+<section class="page-header">
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="index.php">Home</a>
+            <span>/</span>
+            <span>Academics</span>
+        </div>
+        <h1>Our <span style="color: #F59E0B;">Pride</span> - Achievers</h1>
+        <p>Celebrating academic excellence and outstanding achievements</p>
+    </div>
+    <div class="wave-bottom">
+        <svg viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 64C240 96 480 96 720 64C960 32 1200 32 1440 64V80H0V64Z" fill="#F5F7FB" />
+        </svg>
     </div>
 </section>
 
 <!-- Filter Section -->
-<section class="py-4 md:py-8 bg-white shadow-sm sticky top-16 z-40">
-    <div class="container mx-auto px-4">
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 md:gap-4">
-            <h2 class="text-base md:text-xl font-bold text-gray-800">
-                <i class="fas fa-trophy text-yellow-500 mr-2"></i>
+<section
+    style="padding: 1rem 0; background: white; box-shadow: var(--shadow-sm); border-bottom: 1px solid var(--border-light); position: sticky; top: 60px; z-index: 40;">
+    <div class="container">
+        <div class="flex flex-wrap items-center justify-between gap-4">
+            <h3 class="flex items-center gap-3">
+                <div class="icon-box icon-box-sm"><i class="fas fa-trophy"></i></div>
                 Filter by Year
-            </h2>
-            <div class="flex flex-wrap gap-2 overflow-x-auto pb-2 sm:pb-0">
-                <a href="toppers.php" 
-                   class="px-4 py-2 rounded-full <?php echo !$filterYear ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'; ?> transition">
+            </h3>
+            <div class="flex flex-wrap gap-2">
+                <a href="toppers.php" class="btn btn-pill <?php echo !$filterYear ? 'btn-primary' : 'btn-outline'; ?>"
+                    style="padding: 0.5rem 1.25rem; font-size: 0.875rem;">
                     All Years
                 </a>
                 <?php foreach ($years as $year): ?>
-                    <a href="toppers.php?year=<?php echo $year; ?>" 
-                       class="px-4 py-2 rounded-full <?php echo $filterYear == $year ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'; ?> transition">
+                    <a href="toppers.php?year=<?php echo $year; ?>"
+                        class="btn btn-pill <?php echo $filterYear == $year ? 'btn-primary' : 'btn-outline'; ?>"
+                        style="padding: 0.5rem 1.25rem; font-size: 0.875rem;">
                         <?php echo $year; ?>
                     </a>
                 <?php endforeach; ?>
@@ -55,107 +62,103 @@ include 'includes/header.php';
 </section>
 
 <!-- Toppers Grid -->
-<section class="py-8 md:py-16 bg-gradient-to-br from-blue-50 to-indigo-50">
-    <div class="container mx-auto px-4">
+<section class="section bg-light">
+    <div class="container">
         <?php if (empty($toppers)): ?>
-            <div class="text-center py-12 md:py-16">
-                <i class="fas fa-search text-gray-400 text-4xl md:text-6xl mb-4"></i>
-                <h3 class="text-xl md:text-2xl font-bold text-gray-600 mb-2">No Toppers Found</h3>
-                <p class="text-sm md:text-base text-gray-500">Try selecting a different year</p>
+            <div class="text-center" style="padding: 4rem 0;">
+                <div
+                    style="width: 8rem; height: 8rem; background: var(--border-light); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 2rem;">
+                    <i class="fas fa-search" style="font-size: 3rem; color: var(--text-muted);"></i>
+                </div>
+                <h3 style="margin-bottom: 1rem;">No Toppers Found</h3>
+                <p style="color: var(--text-muted);">Try selecting a different year</p>
             </div>
         <?php else: ?>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 <?php foreach ($toppers as $topper): ?>
-                <div class="bg-white rounded-2xl shadow-xl overflow-hidden hover-lift">
-                    <!-- Photo Section -->
-                    <div class="relative h-72 bg-gradient-to-br from-yellow-400 via-orange-400 to-red-400">
-                        <?php if ($topper['photo']): ?>
-                            <img src="uploads/toppers/<?php echo clean($topper['photo']); ?>" 
-                                 alt="<?php echo clean($topper['name']); ?>" 
-                                 class="w-full h-full object-cover">
-                        <?php else: ?>
-                            <div class="w-full h-full flex items-center justify-center">
-                                <i class="fas fa-user-graduate text-white text-7xl"></i>
+                    <div class="card">
+                        <!-- Photo Section -->
+                        <div
+                            style="height: 220px; background: linear-gradient(135deg, #F59E0B, #D97706); position: relative; overflow: hidden;">
+                            <?php if ($topper['photo']): ?>
+                                <img src="uploads/toppers/<?php echo clean($topper['photo']); ?>"
+                                    alt="<?php echo clean($topper['name']); ?>"
+                                    style="width: 100%; height: 100%; object-fit: cover;">
+                            <?php else: ?>
+                                <div
+                                    style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
+                                    <i class="fas fa-user-graduate" style="font-size: 4rem; color: rgba(255,255,255,0.5);"></i>
+                                </div>
+                            <?php endif; ?>
+                            <div
+                                style="position: absolute; top: 1rem; right: 1rem; background: var(--color-primary); color: white; padding: 0.5rem 1rem; border-radius: 0.5rem; font-weight: 700; font-size: 1.25rem;">
+                                <?php echo clean($topper['percentage']); ?>%
                             </div>
-                        <?php endif; ?>
-                        
-                        <!-- Trophy Badge -->
-                        <div class="absolute top-4 right-4 bg-white text-yellow-600 px-4 py-2 rounded-full shadow-lg">
-                            <i class="fas fa-trophy mr-1"></i>
-                            <span class="font-bold"><?php echo clean($topper['percentage']); ?>%</span>
                         </div>
-                        
-                        <!-- Year Badge -->
-                        <div class="absolute bottom-4 left-4 bg-black bg-opacity-70 text-white px-4 py-2 rounded-full">
-                            <i class="fas fa-calendar mr-1"></i>
-                            <?php echo clean($topper['year']); ?>
+
+                        <!-- Details Section -->
+                        <div class="card-body">
+                            <h4 style="margin-bottom: 1rem;"><?php echo clean($topper['name']); ?></h4>
+
+                            <div style="display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 1rem;">
+                                <div class="flex items-center gap-3">
+                                    <div
+                                        style="width: 2.5rem; height: 2.5rem; background: rgba(245, 158, 11, 0.1); border-radius: 0.5rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                                        <i class="fas fa-star" style="color: #F59E0B;"></i>
+                                    </div>
+                                    <div>
+                                        <div style="font-size: 0.75rem; color: var(--text-muted);">Marks</div>
+                                        <div style="font-weight: 600;"><?php echo clean($topper['marks']); ?></div>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-center gap-3">
+                                    <div
+                                        style="width: 2.5rem; height: 2.5rem; background: rgba(37, 99, 235, 0.1); border-radius: 0.5rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                                        <i class="fas fa-graduation-cap" style="color: var(--color-primary);"></i>
+                                    </div>
+                                    <div>
+                                        <div style="font-size: 0.75rem; color: var(--text-muted);">Class & Board</div>
+                                        <div style="font-weight: 600;"><?php echo clean($topper['class']); ?> •
+                                            <?php echo clean($topper['board']); ?></div>
+                                    </div>
+                                </div>
+
+                                <?php if (!empty($topper['year'])): ?>
+                                    <div class="flex items-center gap-3">
+                                        <div
+                                            style="width: 2.5rem; height: 2.5rem; background: rgba(16, 185, 129, 0.1); border-radius: 0.5rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                                            <i class="fas fa-calendar" style="color: #10B981;"></i>
+                                        </div>
+                                        <div>
+                                            <div style="font-size: 0.75rem; color: var(--text-muted);">Year</div>
+                                            <div style="font-weight: 600;"><?php echo clean($topper['year']); ?></div>
+                                        </div>
+                                    </div>
+                                <?php endif; ?>
+                            </div>
+
+                            <?php if (!empty($topper['achievement'])): ?>
+                                <div
+                                    style="background: linear-gradient(135deg, rgba(37, 99, 235, 0.05), rgba(245, 158, 11, 0.05)); border: 1px solid rgba(37, 99, 235, 0.1); border-radius: 0.75rem; padding: 1rem;">
+                                    <div class="flex items-start gap-2">
+                                        <i class="fas fa-award" style="color: #F59E0B; margin-top: 0.125rem;"></i>
+                                        <div>
+                                            <div
+                                                style="font-size: 0.625rem; color: var(--text-muted); text-transform: uppercase; font-weight: 600;">
+                                                Achievement</div>
+                                            <div style="font-weight: 600; color: var(--text-heading);">
+                                                <?php echo clean($topper['achievement']); ?></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php endif; ?>
                         </div>
                     </div>
-                    
-                    <!-- Details Section -->
-                    <div class="p-6">
-                        <h3 class="text-2xl font-bold text-gray-800 mb-4"><?php echo clean($topper['name']); ?></h3>
-                        
-                        <div class="space-y-3 mb-4">
-                            <div class="flex items-center text-gray-700">
-                                <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mr-3">
-                                    <i class="fas fa-star text-blue-600"></i>
-                                </div>
-                                <div>
-                                    <p class="text-sm text-gray-500">Marks Obtained</p>
-                                    <p class="font-bold"><?php echo clean($topper['marks']); ?></p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center text-gray-700">
-                                <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center mr-3">
-                                    <i class="fas fa-graduation-cap text-green-600"></i>
-                                </div>
-                                <div>
-                                    <p class="text-sm text-gray-500">Class</p>
-                                    <p class="font-bold"><?php echo clean($topper['class']); ?></p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center text-gray-700">
-                                <div class="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center mr-3">
-                                    <i class="fas fa-school text-purple-600"></i>
-                                </div>
-                                <div>
-                                    <p class="text-sm text-gray-500">Board</p>
-                                    <p class="font-bold"><?php echo clean($topper['board']); ?></p>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <?php if ($topper['achievement']): ?>
-                        <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg p-4 border-l-4 border-blue-600">
-                            <p class="text-sm text-gray-600 mb-1"><i class="fas fa-award text-blue-600 mr-2"></i>Achievement</p>
-                            <p class="font-semibold text-gray-800"><?php echo clean($topper['achievement']); ?></p>
-                        </div>
-                        <?php endif; ?>
-                    </div>
-                </div>
                 <?php endforeach; ?>
             </div>
         <?php endif; ?>
     </div>
 </section>
 
-<!-- Motivation Section -->
-<section class="py-16 bg-gradient-to-r from-blue-600 to-indigo-600 text-white">
-    <div class="container mx-auto px-4 text-center">
-        <i class="fas fa-quote-left text-5xl text-blue-300 mb-6"></i>
-        <h2 class="text-3xl md:text-4xl font-bold mb-4">Success is the Sum of Small Efforts</h2>
-        <p class="text-xl text-blue-100 mb-8 max-w-3xl mx-auto">
-            Our toppers are the result of dedication, hard work, and excellent guidance from our faculty. 
-            They inspire us to maintain our commitment to academic excellence.
-        </p>
-        <a href="admission.php" class="inline-flex items-center bg-white text-blue-600 px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition shadow-lg">
-            Join Our Success Story <i class="fas fa-arrow-right ml-2"></i>
-        </a>
-    </div>
-</section>
-
 <?php include 'includes/footer.php'; ?>
-

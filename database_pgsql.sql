@@ -1,4 +1,4 @@
--- Anthem Public School Database Schema (PostgreSQL Version)
+-- Lotus Valley School Database Schema (PostgreSQL Version)
 -- Run this file once to create all necessary tables
 
 -- Create admin_users table
@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS admin_users (
 
 -- Insert default admin account (password: admin123)
 INSERT INTO admin_users (username, password, email) VALUES
-('admin', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'admin@anthemschool.com')
+('admin', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'admin@lotusvalley.edu')
 ON CONFLICT (username) DO NOTHING;
 
 -- Create toppers table
@@ -127,8 +127,8 @@ CREATE TABLE IF NOT EXISTS testimonials (
 
 -- Insert sample testimonials
 INSERT INTO testimonials (name, role, content, rating, status, is_featured) VALUES
-('Mr. Rajiv Mehta', 'Parent', 'Anthem Public School has provided excellent education to my child. The teachers are dedicated and the infrastructure is outstanding.', 5, 'approved', TRUE),
-('Ananya Sharma', 'Alumni - 2023', 'The best years of my life were spent at Anthem. The school not only focused on academics but also on overall personality development.', 5, 'approved', TRUE),
+('Mr. Rajiv Mehta', 'Parent', 'Lotus Valley has provided excellent education to my child. The teachers are dedicated and the infrastructure is outstanding.', 5, 'approved', TRUE),
+('Ananya Sharma', 'Alumni - 2023', 'The best years of my life were spent at Lotus Valley. The school not only focused on academics but also on overall personality development.', 5, 'approved', TRUE),
 ('Mrs. Priya Singh', 'Parent', 'I am extremely satisfied with the quality of education and care my child receives at this school. Highly recommended!', 5, 'approved', TRUE)
 ON CONFLICT DO NOTHING;
 
@@ -142,16 +142,16 @@ CREATE TABLE IF NOT EXISTS site_settings (
 
 -- Insert site settings
 INSERT INTO site_settings (setting_key, setting_value) VALUES
-('school_name', 'Anthem Public School'),
-('school_email', 'info@anthempublicschool.com'),
-('school_phone', '+91-9876543210'),
+('school_name', 'Lotus Valley'),
+('school_email', 'info@lotusvalley.edu'),
+('school_phone', '9896421785'),
 ('school_address', 'Sector 12, Education City, New Delhi - 110001'),
-('facebook_url', 'https://facebook.com/anthempublicschool'),
-('twitter_url', 'https://twitter.com/anthemschool'),
-('instagram_url', 'https://instagram.com/anthempublicschool'),
-('youtube_url', 'https://youtube.com/anthempublicschool'),
-('principal_message', 'Welcome to Anthem Public School, where we nurture young minds to become future leaders.'),
-('about_text', 'Anthem Public School is a premier educational institution dedicated to providing quality education and holistic development of students.'),
+('facebook_url', 'https://facebook.com/lotusvalleyschool'),
+('twitter_url', 'https://twitter.com/lotusvalley'),
+('instagram_url', 'https://instagram.com/lotusvalleyschool'),
+('youtube_url', 'https://youtube.com/lotusvalleyschool'),
+('principal_message', 'Welcome to Lotus Valley, where excellence blooms and young minds flourish into future leaders.'),
+('about_text', 'Lotus Valley is a premier educational institution dedicated to nurturing excellence and providing holistic development through innovative learning and strong values.'),
 ('students_count', '2500'),
 ('faculty_count', '150'),
 ('years_established', '25'),
