@@ -416,6 +416,11 @@ if (!isset($pageTitle)) {
                         <i class="fas fa-star"></i>
                         <span>Testimonials</span>
                     </a>
+                    <a href="disclosures.php"
+                        class="sidebar-link <?php echo $currentPage === 'disclosures.php' ? 'active' : ''; ?>">
+                        <i class="fas fa-file-alt"></i>
+                        <span>Disclosures</span>
+                    </a>
                 </div>
 
                 <div class="nav-section">

@@ -116,6 +116,12 @@ $currentPage = basename($_SERVER['PHP_SELF']);
                         </a>
                     </li>
                     <li>
+                        <a href="disclosure.php"
+                            class="nav-link <?php echo $currentPage === 'disclosure.php' ? 'active' : ''; ?>">
+                            Disclosure
+                        </a>
+                    </li>
+                    <li>
                         <a href="contact.php"
                             class="nav-link <?php echo $currentPage === 'contact.php' ? 'active' : ''; ?>">
                             Contact
@@ -150,6 +156,9 @@ $currentPage = basename($_SERVER['PHP_SELF']);
                 </a>
                 <a href="gallery.php" class="<?php echo $currentPage === 'gallery.php' ? 'active' : ''; ?>">
                     <i class="fas fa-images"></i> Gallery
+                </a>
+                <a href="disclosure.php" class="<?php echo $currentPage === 'disclosure.php' ? 'active' : ''; ?>">
+                    <i class="fas fa-file-alt"></i> Disclosure
                 </a>
                 <a href="contact.php" class="<?php echo $currentPage === 'contact.php' ? 'active' : ''; ?>">
                     <i class="fas fa-envelope"></i> Contact
