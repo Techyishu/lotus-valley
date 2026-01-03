@@ -421,6 +421,26 @@ if (!isset($pageTitle)) {
                         <i class="fas fa-file-alt"></i>
                         <span>Disclosures</span>
                     </a>
+                    <a href="sports.php"
+                        class="sidebar-link <?php echo $currentPage === 'sports.php' ? 'active' : ''; ?>">
+                        <i class="fas fa-running"></i>
+                        <span>Sports</span>
+                    </a>
+                    <a href="slc.php"
+                        class="sidebar-link <?php echo $currentPage === 'slc.php' ? 'active' : ''; ?>">
+                        <i class="fas fa-shapes"></i>
+                        <span>SLC</span>
+                    </a>
+                    <a href="bus-routes.php"
+                        class="sidebar-link <?php echo $currentPage === 'bus-routes.php' ? 'active' : ''; ?>">
+                        <i class="fas fa-bus"></i>
+                        <span>Bus Routes</span>
+                    </a>
+                    <a href="fee-structure.php"
+                        class="sidebar-link <?php echo $currentPage === 'fee-structure.php' ? 'active' : ''; ?>">
+                        <i class="fas fa-money-bill-wave"></i>
+                        <span>Fee Structure</span>
+                    </a>
                 </div>
 
                 <div class="nav-section">

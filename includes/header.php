@@ -122,6 +122,30 @@ $currentPage = basename($_SERVER['PHP_SELF']);
                         </a>
                     </li>
                     <li>
+                        <a href="sports.php"
+                            class="nav-link <?php echo $currentPage === 'sports.php' ? 'active' : ''; ?>">
+                            Sports
+                        </a>
+                    </li>
+                    <li>
+                        <a href="slc.php"
+                            class="nav-link <?php echo $currentPage === 'slc.php' ? 'active' : ''; ?>">
+                            SLC
+                        </a>
+                    </li>
+                    <li>
+                        <a href="bus-routes.php"
+                            class="nav-link <?php echo $currentPage === 'bus-routes.php' ? 'active' : ''; ?>">
+                            Bus Routes
+                        </a>
+                    </li>
+                    <li>
+                        <a href="fee-structure.php"
+                            class="nav-link <?php echo $currentPage === 'fee-structure.php' ? 'active' : ''; ?>">
+                            Fee Structure
+                        </a>
+                    </li>
+                    <li>
                         <a href="contact.php"
                             class="nav-link <?php echo $currentPage === 'contact.php' ? 'active' : ''; ?>">
                             Contact
@@ -159,6 +183,18 @@ $currentPage = basename($_SERVER['PHP_SELF']);
                 </a>
                 <a href="disclosure.php" class="<?php echo $currentPage === 'disclosure.php' ? 'active' : ''; ?>">
                     <i class="fas fa-file-alt"></i> Disclosure
+                </a>
+                <a href="sports.php" class="<?php echo $currentPage === 'sports.php' ? 'active' : ''; ?>">
+                    <i class="fas fa-running"></i> Sports
+                </a>
+                <a href="slc.php" class="<?php echo $currentPage === 'slc.php' ? 'active' : ''; ?>">
+                    <i class="fas fa-shapes"></i> SLC
+                </a>
+                <a href="bus-routes.php" class="<?php echo $currentPage === 'bus-routes.php' ? 'active' : ''; ?>">
+                    <i class="fas fa-bus"></i> Bus Routes
+                </a>
+                <a href="fee-structure.php" class="<?php echo $currentPage === 'fee-structure.php' ? 'active' : ''; ?>">
+                    <i class="fas fa-money-bill-wave"></i> Fee Structure
                 </a>
                 <a href="contact.php" class="<?php echo $currentPage === 'contact.php' ? 'active' : ''; ?>">
                     <i class="fas fa-envelope"></i> Contact

@@ -1,8 +1,6 @@
 <?php
-require_once 'includes/admin_auth.php';
-require_once '../includes/functions.php';
-
 $pageTitle = 'Manage Disclosures';
+require_once 'includes/admin_header.php';
 
 // Handle Delete
 if (isset($_GET['delete'])) {
@@ -134,15 +132,7 @@ if (isset($_GET['edit'])) {
         $editData = null;
     }
 }
-
-include 'includes/admin_header.php';
 ?>
-
-<div class="admin-content">
-    <div class="admin-header">
-        <h1><i class="fas fa-file-alt"></i> Manage Mandatory Disclosures</h1>
-        <p>Upload and manage mandatory disclosure documents</p>
-    </div>
 
     <?php if (isset($_SESSION['success'])): ?>
         <div class="alert alert-success">
@@ -313,6 +303,5 @@ include 'includes/admin_header.php';
             <?php endif; ?>
         </div>
     </div>
-</div>
 
 <?php include 'includes/admin_footer.php'; ?>
