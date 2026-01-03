@@ -115,35 +115,43 @@ $currentPage = basename($_SERVER['PHP_SELF']);
                             Gallery
                         </a>
                     </li>
-                    <li>
-                        <a href="disclosure.php"
-                            class="nav-link <?php echo $currentPage === 'disclosure.php' ? 'active' : ''; ?>">
-                            Disclosure
+                    <li class="nav-item-dropdown">
+                        <a href="javascript:void(0)"
+                            class="nav-link dropdown-toggle <?php echo in_array($currentPage, ['disclosure.php', 'sports.php', 'slc.php', 'bus-routes.php', 'fee-structure.php']) ? 'active' : ''; ?>">
+                            More Info <i class="fas fa-chevron-down" style="font-size: 0.7em; margin-left: 0.25rem;"></i>
                         </a>
-                    </li>
-                    <li>
-                        <a href="sports.php"
-                            class="nav-link <?php echo $currentPage === 'sports.php' ? 'active' : ''; ?>">
-                            Sports
-                        </a>
-                    </li>
-                    <li>
-                        <a href="slc.php"
-                            class="nav-link <?php echo $currentPage === 'slc.php' ? 'active' : ''; ?>">
-                            SLC
-                        </a>
-                    </li>
-                    <li>
-                        <a href="bus-routes.php"
-                            class="nav-link <?php echo $currentPage === 'bus-routes.php' ? 'active' : ''; ?>">
-                            Bus Routes
-                        </a>
-                    </li>
-                    <li>
-                        <a href="fee-structure.php"
-                            class="nav-link <?php echo $currentPage === 'fee-structure.php' ? 'active' : ''; ?>">
-                            Fee Structure
-                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="disclosure.php"
+                                    class="<?php echo $currentPage === 'disclosure.php' ? 'active' : ''; ?>">
+                                    <i class="fas fa-file-alt"></i> Disclosure
+                                </a>
+                            </li>
+                            <li>
+                                <a href="sports.php"
+                                    class="<?php echo $currentPage === 'sports.php' ? 'active' : ''; ?>">
+                                    <i class="fas fa-running"></i> Sports
+                                </a>
+                            </li>
+                            <li>
+                                <a href="slc.php"
+                                    class="<?php echo $currentPage === 'slc.php' ? 'active' : ''; ?>">
+                                    <i class="fas fa-shapes"></i> SLC
+                                </a>
+                            </li>
+                            <li>
+                                <a href="bus-routes.php"
+                                    class="<?php echo $currentPage === 'bus-routes.php' ? 'active' : ''; ?>">
+                                    <i class="fas fa-bus"></i> Bus Routes
+                                </a>
+                            </li>
+                            <li>
+                                <a href="fee-structure.php"
+                                    class="<?php echo $currentPage === 'fee-structure.php' ? 'active' : ''; ?>">
+                                    <i class="fas fa-money-bill-wave"></i> Fee Structure
+                                </a>
+                            </li>
+                        </ul>
                     </li>
                     <li>
                         <a href="contact.php"
@@ -222,6 +230,27 @@ $currentPage = basename($_SERVER['PHP_SELF']);
                     icon.classList.add('fa-bars');
                 }
             }
+
+            // Mobile dropdown toggle
+            document.querySelectorAll('.dropdown-toggle').forEach(toggle => {
+                toggle.addEventListener('click', function(e) {
+                    if (window.innerWidth < 1024) {
+                        e.preventDefault();
+                        e.stopPropagation();
+
+                        const dropdown = this.nextElementSibling;
+                        const isOpen = dropdown.style.display === 'block';
+
+                        // Close all other dropdowns
+                        document.querySelectorAll('.dropdown-menu').forEach(menu => {
+                            menu.style.display = 'none';
+                        });
+
+                        // Toggle current dropdown
+                        dropdown.style.display = isOpen ? 'none' : 'block';
+                    }
+                });
+            });
 
             // Close mobile menu when clicking outside
             document.addEventListener('click', function (e) {
