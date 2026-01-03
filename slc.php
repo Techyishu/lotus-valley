@@ -1,7 +1,7 @@
 <?php
 require_once 'includes/functions.php';
 
-$pageTitle = 'Student Life Circle (SLC)';
+$pageTitle = 'School Leaving Certificates';
 
 // Fetch all SLC items
 try {
@@ -24,14 +24,14 @@ include 'includes/header.php';
         <div style="text-align: center; max-width: 48rem; margin: 0 auto;">
             <div
                 style="display: inline-block; background: rgba(255,255,255,0.2); padding: 0.5rem 1.5rem; border-radius: 2rem; margin-bottom: 1.5rem;">
-                <span style="font-size: 0.875rem; font-weight: 600;"><i class="fas fa-shapes"></i> Beyond the Classroom</span>
+                <span style="font-size: 0.875rem; font-weight: 600;"><i class="fas fa-certificate"></i> Official Documents</span>
             </div>
-            <h1 style="font-size: 3rem; font-weight: 700; margin-bottom: 1rem; color: white;">STUDENT LIFE CIRCLE</h1>
+            <h1 style="font-size: 3rem; font-weight: 700; margin-bottom: 1rem; color: white;">SCHOOL LEAVING CERTIFICATES</h1>
             <nav style="display: flex; align-items: center; justify-content: center; gap: 0.5rem; font-size: 0.875rem;">
                 <a href="index.php" style="color: rgba(255,255,255,0.9); text-decoration: none;"><i
                         class="fas fa-home"></i> Home</a>
                 <span style="color: rgba(255,255,255,0.7);">/</span>
-                <span style="color: white;">Student Life Circle</span>
+                <span style="color: white;">School Leaving Certificates</span>
             </nav>
         </div>
     </div>
@@ -41,16 +41,16 @@ include 'includes/header.php';
 <section class="section bg-light">
     <div class="container">
         <div class="section-header">
-            <span class="badge badge-primary"><i class="fas fa-shapes"></i> SLC</span>
-            <h2>Student Life Circle Activities</h2>
-            <p>Exploring talents and building memories through diverse co-curricular activities</p>
+            <span class="badge badge-primary"><i class="fas fa-certificate"></i> Certificates</span>
+            <h2>School Leaving Certificates</h2>
+            <p>Download official school leaving certificates and transfer certificates</p>
         </div>
 
         <?php if (empty($slcResult)): ?>
             <div class="card text-center" style="padding: 4rem;">
-                <i class="fas fa-shapes" style="font-size: 4rem; color: var(--border-light); margin-bottom: 1rem;"></i>
-                <h3 style="color: var(--text-muted); font-weight: 500;">No SLC activities available</h3>
-                <p style="color: var(--text-muted);">Please check back later</p>
+                <i class="fas fa-certificate" style="font-size: 4rem; color: var(--border-light); margin-bottom: 1rem;"></i>
+                <h3 style="color: var(--text-muted); font-weight: 500;">No certificates available</h3>
+                <p style="color: var(--text-muted);">Please check back later or contact school administration</p>
             </div>
         <?php else: ?>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -75,7 +75,7 @@ include 'includes/header.php';
                                     <?php endif; ?>
                                     <div style="margin-top: 1rem;">
                                         <span style="color: #8B5CF6; font-size: 0.875rem; font-weight: 600;">
-                                            <i class="fas fa-external-link-alt"></i> View Document
+                                            <i class="fas fa-download"></i> Download Certificate
                                         </span>
                                     </div>
                                 </div>
@@ -100,7 +100,7 @@ include 'includes/header.php';
                                     <?php endif; ?>
                                     <div style="margin-top: 1rem;">
                                         <span style="color: #8B5CF6; font-size: 0.875rem; font-weight: 600;">
-                                            <i class="fas fa-expand"></i> View Image
+                                            <i class="fas fa-expand"></i> View Certificate
                                         </span>
                                     </div>
                                 </div>
@@ -118,14 +118,31 @@ include 'includes/header.php';
                 <div style="display: flex; gap: 1rem; align-items: start;">
                     <i class="fas fa-info-circle" style="color: #8B5CF6; font-size: 1.5rem; margin-top: 0.25rem;"></i>
                     <div>
-                        <h4 style="color: #8B5CF6; margin-bottom: 0.5rem; font-weight: 600;">Holistic Development</h4>
+                        <h4 style="color: #8B5CF6; margin-bottom: 0.5rem; font-weight: 600;">Important Information</h4>
                         <p style="color: var(--text-body); line-height: 1.7; margin: 0;">
-                            Our Student Life Circle offers a wide range of co-curricular activities that nurture creativity,
-                            leadership, and social skills. From cultural events to community service, every activity is
-                            designed to shape well-rounded individuals ready to make a positive impact.
+                            School Leaving Certificates are issued upon completion of education or upon transfer to another
+                            institution. For obtaining a new certificate, please contact the school administration with
+                            necessary documents including student ID, previous academic records, and parents' identity
+                            proof. Processing time is typically 3-5 working days.
                         </p>
                     </div>
                 </div>
+            </div>
+        </div>
+
+        <!-- Contact Section -->
+        <div class="card"
+            style="margin-top: 2rem; background: linear-gradient(135deg, rgba(139, 92, 246, 0.05), rgba(124, 58, 237, 0.02)); border: 2px solid rgba(139, 92, 246, 0.2);">
+            <div class="card-body" style="text-align: center;">
+                <i class="fas fa-phone-alt" style="color: #8B5CF6; font-size: 2rem; margin-bottom: 1rem;"></i>
+                <h3 style="color: #8B5CF6; margin-bottom: 0.5rem; font-weight: 600;">Need a Certificate?</h3>
+                <p style="color: var(--text-body); line-height: 1.7; margin: 0 0 1rem 0;">
+                    Contact the school office to request a School Leaving Certificate or Transfer Certificate.
+                </p>
+                <a href="contact.php"
+                    style="display: inline-block; background: linear-gradient(135deg, #8B5CF6, #7C3AED); color: white; padding: 0.75rem 2rem; border-radius: 2rem; text-decoration: none; font-weight: 600; transition: all 0.3s ease;">
+                    <i class="fas fa-envelope"></i> Contact Office
+                </a>
             </div>
         </div>
     </div>

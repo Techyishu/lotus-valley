@@ -1,5 +1,5 @@
 <?php
-$pageTitle = 'Manage SLC';
+$pageTitle = 'Manage School Leaving Certificates';
 require_once 'includes/admin_header.php';
 
 // Handle Delete
@@ -21,9 +21,9 @@ if (isset($_GET['delete'])) {
 
         $deleteStmt = $pdo->prepare("DELETE FROM slc WHERE id = ?");
         $deleteStmt->execute([$id]);
-        $_SESSION['success'] = 'SLC item deleted successfully!';
+        $_SESSION['success'] = 'School Leaving Certificate deleted successfully!';
     } catch (PDOException $e) {
-        $_SESSION['error'] = 'Error deleting SLC item: ' . $e->getMessage();
+        $_SESSION['error'] = 'Error deleting certificate: ' . $e->getMessage();
     }
 
     header('Location: slc.php');
@@ -100,7 +100,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $stmt = $pdo->prepare("UPDATE slc SET title = ?, description = ?, display_order = ? WHERE id = ?");
                     $stmt->execute([$title, $description, $display_order, $id]);
                 }
-                $_SESSION['success'] = 'SLC item updated successfully!';
+                $_SESSION['success'] = 'School Leaving Certificate updated successfully!';
             } else {
                 // Insert new
                 if (!$fileName) {
@@ -111,7 +111,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 $stmt = $pdo->prepare("INSERT INTO slc (title, description, file_path, file_type, display_order) VALUES (?, ?, ?, ?, ?)");
                 $stmt->execute([$title, $description, $fileName, $fileType, $display_order]);
-                $_SESSION['success'] = 'SLC item added successfully!';
+                $_SESSION['success'] = 'School Leaving Certificate added successfully!';
             }
         } catch (PDOException $e) {
             $_SESSION['error'] = 'Database error: ' . $e->getMessage();
@@ -162,7 +162,7 @@ if (isset($_GET['edit'])) {
     <div class="card" style="margin-bottom: 2rem;">
         <div class="card-header">
             <h3><i class="fas fa-<?php echo $editData ? 'edit' : 'plus'; ?>"></i>
-                <?php echo $editData ? 'Edit SLC Item' : 'Add SLC Item'; ?>
+                <?php echo $editData ? 'Edit Certificate' : 'Add School Leaving Certificate'; ?>
             </h3>
         </div>
         <div class="card-body">
@@ -173,14 +173,14 @@ if (isset($_GET['edit'])) {
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div class="form-group">
-                        <label for="title">Title *</label>
+                        <label for="title">Certificate Title *</label>
                         <input type="text" id="title" name="title" class="form-control"
                                value="<?php echo $editData ? htmlspecialchars($editData['title']) : ''; ?>"
-                               required placeholder="e.g., Annual Function, Science Exhibition">
+                               required placeholder="e.g., Class 10 - 2024, Class 12 - 2023">
                     </div>
 
                     <div class="form-group">
-                        <label for="file">Upload File *</label>
+                        <label for="file">Upload Certificate *</label>
                         <input type="file" id="file" name="file" class="form-control"
                                accept=".pdf,.jpg,.jpeg,.png,.gif"
                                <?php echo $editData ? '' : 'required'; ?>>
@@ -207,7 +207,7 @@ if (isset($_GET['edit'])) {
                     <div class="form-group" style="grid-column: 1 / -1;">
                         <label for="description">Description (Optional)</label>
                         <textarea id="description" name="description" class="form-control" rows="3"
-                                  placeholder="Brief description of the SLC activity"><?php echo $editData ? htmlspecialchars($editData['description']) : ''; ?></textarea>
+                                  placeholder="Additional information about the certificate"><?php echo $editData ? htmlspecialchars($editData['description']) : ''; ?></textarea>
                     </div>
 
                     <div class="form-group">
@@ -224,7 +224,7 @@ if (isset($_GET['edit'])) {
                 <div style="display: flex; gap: 1rem; margin-top: 1.5rem;">
                     <button type="submit" class="btn btn-primary">
                         <i class="fas fa-<?php echo $editData ? 'save' : 'plus'; ?>"></i>
-                        <?php echo $editData ? 'Update Item' : 'Add Item'; ?>
+                        <?php echo $editData ? 'Update Certificate' : 'Add Certificate'; ?>
                     </button>
                     <?php if ($editData): ?>
                         <a href="slc.php" class="btn btn-outline">
@@ -236,10 +236,10 @@ if (isset($_GET['edit'])) {
         </div>
     </div>
 
-    <!-- SLC List -->
+    <!-- Certificates List -->
     <div class="card">
         <div class="card-header">
-            <h3><i class="fas fa-list"></i> All SLC Items</h3>
+            <h3><i class="fas fa-list"></i> All School Leaving Certificates</h3>
         </div>
         <div class="card-body">
             <?php if (count($slcResult) > 0): ?>
@@ -286,7 +286,7 @@ if (isset($_GET['edit'])) {
                                         </a>
                                         <a href="?delete=<?php echo $item['id']; ?>"
                                            class="btn btn-sm btn-danger"
-                                           onclick="return confirm('Are you sure you want to delete this item?')"
+                                           onclick="return confirm('Are you sure you want to delete this certificate?')"
                                            title="Delete">
                                             <i class="fas fa-trash"></i>
                                         </a>
@@ -299,8 +299,8 @@ if (isset($_GET['edit'])) {
                 </div>
             <?php else: ?>
                 <div class="text-center" style="padding: 3rem;">
-                    <i class="fas fa-images" style="font-size: 4rem; color: var(--border-light); margin-bottom: 1rem;"></i>
-                    <p style="color: var(--text-muted);">No SLC items added yet. Add your first item above.</p>
+                    <i class="fas fa-certificate" style="font-size: 4rem; color: var(--border-light); margin-bottom: 1rem;"></i>
+                    <p style="color: var(--text-muted);">No certificates added yet. Add your first certificate above.</p>
                 </div>
             <?php endif; ?>
         </div>

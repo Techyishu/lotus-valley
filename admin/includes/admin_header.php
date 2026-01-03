@@ -2,7 +2,6 @@
 require_once '../includes/auth.php';
 require_once '../includes/functions.php';
 
-// Require login for all admin pages
 requireLogin();
 
 $admin = getLoggedInAdmin();
@@ -18,11 +17,22 @@ if (!isset($pageTitle)) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo clean($pageTitle); ?> - Admin Panel | Lotus Valley School</title>
+    <title><?php echo clean($pageTitle); ?> - Admin | Lotus Valley School</title>
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Admin Panel Specific Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #f5f7fa;
+            color: #1a202c;
+        }
+
         .admin-layout {
             display: flex;
             min-height: 100vh;
@@ -30,17 +40,16 @@ if (!isset($pageTitle)) {
 
         /* Sidebar */
         .admin-sidebar {
-            width: 260px;
-            background: linear-gradient(180deg, #0F766E 0%, #064E4A 100%);
-            color: white;
-            flex-shrink: 0;
+            width: 250px;
+            background: #ffffff;
+            border-right: 1px solid #e2e8f0;
             display: none;
             flex-direction: column;
             position: fixed;
             top: 0;
             left: 0;
             bottom: 0;
-            z-index: 50;
+            z-index: 1000;
             overflow-y: auto;
         }
 
@@ -55,8 +64,9 @@ if (!isset($pageTitle)) {
         }
 
         .sidebar-header {
-            padding: 1.5rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1.25rem 1.5rem;
+            border-bottom: 1px solid #e2e8f0;
+            background: #ffffff;
         }
 
         .sidebar-logo {
@@ -66,11 +76,8 @@ if (!isset($pageTitle)) {
         }
 
         .sidebar-logo-img {
-            width: 50px;
-            height: 50px;
-            background: white;
-            border-radius: 0.75rem;
-            padding: 0.25rem;
+            width: 40px;
+            height: 40px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -82,87 +89,78 @@ if (!isset($pageTitle)) {
             object-fit: contain;
         }
 
-        .sidebar-logo-text {
-            flex: 1;
-        }
-
         .sidebar-logo-text h2 {
-            font-size: 1.125rem;
+            font-size: 1rem;
             font-weight: 700;
-            color: white;
+            color: #1a202c;
             margin: 0;
-            line-height: 1.2;
+            line-height: 1.3;
         }
 
         .sidebar-logo-text span {
-            font-size: 0.75rem;
-            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.7rem;
+            color: #718096;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
 
         /* Navigation */
         .sidebar-nav {
             flex: 1;
-            padding: 1rem 0.75rem;
+            padding: 1rem 0;
+            overflow-y: auto;
         }
 
         .nav-section {
-            margin-bottom: 1.5rem;
+            margin-bottom: 0.5rem;
         }
 
         .nav-section-title {
-            font-size: 0.6875rem;
-            font-weight: 600;
+            font-size: 0.65rem;
+            font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.1em;
-            color: rgba(255, 255, 255, 0.4);
-            padding: 0 0.75rem;
-            margin-bottom: 0.5rem;
+            color: #a0aec0;
+            padding: 0.75rem 1.5rem 0.5rem;
         }
 
         .sidebar-link {
             display: flex;
             align-items: center;
             gap: 0.75rem;
-            padding: 0.75rem;
-            border-radius: 0.5rem;
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 0.9375rem;
+            padding: 0.625rem 1.5rem;
+            color: #4a5568;
+            font-size: 0.875rem;
             font-weight: 500;
-            transition: all 0.2s ease;
-            margin-bottom: 0.25rem;
+            text-decoration: none;
+            transition: all 0.15s ease;
+            border-left: 3px solid transparent;
+            margin: 0.125rem 0;
         }
 
         .sidebar-link:hover {
-            background: rgba(255, 255, 255, 0.08);
-            color: white;
+            background: #f7fafc;
+            color: #2d3748;
         }
 
         .sidebar-link.active {
-            background: var(--color-primary);
-            color: white;
-            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);
+            background: #edf2f7;
+            color: #0d9488;
+            border-left-color: #0d9488;
         }
 
         .sidebar-link i {
-            width: 1.25rem;
+            width: 1.125rem;
             text-align: center;
-            font-size: 1rem;
-        }
-
-        .sidebar-link .badge {
-            margin-left: auto;
-            background: var(--color-secondary);
-            color: #1a1a1a;
-            font-size: 0.6875rem;
-            padding: 0.125rem 0.5rem;
-            border-radius: 9999px;
-            font-weight: 600;
+            font-size: 0.9375rem;
         }
 
         /* Sidebar Footer */
         .sidebar-footer {
             padding: 1rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-top: 1px solid #e2e8f0;
+            background: #f7fafc;
         }
 
         .admin-profile {
@@ -170,21 +168,23 @@ if (!isset($pageTitle)) {
             align-items: center;
             gap: 0.75rem;
             padding: 0.75rem;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 0.75rem;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.5rem;
             margin-bottom: 0.75rem;
         }
 
         .admin-avatar {
-            width: 2.5rem;
-            height: 2.5rem;
-            background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
-            border-radius: 0.5rem;
+            width: 2.25rem;
+            height: 2.25rem;
+            background: linear-gradient(135deg, #0d9488, #0f766e);
+            border-radius: 0.375rem;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
             font-weight: 600;
+            font-size: 0.875rem;
         }
 
         .admin-info {
@@ -193,17 +193,17 @@ if (!isset($pageTitle)) {
         }
 
         .admin-name {
-            font-size: 0.875rem;
+            font-size: 0.8125rem;
             font-weight: 600;
-            color: white;
+            color: #1a202c;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
         }
 
         .admin-role {
-            font-size: 0.75rem;
-            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.6875rem;
+            color: #718096;
         }
 
         .logout-btn {
@@ -213,19 +213,20 @@ if (!isset($pageTitle)) {
             gap: 0.5rem;
             width: 100%;
             padding: 0.625rem;
-            background: rgba(239, 68, 68, 0.2);
-            color: #FCA5A5;
-            border: none;
-            border-radius: 0.5rem;
-            font-size: 0.875rem;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            color: #e53e3e;
+            border-radius: 0.375rem;
+            font-size: 0.8125rem;
             font-weight: 500;
             cursor: pointer;
-            transition: all 0.2s;
+            text-decoration: none;
+            transition: all 0.15s ease;
         }
 
         .logout-btn:hover {
-            background: rgba(239, 68, 68, 0.3);
-            color: white;
+            background: #fff5f5;
+            border-color: #fc8181;
         }
 
         /* Main Content */
@@ -233,27 +234,27 @@ if (!isset($pageTitle)) {
             flex: 1;
             display: flex;
             flex-direction: column;
-            background: var(--bg-light);
+            background: #f5f7fa;
             min-width: 0;
         }
 
         @media (min-width: 1024px) {
             .admin-main {
-                margin-left: 260px;
+                margin-left: 250px;
             }
         }
 
         /* Top Header */
         .admin-header {
-            background: white;
+            background: #ffffff;
             padding: 1rem 1.5rem;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            border-bottom: 1px solid var(--border-light);
+            border-bottom: 1px solid #e2e8f0;
             position: sticky;
             top: 0;
-            z-index: 40;
+            z-index: 50;
         }
 
         .admin-header-left {
@@ -266,13 +267,18 @@ if (!isset($pageTitle)) {
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 2.5rem;
-            height: 2.5rem;
-            background: var(--bg-light);
-            border: none;
-            border-radius: 0.5rem;
-            color: var(--text-heading);
+            width: 2.25rem;
+            height: 2.25rem;
+            background: #f7fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.375rem;
+            color: #4a5568;
             cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .mobile-menu-btn:hover {
+            background: #edf2f7;
         }
 
         @media (min-width: 1024px) {
@@ -282,9 +288,9 @@ if (!isset($pageTitle)) {
         }
 
         .page-title {
-            font-size: 1.25rem;
+            font-size: 1.125rem;
             font-weight: 700;
-            color: var(--text-heading);
+            color: #1a202c;
         }
 
         .admin-header-right {
@@ -297,24 +303,20 @@ if (!isset($pageTitle)) {
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 2.5rem;
-            height: 2.5rem;
-            background: var(--bg-light);
-            border: none;
-            border-radius: 0.5rem;
-            color: var(--text-body);
+            width: 2.25rem;
+            height: 2.25rem;
+            background: #f7fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.375rem;
+            color: #4a5568;
             cursor: pointer;
-            transition: all 0.2s;
+            text-decoration: none;
+            transition: all 0.15s ease;
         }
 
         .header-btn:hover {
-            background: var(--color-primary);
-            color: white;
-        }
-
-        .header-btn.primary {
-            background: var(--color-primary);
-            color: white;
+            background: #edf2f7;
+            color: #2d3748;
         }
 
         /* Content Area */
@@ -337,30 +339,225 @@ if (!isset($pageTitle)) {
             display: block;
         }
 
-        /* Admin Cards */
-        .admin-card {
-            background: white;
-            border-radius: 1rem;
-            box-shadow: var(--shadow-sm);
-            border: 1px solid var(--border-light);
+        /* Cards */
+        .card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.5rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            margin-bottom: 1.5rem;
         }
 
-        .admin-card-header {
+        .card-header {
             padding: 1.25rem 1.5rem;
-            border-bottom: 1px solid var(--border-light);
+            border-bottom: 1px solid #e2e8f0;
             display: flex;
             align-items: center;
             justify-content: space-between;
         }
 
-        .admin-card-title {
-            font-size: 1.125rem;
+        .card-header h3 {
+            font-size: 1rem;
             font-weight: 600;
-            color: var(--text-heading);
+            color: #1a202c;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
-        .admin-card-body {
+        .card-body {
             padding: 1.5rem;
+        }
+
+        /* Tables */
+        .table-responsive {
+            overflow-x: auto;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.875rem;
+        }
+
+        .table thead {
+            background: #f7fafc;
+        }
+
+        .table th {
+            padding: 0.75rem 1rem;
+            text-align: left;
+            font-weight: 600;
+            color: #4a5568;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .table td {
+            padding: 0.875rem 1rem;
+            border-bottom: 1px solid #e2e8f0;
+            color: #2d3748;
+        }
+
+        .table tbody tr:hover {
+            background: #f7fafc;
+        }
+
+        .table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            font-size: 0.8125rem;
+            font-weight: 500;
+            border-radius: 0.375rem;
+            border: 1px solid transparent;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.15s ease;
+        }
+
+        .btn-primary {
+            background: #0d9488;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #0f766e;
+        }
+
+        .btn-outline {
+            background: white;
+            border-color: #e2e8f0;
+            color: #4a5568;
+        }
+
+        .btn-outline:hover {
+            background: #f7fafc;
+            border-color: #cbd5e0;
+        }
+
+        .btn-danger {
+            background: #e53e3e;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #c53030;
+        }
+
+        .btn-sm {
+            padding: 0.375rem 0.75rem;
+            font-size: 0.75rem;
+        }
+
+        /* Forms */
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.8125rem;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 0.375rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.5rem 0.75rem;
+            font-size: 0.875rem;
+            color: #2d3748;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.375rem;
+            transition: border-color 0.15s ease, box-shadow 0.15s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #0d9488;
+            box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.1);
+        }
+
+        .form-control::placeholder {
+            color: #a0aec0;
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        /* Alerts */
+        .alert {
+            padding: 0.875rem 1rem;
+            border-radius: 0.375rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.875rem;
+        }
+
+        .alert-success {
+            background: #f0fdf4;
+            border: 1px solid #86efac;
+            color: #166534;
+        }
+
+        .alert-error {
+            background: #fef2f2;
+            border: 1px solid #fca5a5;
+            color: #991b1b;
+        }
+
+        /* Grid */
+        .grid {
+            display: grid;
+        }
+
+        .grid-cols-1 {
+            grid-template-columns: repeat(1, 1fr);
+        }
+
+        @media (min-width: 768px) {
+            .grid-cols-2 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .md\:grid-cols-2 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .gap-6 {
+            gap: 1.5rem;
+        }
+
+        /* Utilities */
+        .text-center {
+            text-align: center;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            border-radius: 0.25rem;
+            background: #edf2f7;
+            color: #4a5568;
         }
     </style>
 </head>
@@ -395,7 +592,7 @@ if (!isset($pageTitle)) {
                 </div>
 
                 <div class="nav-section">
-                    <div class="nav-section-title">Content Management</div>
+                    <div class="nav-section-title">Content</div>
                     <a href="toppers.php"
                         class="sidebar-link <?php echo in_array($currentPage, ['toppers.php', 'add_topper.php', 'edit_topper.php']) ? 'active' : ''; ?>">
                         <i class="fas fa-trophy"></i>
@@ -428,8 +625,8 @@ if (!isset($pageTitle)) {
                     </a>
                     <a href="slc.php"
                         class="sidebar-link <?php echo $currentPage === 'slc.php' ? 'active' : ''; ?>">
-                        <i class="fas fa-shapes"></i>
-                        <span>SLC</span>
+                        <i class="fas fa-certificate"></i>
+                        <span>School Leaving Certificate</span>
                     </a>
                     <a href="bus-routes.php"
                         class="sidebar-link <?php echo $currentPage === 'bus-routes.php' ? 'active' : ''; ?>">
@@ -508,9 +705,6 @@ if (!isset($pageTitle)) {
                     <a href="../" target="_blank" class="header-btn" title="View Website">
                         <i class="fas fa-external-link-alt"></i>
                     </a>
-                    <button class="header-btn primary" title="Notifications">
-                        <i class="fas fa-bell"></i>
-                    </button>
                 </div>
             </header>
 

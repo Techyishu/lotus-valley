@@ -136,7 +136,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
                             <li>
                                 <a href="slc.php"
                                     class="<?php echo $currentPage === 'slc.php' ? 'active' : ''; ?>">
-                                    <i class="fas fa-shapes"></i> SLC
+                                    <i class="fas fa-certificate"></i> School Leaving Certificate
                                 </a>
                             </li>
                             <li>
@@ -196,7 +196,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
                     <i class="fas fa-running"></i> Sports
                 </a>
                 <a href="slc.php" class="<?php echo $currentPage === 'slc.php' ? 'active' : ''; ?>">
-                    <i class="fas fa-shapes"></i> SLC
+                    <i class="fas fa-certificate"></i> School Leaving Certificate
                 </a>
                 <a href="bus-routes.php" class="<?php echo $currentPage === 'bus-routes.php' ? 'active' : ''; ?>">
                     <i class="fas fa-bus"></i> Bus Routes
