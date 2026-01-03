@@ -1,6 +1,7 @@
 <?php
-$pageTitle = 'Manage Fee Structure';
-require_once 'includes/admin_header.php';
+require_once '../includes/auth.php';
+require_once '../includes/functions.php';
+requireLogin();
 
 // Handle Delete
 if (isset($_GET['delete'])) {
@@ -46,6 +47,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     header('Location: fee-structure.php');
     exit;
 }
+
+$pageTitle = 'Manage Fee Structure';
+require_once 'includes/admin_header.php';
 
 // Fetch all fee structures
 try {
@@ -207,7 +211,8 @@ if (isset($_GET['edit'])) {
                                         </div>
                                         <?php if ($fee['notes']): ?>
                                             <div class="text-xs text-gray-500 mt-0.5">
-                                                <?php echo htmlspecialchars(substr($fee['notes'], 0, 30)); ?>...</div>
+                                                <?php echo htmlspecialchars(substr($fee['notes'], 0, 30)); ?>...
+                                            </div>
                                         <?php endif; ?>
                                     </td>
                                     <td class="px-6 py-4 text-right text-gray-600">

@@ -1,4 +1,13 @@
 <?php
+require_once '../includes/auth.php';
+require_once '../includes/functions.php';
+requireLogin();
+
+if (!isset($_GET['id'])) {
+    header('Location: staff.php');
+    exit;
+}
+
 $pageTitle = 'Edit Staff Member';
 require_once 'includes/admin_header.php';
 global $pdo;

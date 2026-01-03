@@ -1,6 +1,7 @@
 <?php
-$pageTitle = 'Manage Sports';
-require_once 'includes/admin_header.php';
+require_once '../includes/auth.php';
+require_once '../includes/functions.php';
+requireLogin();
 
 // Handle Delete
 if (isset($_GET['delete'])) {
@@ -43,6 +44,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     header('Location: sports.php');
     exit;
 }
+
+$pageTitle = 'Manage Sports';
+require_once 'includes/admin_header.php';
 
 // Fetch all sports activities
 try {

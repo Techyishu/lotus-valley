@@ -1,14 +1,18 @@
 <?php
-$pageTitle = 'Edit Topper';
-require_once 'includes/admin_header.php';
-
-global $pdo;
+require_once '../includes/auth.php';
+require_once '../includes/functions.php';
+requireLogin();
 
 $id = (int) ($_GET['id'] ?? 0);
 if ($id <= 0) {
     header('Location: toppers.php');
     exit;
 }
+
+$pageTitle = 'Edit Topper';
+require_once 'includes/admin_header.php';
+
+global $pdo;
 
 // Get topper data
 try {

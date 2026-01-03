@@ -1,6 +1,7 @@
 <?php
-$pageTitle = 'Manage Disclosures';
-require_once 'includes/admin_header.php';
+require_once '../includes/auth.php';
+require_once '../includes/functions.php';
+requireLogin();
 
 // Handle Delete
 if (isset($_GET['delete'])) {
@@ -111,6 +112,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     header('Location: disclosures.php');
     exit;
 }
+
+$pageTitle = 'Manage Disclosures';
+require_once 'includes/admin_header.php';
 
 // Fetch all disclosures
 try {

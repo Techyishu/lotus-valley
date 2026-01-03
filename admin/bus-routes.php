@@ -1,6 +1,7 @@
 <?php
-$pageTitle = 'Manage Bus Routes';
-require_once 'includes/admin_header.php';
+require_once '../includes/auth.php';
+require_once '../includes/functions.php';
+requireLogin();
 
 // Handle Delete
 if (isset($_GET['delete'])) {
@@ -47,6 +48,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     header('Location: bus-routes.php');
     exit;
 }
+
+$pageTitle = 'Manage Bus Routes';
+require_once 'includes/admin_header.php';
 
 // Fetch all bus routes
 try {
