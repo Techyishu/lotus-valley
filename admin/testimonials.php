@@ -59,8 +59,11 @@ $testimonials = $stmt->fetchAll();
     <?php if (empty($testimonials)): ?>
         <div class="col-span-1 lg:col-span-2 card">
             <div class="card-body text-center py-12">
-                <i class="far fa-comment-dots text-gray-300 text-5xl mb-4"></i>
-                <p class="text-gray-500">No testimonials found.</p>
+                <div class="w-20 h-20 bg-teal-50 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <i class="far fa-comment-dots text-teal-600 text-3xl"></i>
+                </div>
+                <h3 class="text-xl font-bold text-gray-800 mb-2">No Testimonials Found</h3>
+                <p class="text-gray-500">Wait for user submissions to approve/reject them here.</p>
             </div>
         </div>
     <?php else: ?>
@@ -76,7 +79,8 @@ $testimonials = $stmt->fetchAll();
                             <div>
                                 <h4 class="font-bold text-gray-800"><?php echo clean($test['name']); ?></h4>
                                 <p class="text-xs text-primary-600 font-medium uppercase tracking-wide">
-                                    <?php echo clean($test['role']); ?></p>
+                                    <?php echo clean($test['role']); ?>
+                                </p>
                             </div>
                         </div>
                         <div class="flex text-yellow-400 text-xs">

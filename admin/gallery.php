@@ -44,7 +44,8 @@ $images = $stmt->fetchAll();
 ?>
 
 <div class="card">
-    <div class="card-header">
+
+    <div class="card-header border-b border-gray-100 flex justify-between items-center">
         <h3><i class="fas fa-images"></i> Gallery Images</h3>
         <button onclick="document.getElementById('uploadModal').classList.remove('hidden')" class="btn btn-primary">
             <i class="fas fa-plus"></i> Upload Images
@@ -55,8 +56,8 @@ $images = $stmt->fetchAll();
         <?php if (empty($images)): ?>
             <div class="text-center py-16">
                 <div
-                    style="width: 80px; height: 80px; background: #fce7f3; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem;">
-                    <i class="fas fa-images text-pink-500 text-3xl"></i>
+                    style="width: 80px; height: 80px; background: #fce4ec; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem;">
+                    <i class="fas fa-images text-pink-600 text-3xl"></i>
                 </div>
                 <h3 class="text-xl font-bold text-gray-800 mb-2">No Images Found</h3>
                 <p class="text-gray-500 mb-6">Start by uploading photos to your gallery.</p>

@@ -153,9 +153,12 @@ if (isset($_GET['edit'])) {
     <div class="lg:col-span-2 space-y-6">
         <?php if (empty($sportsResult)): ?>
             <div class="card">
-                <div class="card-body text-center py-16">
-                    <i class="fas fa-basketball-ball text-gray-300 text-5xl mb-4"></i>
-                    <p class="text-gray-500">No sports activities found.</p>
+                <div class="card-body text-center py-12">
+                    <div class="w-20 h-20 bg-teal-50 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-basketball-ball text-teal-600 text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">No Sports Activities Found</h3>
+                    <p class="text-gray-500">Add a new sports activity to showcase.</p>
                 </div>
             </div>
         <?php else: ?>
@@ -185,9 +188,11 @@ if (isset($_GET['edit'])) {
                                     </td>
                                     <td class="px-6 py-4">
                                         <div class="font-bold text-gray-800 text-base mb-1">
-                                            <?php echo htmlspecialchars($sport['title']); ?></div>
+                                            <?php echo htmlspecialchars($sport['title']); ?>
+                                        </div>
                                         <div class="text-sm text-gray-500 line-clamp-2 leading-relaxed">
-                                            <?php echo htmlspecialchars($sport['description']); ?></div>
+                                            <?php echo htmlspecialchars($sport['description']); ?>
+                                        </div>
                                     </td>
                                     <td class="px-6 py-4 text-center">
                                         <span

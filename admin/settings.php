@@ -62,9 +62,12 @@ $settings = getAllSettings();
     </div>
 </div>
 
+
 <?php if ($message): ?>
     <div
-        class="mb-6 p-4 rounded-lg <?php echo $messageType === 'success' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'; ?>">
+        class="mb-6 p-4 rounded-lg border flex items-center gap-3 <?php echo $messageType === 'success' ? 'bg-green-50 text-green-800 border-green-200' : 'bg-red-50 text-red-800 border-red-200'; ?>">
+        <i
+            class="<?php echo $messageType === 'success' ? 'fas fa-check-circle text-green-500' : 'fas fa-exclamation-circle text-red-500'; ?>"></i>
         <?php echo $message; ?>
     </div>
 <?php endif; ?>

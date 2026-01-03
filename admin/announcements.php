@@ -115,10 +115,15 @@ $announcements = $stmt->fetchAll();
     <!-- List Side -->
     <div class="space-y-4">
         <?php if (empty($announcements)): ?>
+
             <div class="card">
                 <div class="card-body text-center py-12">
-                    <i class="fas fa-bullhorn text-gray-300 text-5xl mb-4"></i>
-                    <p class="text-gray-500">No announcements found</p>
+                    <div
+                        style="width: 80px; height: 80px; background: #e0f2f1; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem;">
+                        <i class="fas fa-bullhorn text-teal-600 text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">No Announcements</h3>
+                    <p class="text-gray-500">Create your first announcement to notify users.</p>
                 </div>
             </div>
         <?php else: ?>

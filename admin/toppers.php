@@ -39,18 +39,19 @@ try {
 ?>
 
 <div class="card">
-    <div class="card-header">
-        <h3><i class="fas fa-trophy"></i> All Toppers</h3>
+
+    <div class="card-header border-b border-gray-100 flex justify-between items-center">
+        <h3><i class="fas fa-trophy"></i> Manage Toppers</h3>
         <a href="add_topper.php" class="btn btn-primary">
-            <i class="fas fa-plus"></i> Add New Topper
+            <i class="fas fa-plus"></i> Add Topper
         </a>
     </div>
 
     <?php if (empty($toppers)): ?>
         <div class="card-body text-center py-16">
             <div
-                style="width: 80px; height: 80px; background: #fef3c7; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem;">
-                <i class="fas fa-trophy text-orange-400 text-3xl"></i>
+                style="width: 80px; height: 80px; background: #fff8e1; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem;">
+                <i class="fas fa-trophy text-amber-500 text-3xl"></i>
             </div>
             <h3 class="text-xl font-bold text-gray-800 mb-2">No Toppers Found</h3>
             <p class="text-gray-500 mb-6">Start by adding your first academic topper.</p>
@@ -59,9 +60,9 @@ try {
             </a>
         </div>
     <?php else: ?>
-        <div class="card-body" style="padding: 0;">
-            <div class="table-responsive" style="border: none; border-radius: 0;">
-                <table class="table">
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table w-full">
                     <thead>
                         <tr>
                             <th>Student</th>

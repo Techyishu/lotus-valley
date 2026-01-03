@@ -4,7 +4,7 @@ require_once 'includes/admin_header.php';
 
 // Handle Delete
 if (isset($_GET['delete'])) {
-    $id = (int)$_GET['delete'];
+    $id = (int) $_GET['delete'];
 
     try {
         // Get file path before deleting
@@ -32,10 +32,10 @@ if (isset($_GET['delete'])) {
 
 // Handle Add/Edit
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $id = isset($_POST['id']) ? (int)$_POST['id'] : 0;
+    $id = isset($_POST['id']) ? (int) $_POST['id'] : 0;
     $title = trim($_POST['title']);
     $description = trim($_POST['description']);
-    $display_order = (int)$_POST['display_order'];
+    $display_order = (int) $_POST['display_order'];
 
     $uploadError = '';
     $fileName = '';
@@ -135,7 +135,7 @@ try {
 // Get edit data if editing
 $editData = null;
 if (isset($_GET['edit'])) {
-    $editId = (int)$_GET['edit'];
+    $editId = (int) $_GET['edit'];
     try {
         $editStmt = $pdo->prepare("SELECT * FROM slc WHERE id = ?");
         $editStmt->execute([$editId]);
@@ -146,57 +146,79 @@ if (isset($_GET['edit'])) {
 }
 ?>
 
-    <?php if (isset($_SESSION['success'])): ?>
-        <div class="alert alert-success">
-            <i class="fas fa-check-circle"></i> <?php echo $_SESSION['success']; unset($_SESSION['success']); ?>
-        </div>
-    <?php endif; ?>
 
-    <?php if (isset($_SESSION['error'])): ?>
-        <div class="alert alert-error">
-            <i class="fas fa-exclamation-circle"></i> <?php echo $_SESSION['error']; unset($_SESSION['error']); ?>
-        </div>
-    <?php endif; ?>
+<?php if (isset($_SESSION['success'])): ?>
+    <div class="mb-6 p-4 rounded-lg bg-green-50 text-green-800 border border-green-200 flex items-center gap-3">
+        <i class="fas fa-check-circle text-green-500"></i> <?php echo $_SESSION['success'];
+        unset($_SESSION['success']); ?>
+    </div>
+<?php endif; ?>
 
-    <!-- Add/Edit Form -->
-    <div class="card" style="margin-bottom: 2rem;">
-        <div class="card-header">
-            <h3><i class="fas fa-<?php echo $editData ? 'edit' : 'plus'; ?>"></i>
-                <?php echo $editData ? 'Edit Certificate' : 'Add School Leaving Certificate'; ?>
-            </h3>
-        </div>
-        <div class="card-body">
-            <form method="POST" enctype="multipart/form-data">
-                <?php if ($editData): ?>
-                    <input type="hidden" name="id" value="<?php echo $editData['id']; ?>">
-                <?php endif; ?>
+<?php if (isset($_SESSION['error'])): ?>
+    <div class="mb-6 p-4 rounded-lg bg-red-50 text-red-800 border border-red-200 flex items-center gap-3">
+        <i class="fas fa-exclamation-circle text-red-500"></i> <?php echo $_SESSION['error'];
+        unset($_SESSION['error']); ?>
+    </div>
+<?php endif; ?>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="card mb-6">
+    <div class="card-header">
+        <h3><i class="fas fa-certificate"></i> Manage School Leaving Certificates</h3>
+    </div>
+</div>
+
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+    <!-- Form Section -->
+    <div class="lg:col-span-1">
+        <div class="card h-fit sticky top-6">
+            <div class="card-header border-b border-gray-100">
+                <h3><i class="fas fa-<?php echo $editData ? 'edit' : 'plus'; ?>"></i>
+                    <?php echo $editData ? 'Edit Certificate' : 'Add New Certificate'; ?>
+                </h3>
+            </div>
+            <div class="card-body">
+                <form method="POST" enctype="multipart/form-data" class="space-y-4">
+                    <?php if ($editData): ?>
+                        <input type="hidden" name="id" value="<?php echo $editData['id']; ?>">
+                    <?php endif; ?>
+
                     <div class="form-group">
-                        <label for="title">Certificate Title *</label>
-                        <input type="text" id="title" name="title" class="form-control"
-                               value="<?php echo $editData ? htmlspecialchars($editData['title']) : ''; ?>"
-                               required placeholder="e.g., Class 10 - 2024, Class 12 - 2023">
+                        <label class="block text-gray-700 font-semibold mb-2">Title <span
+                                class="text-red-500">*</span></label>
+                        <input type="text" name="title" class="form-control"
+                            value="<?php echo $editData ? htmlspecialchars($editData['title']) : ''; ?>" required
+                            placeholder="e.g. Class 10 - 2024">
                     </div>
 
                     <div class="form-group">
-                        <label for="file">Upload Certificate *</label>
-                        <input type="file" id="file" name="file" class="form-control"
-                               accept=".pdf,.jpg,.jpeg,.png,.gif"
-                               <?php echo $editData ? '' : 'required'; ?>>
-                        <small style="color: var(--text-muted); font-size: 0.875rem; display: block; margin-top: 0.5rem;">
-                            Accepted formats: PDF, JPG, PNG, GIF
-                        </small>
+                        <label class="block text-gray-700 font-semibold mb-2">
+                            Upload Certificate
+                            <?php echo $editData ? '<span class="text-gray-400 font-normal text-xs">(Optional to replace)</span>' : '<span class="text-red-500">*</span>'; ?>
+                        </label>
+                        <div
+                            class="border-2 border-dashed border-gray-200 rounded-lg p-4 text-center hover:bg-gray-50 transition cursor-pointer relative">
+                            <input type="file" name="file"
+                                class="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                                accept=".pdf,.jpg,.jpeg,.png,.gif" <?php echo $editData ? '' : 'required'; ?>
+                                onchange="this.nextElementSibling.innerText = this.files[0].name">
+                            <div class="text-gray-500 text-sm pointer-events-none">
+                                <i class="fas fa-cloud-upload-alt text-2xl mb-2 text-primary-400"></i><br>
+                                <span class="font-medium">Click to upload</span><br>
+                                <span class="text-xs text-gray-400">PDF, JPG, PNG, GIF</span>
+                            </div>
+                        </div>
                         <?php if ($editData && $editData['file_path']): ?>
-                            <div style="margin-top: 0.5rem;">
+                            <div class="mt-2 flex items-center gap-2 text-sm">
                                 <?php if ($editData['file_type'] === 'pdf'): ?>
                                     <a href="../uploads/slc/<?php echo htmlspecialchars($editData['file_path']); ?>"
-                                       target="_blank" class="btn btn-sm btn-outline">
+                                        target="_blank"
+                                        class="flex items-center gap-2 px-3 py-2 rounded-lg bg-red-50 text-red-600 border border-red-100 hover:bg-red-100 transition w-full">
                                         <i class="fas fa-file-pdf"></i> View Current PDF
                                     </a>
                                 <?php else: ?>
                                     <a href="../uploads/slc/<?php echo htmlspecialchars($editData['file_path']); ?>"
-                                       target="_blank" class="btn btn-sm btn-outline">
+                                        target="_blank"
+                                        class="flex items-center gap-2 px-3 py-2 rounded-lg bg-blue-50 text-blue-600 border border-blue-100 hover:bg-blue-100 transition w-full">
                                         <i class="fas fa-image"></i> View Current Image
                                     </a>
                                 <?php endif; ?>
@@ -204,106 +226,115 @@ if (isset($_GET['edit'])) {
                         <?php endif; ?>
                     </div>
 
-                    <div class="form-group" style="grid-column: 1 / -1;">
-                        <label for="description">Description (Optional)</label>
-                        <textarea id="description" name="description" class="form-control" rows="3"
-                                  placeholder="Additional information about the certificate"><?php echo $editData ? htmlspecialchars($editData['description']) : ''; ?></textarea>
+                    <div class="form-group">
+                        <label class="block text-gray-700 font-semibold mb-2">Display Order</label>
+                        <input type="number" name="display_order" class="form-control"
+                            value="<?php echo $editData ? $editData['display_order'] : '0'; ?>" min="0" placeholder="0">
                     </div>
 
                     <div class="form-group">
-                        <label for="display_order">Display Order</label>
-                        <input type="number" id="display_order" name="display_order" class="form-control"
-                               value="<?php echo $editData ? $editData['display_order'] : '0'; ?>"
-                               min="0" placeholder="0">
-                        <small style="color: var(--text-muted); font-size: 0.875rem; display: block; margin-top: 0.5rem;">
-                            Lower numbers appear first
-                        </small>
+                        <label class="block text-gray-700 font-semibold mb-2">Description</label>
+                        <textarea name="description" class="form-control" rows="3"
+                            placeholder="Additional info..."><?php echo $editData ? htmlspecialchars($editData['description']) : ''; ?></textarea>
                     </div>
-                </div>
 
-                <div style="display: flex; gap: 1rem; margin-top: 1.5rem;">
-                    <button type="submit" class="btn btn-primary">
-                        <i class="fas fa-<?php echo $editData ? 'save' : 'plus'; ?>"></i>
-                        <?php echo $editData ? 'Update Certificate' : 'Add Certificate'; ?>
-                    </button>
-                    <?php if ($editData): ?>
-                        <a href="slc.php" class="btn btn-outline">
-                            <i class="fas fa-times"></i> Cancel
-                        </a>
-                    <?php endif; ?>
-                </div>
-            </form>
+                    <div class="flex items-center gap-3 pt-2">
+                        <button type="submit" class="btn btn-primary w-full justify-center">
+                            <i class="fas fa-save"></i> <?php echo $editData ? 'Update' : 'Save'; ?>
+                        </button>
+                        <?php if ($editData): ?>
+                            <a href="slc.php" class="btn btn-outline w-full justify-center">
+                                Cancel
+                            </a>
+                        <?php endif; ?>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 
-    <!-- Certificates List -->
-    <div class="card">
-        <div class="card-header">
-            <h3><i class="fas fa-list"></i> All School Leaving Certificates</h3>
-        </div>
-        <div class="card-body">
-            <?php if (count($slcResult) > 0): ?>
+    <!-- List Section -->
+    <div class="lg:col-span-2 space-y-6">
+        <?php if (empty($slcResult)): ?>
+            <div class="card">
+                <div class="card-body text-center py-12">
+                    <div class="w-20 h-20 bg-teal-50 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-certificate text-teal-600 text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">No SLC Certificates Found</h3>
+                    <p class="text-gray-500">Upload a new School Leaving Certificate to display.</p>
+                </div>
+            </div>
+        <?php else: ?>
+            <div class="card overflow-hidden">
+                <div class="card-header border-b border-gray-100 flex justify-between items-center">
+                    <h3 class="text-gray-800"><i class="fas fa-list"></i> All Certificates</h3>
+                    <span class="badge badge-secondary shadow-sm"><?php echo count($slcResult); ?> files</span>
+                </div>
                 <div class="table-responsive">
-                    <table class="table">
+                    <table class="table w-full">
                         <thead>
-                            <tr>
-                                <th>Title</th>
-                                <th>Type</th>
-                                <th>Description</th>
-                                <th>File</th>
-                                <th>Order</th>
-                                <th>Actions</th>
+                            <tr class="bg-gray-50 text-gray-600 uppercase text-xs tracking-wider text-left">
+                                <th class="px-6 py-3 font-semibold">Details</th>
+                                <th class="px-6 py-3 font-semibold w-24 text-center">Type</th>
+                                <th class="px-6 py-3 font-semibold w-20 text-center">Order</th>
+                                <th class="px-6 py-3 font-semibold text-right">Actions</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="divide-y divide-gray-100">
                             <?php foreach ($slcResult as $item): ?>
-                            <tr>
-                                <td><strong><?php echo htmlspecialchars($item['title']); ?></strong></td>
-                                <td>
-                                    <span class="badge" style="background: <?php echo $item['file_type'] === 'pdf' ? '#EF4444' : '#10B981'; ?>; color: white; padding: 0.25rem 0.5rem; border-radius: 0.25rem; font-size: 0.75rem;">
-                                        <?php echo strtoupper($item['file_type']); ?>
-                                    </span>
-                                </td>
-                                <td>
-                                    <?php if ($item['description']): ?>
-                                        <small><?php echo htmlspecialchars(substr($item['description'], 0, 80)); ?>...</small>
-                                    <?php else: ?>
-                                        -
-                                    <?php endif; ?>
-                                </td>
-                                <td>
-                                    <a href="../uploads/slc/<?php echo htmlspecialchars($item['file_path']); ?>"
-                                       target="_blank" class="btn btn-sm btn-outline">
-                                        <i class="fas fa-eye"></i> View
-                                    </a>
-                                </td>
-                                <td><?php echo $item['display_order']; ?></td>
-                                <td>
-                                    <div style="display: flex; gap: 0.5rem;">
-                                        <a href="?edit=<?php echo $item['id']; ?>"
-                                           class="btn btn-sm btn-primary" title="Edit">
-                                            <i class="fas fa-edit"></i>
-                                        </a>
-                                        <a href="?delete=<?php echo $item['id']; ?>"
-                                           class="btn btn-sm btn-danger"
-                                           onclick="return confirm('Are you sure you want to delete this certificate?')"
-                                           title="Delete">
-                                            <i class="fas fa-trash"></i>
-                                        </a>
-                                    </div>
-                                </td>
-                            </tr>
+                                <tr class="hover:bg-gray-50 transition">
+                                    <td class="px-6 py-4">
+                                        <div class="font-bold text-gray-800 text-base mb-1">
+                                            <?php echo htmlspecialchars($item['title']); ?>
+                                        </div>
+                                        <?php if ($item['description']): ?>
+                                            <div class="text-xs text-gray-500 line-clamp-1">
+                                                <?php echo htmlspecialchars($item['description']); ?>
+                                            </div>
+                                        <?php endif; ?>
+                                    </td>
+                                    <td class="px-6 py-4 text-center">
+                                        <span
+                                            class="px-2 py-1 rounded-md text-xs font-bold uppercase tracking-wide <?php echo $item['file_type'] === 'pdf' ? 'bg-red-50 text-red-600' : 'bg-green-50 text-green-600'; ?>">
+                                            <?php echo strtoupper($item['file_type']); ?>
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-4 text-center">
+                                        <span
+                                            class="inline-flex items-center justify-center w-6 h-6 rounded bg-gray-100 text-gray-600 text-xs font-bold">
+                                            <?php echo $item['display_order']; ?>
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-4 text-right">
+                                        <div class="flex items-center justify-end gap-2">
+                                            <a href="../uploads/slc/<?php echo htmlspecialchars($item['file_path']); ?>"
+                                                target="_blank"
+                                                class="w-8 h-8 rounded-full flex items-center justify-center text-gray-500 hover:bg-gray-100 transition"
+                                                title="View File">
+                                                <i class="fas fa-eye"></i>
+                                            </a>
+                                            <a href="?edit=<?php echo $item['id']; ?>"
+                                                class="w-8 h-8 rounded-full flex items-center justify-center text-blue-600 hover:bg-blue-50 transition"
+                                                title="Edit">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                            <a href="?delete=<?php echo $item['id']; ?>"
+                                                class="w-8 h-8 rounded-full flex items-center justify-center text-red-600 hover:bg-red-50 transition"
+                                                onclick="return confirm('Are you sure you want to delete this certificate?')"
+                                                title="Delete">
+                                                <i class="fas fa-trash"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
                             <?php endforeach; ?>
                         </tbody>
                     </table>
                 </div>
-            <?php else: ?>
-                <div class="text-center" style="padding: 3rem;">
-                    <i class="fas fa-certificate" style="font-size: 4rem; color: var(--border-light); margin-bottom: 1rem;"></i>
-                    <p style="color: var(--text-muted);">No certificates added yet. Add your first certificate above.</p>
-                </div>
-            <?php endif; ?>
-        </div>
+            </div>
+        <?php endif; ?>
     </div>
+</div>
 
 <?php include 'includes/admin_footer.php'; ?>

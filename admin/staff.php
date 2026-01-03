@@ -35,29 +35,30 @@ try {
 ?>
 
 <div class="card">
-    <div class="card-header">
-        <h3><i class="fas fa-user-tie"></i> All Staff Members</h3>
+
+    <div class="card-header border-b border-gray-100 flex justify-between items-center">
+        <h3><i class="fas fa-user-tie"></i> Manage Staff</h3>
         <a href="add_staff.php" class="btn btn-primary">
-            <i class="fas fa-plus"></i> Add New Staff
+            <i class="fas fa-plus"></i> Add Staff
         </a>
     </div>
 
     <?php if (empty($staffMembers)): ?>
-        <div class="card-body text-center py-16">
-            <div
-                style="width: 80px; height: 80px; background: #e0e7ff; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem;">
-                <i class="fas fa-user-tie text-indigo-500 text-3xl"></i>
-            </div>
-            <h3 class="text-xl font-bold text-gray-800 mb-2">No Staff Members Found</h3>
-            <p class="text-gray-500 mb-6">Start by building your team directory.</p>
-            <a href="add_staff.php" class="btn btn-primary">
-                Add Staff Member
-            </a>
+            <div class=" card-body text-center py-16">
+                    <div
+                        style="width: 80px; height: 80px; background: #e0f2f1; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem;">
+                        <i class="fas fa-user-tie text-teal-600 text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">No Staff Members Found</h3>
+                    <p class="text-gray-500 mb-6">Start by building your team directory.</p>
+                    <a href="add_staff.php" class="btn btn-primary">
+                        Add Staff Member
+                    </a>
         </div>
     <?php else: ?>
-        <div class="card-body" style="padding: 0;">
-            <div class="table-responsive" style="border: none; border-radius: 0;">
-                <table class="table">
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table w-full">
                     <thead>
                         <tr>
                             <th>Staff Member</th>

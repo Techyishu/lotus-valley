@@ -73,12 +73,13 @@ try {
 </div>
 
 <div class="space-y-6">
+
     <?php if (empty($inquiries)): ?>
         <div class="card">
             <div class="card-body text-center py-16">
                 <div
-                    style="width: 80px; height: 80px; background: #f3f4f6; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem;">
-                    <i class="fas fa-envelope-open text-gray-400 text-3xl"></i>
+                    style="width: 80px; height: 80px; background: #e0f2f1; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem;">
+                    <i class="fas fa-envelope-open text-teal-600 text-3xl"></i>
                 </div>
                 <h3 class="text-xl font-bold text-gray-800 mb-2">No Inquiries Found</h3>
                 <p class="text-gray-500">Check back later for new admission inquiries.</p>

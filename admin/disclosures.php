@@ -250,9 +250,12 @@ if (isset($_GET['edit'])) {
     <div class="lg:col-span-2 space-y-6">
         <?php if (empty($disclosuresResult)): ?>
             <div class="card">
-                <div class="card-body text-center py-16">
-                    <i class="fas fa-folder-open text-gray-300 text-5xl mb-4"></i>
-                    <p class="text-gray-500">No disclosures found.</p>
+                <div class="card-body text-center py-12">
+                    <div class="w-20 h-20 bg-teal-50 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-folder-open text-teal-600 text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">No Disclosures Found</h3>
+                    <p class="text-gray-500">Upload a new disclosure document to get started.</p>
                 </div>
             </div>
         <?php else: ?>
@@ -290,10 +293,12 @@ if (isset($_GET['edit'])) {
                                 <tr class="hover:bg-gray-50 transition">
                                     <td class="px-6 py-4">
                                         <div class="font-semibold text-gray-800">
-                                            <?php echo htmlspecialchars($disclosure['title']); ?></div>
+                                            <?php echo htmlspecialchars($disclosure['title']); ?>
+                                        </div>
                                         <?php if ($disclosure['description']): ?>
                                             <div class="text-xs text-gray-500 mt-1">
-                                                <?php echo htmlspecialchars($disclosure['description']); ?></div>
+                                                <?php echo htmlspecialchars($disclosure['description']); ?>
+                                            </div>
                                         <?php endif; ?>
                                     </td>
                                     <td class="px-6 py-4">
