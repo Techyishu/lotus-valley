@@ -16,103 +16,80 @@ include 'includes/header.php';
 ?>
 
 <!-- Hero Section -->
-<!-- MOONSTAR PREMIERE HERO SECTION -->
-<section class="moonstar-hero">
-    <!-- Animated Blobs -->
-    <div class="moonstar-blob moonstar-blob-1"></div>
-    <div class="moonstar-blob moonstar-blob-2"></div>
-    <div class="moonstar-blob moonstar-blob-3"></div>
-
-    <div class="moonstar-container">
-        <!-- Content Side -->
-        <div class="moonstar-content">
-            <div class="moonstar-badge">
-                <i class="fas fa-star"></i>
-                <span>Welcome to Lotus Valley International School</span>
-            </div>
-
-            <h1 class="moonstar-title">
-                Shaping Bright Minds for a <br />
-                <span class="text-gradient">Better Tomorrow</span>.
-            </h1>
-
-            <p class="moonstar-desc">
-                Established at Choura campus with a fresh vision and modern outlook.
-                We provide a world-class environment where curiosity meets excellence, empowering your child to lead the
-                future.
-            </p>
-
-            <div class="moonstar-actions">
-                <a href="admission.php" class="moonstar-btn moonstar-btn-primary">
-                    <i class="fas fa-paper-plane"></i> Apply for Admission
-                </a>
-                <a href="toppers.php" class="moonstar-btn moonstar-btn-outline">
-                    <i class="fas fa-compass"></i> Explore Academics
-                </a>
-            </div>
-
-            <div class="moonstar-stats-row">
-                <div class="moonstar-stat">
-                    <strong><?php echo clean($settings['years_established'] ?? '25'); ?>+</strong>
-                    <span>Years of Excellence</span>
-                </div>
-                <div class="moonstar-stat">
-                    <strong>100%</strong>
-                    <span>College Acceptance</span>
-                </div>
-                <div class="moonstar-stat">
-                    <strong><?php echo clean($settings['students_count'] ?? '1500'); ?>+</strong>
-                    <span>Happy Students</span>
+<!-- Hero Slider Section -->
+<section class="hero-slider-section">
+    <div class="hero-slider-container" id="heroSlider">
+        <!-- Slide 1 -->
+        <div class="hero-slide active"
+            style="background-image: url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=1920&auto=format&fit=crop');">
+            <div class="hero-slide-content-wrapper">
+                <div class="hero-slide-content">
+                    <div class="hero-badge"><i class="fas fa-star"></i> Welcome to Lotus Valley</div>
+                    <h1 class="hero-title">Shaping Bright Minds for a Better Future</h1>
+                    <p class="hero-desc">Experience world-class education where curiosity meets excellence, empowering
+                        every student to lead with confidence and integrity.</p>
+                    <div class="hero-actions">
+                        <a href="admission.php" class="hero-btn hero-btn-primary">
+                            <i class="fas fa-paper-plane"></i> Apply for Admission
+                        </a>
+                        <a href="about.php" class="hero-btn hero-btn-white">
+                            <i class="fas fa-info-circle"></i> Discover More
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Visual Side -->
-        <div class="moonstar-visual">
-            <div class="moonstar-img-wrapper">
-                <!-- SVG Illustration Placeholder -->
-                <svg width="550" height="450" viewBox="0 0 550 450" xmlns="http://www.w3.org/2000/svg"
-                    class="moonstar-hero-img">
-                    <defs>
-                        <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:1" />
-                            <stop offset="100%" style="stop-color:#1d4ed8;stop-opacity:1" />
-                        </linearGradient>
-                        <clipPath id="blobClip">
-                            <rect width="550" height="450" rx="30" />
-                        </clipPath>
-                    </defs>
-                    <rect width="550" height="450" fill="#1e3a8a" rx="30" />
-                    <!-- Abstract geometric tech pattern -->
-                    <circle cx="50" cy="50" r="300" fill="url(#grad1)" opacity="0.2" />
-                    <circle cx="500" cy="400" r="200" fill="#f59e0b" opacity="0.1" />
-
-                    <!-- Student Illustration (External Image) -->
-                    <image
-                        href="https://images.unsplash.com/photo-1544531861-46487e3831f4?q=80&w=1500&auto=format&fit=crop"
-                        x="0" y="0" width="550" height="450" preserveAspectRatio="xMidYMid slice"
-                        clip-path="url(#blobClip)" opacity="0.9" />
-
-                </svg>
-            </div>
-
-            <!-- Float Card 1 -->
-            <div class="moonstar-float-card float-1">
-                <i class="fas fa-graduation-cap"></i>
-                <div class="moonstar-float-text">
-                    <h4>World Class</h4>
-                    <span>Education</span>
+        <!-- Slide 2 -->
+        <div class="hero-slide"
+            style="background-image: url('https://images.unsplash.com/photo-1544531861-46487e3831f4?q=80&w=1920&auto=format&fit=crop');">
+            <div class="hero-slide-content-wrapper">
+                <div class="hero-slide-content">
+                    <div class="hero-badge"><i class="fas fa-trophy"></i> Academic Excellence</div>
+                    <h1 class="hero-title">A Tradition of Outstanding Achievements</h1>
+                    <p class="hero-desc">With 100% board results and a curriculum designed for holistic development, we
+                        nurture the leaders and innovators of tomorrow.</p>
+                    <div class="hero-actions">
+                        <a href="toppers.php" class="hero-btn hero-btn-primary">
+                            <i class="fas fa-award"></i> View Toppers
+                        </a>
+                        <a href="contact.php" class="hero-btn hero-btn-white">
+                            <i class="fas fa-phone-alt"></i> Contact Us
+                        </a>
+                    </div>
                 </div>
             </div>
+        </div>
 
-            <!-- Float Card 2 -->
-            <div class="moonstar-float-card float-2">
-                <i class="fas fa-award"></i>
-                <div class="moonstar-float-text">
-                    <h4>Award Winner</h4>
-                    <span>2024-2025</span>
+        <!-- Slide 3 -->
+        <div class="hero-slide"
+            style="background-image: url('https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=1920&auto=format&fit=crop');">
+            <div class="hero-slide-content-wrapper">
+                <div class="hero-slide-content">
+                    <div class="hero-badge"><i class="fas fa-child"></i> Holistic Growth</div>
+                    <h1 class="hero-title">Beyond Classrooms: Sports & Arts</h1>
+                    <p class="hero-desc">State-of-the-art facilities for sports, music, and arts ensuring a balanced and
+                        enriching school life for every child.</p>
+                    <div class="hero-actions">
+                        <a href="gallery.php" class="hero-btn hero-btn-primary">
+                            <i class="fas fa-images"></i> View Gallery
+                        </a>
+                        <a href="sports.php" class="hero-btn hero-btn-white">
+                            <i class="fas fa-running"></i> Sports Academy
+                        </a>
+                    </div>
                 </div>
             </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="slider-arrow slider-prev" onclick="moveSlide(-1)"><i class="fas fa-chevron-left"></i></div>
+        <div class="slider-arrow slider-next" onclick="moveSlide(1)"><i class="fas fa-chevron-right"></i></div>
+
+        <div class="slider-dots">
+            <div class="slider-dot active" onclick="currentSlide(0)"></div>
+            <div class="slider-dot" onclick="currentSlide(1)"></div>
+            <div class="slider-dot" onclick="currentSlide(2)"></div>
         </div>
     </div>
 </section>
@@ -537,5 +514,56 @@ include 'includes/header.php';
         </div>
     </div>
 </section>
+
+
+<script>
+    // Hero Slider Logic
+    document.addEventListener('DOMContentLoaded', function () {
+        const slides = document.querySelectorAll('.hero-slide');
+        const dots = document.querySelectorAll('.slider-dot');
+        let currentSlideIndex = 0;
+        let slideInterval;
+
+        function showSlide(index) {
+            // Handle wrap around
+            if (index >= slides.length) index = 0;
+            if (index < 0) index = slides.length - 1;
+
+            // Remove active class from all
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+
+            // Add active to current
+            slides[index].classList.add('active');
+            dots[index].classList.add('active');
+
+            currentSlideIndex = index;
+        }
+
+        function moveSlide(step) {
+            showSlide(currentSlideIndex + step);
+            resetTimer();
+        }
+
+        window.moveSlide = moveSlide; // Make global for onclick
+
+        function currentSlide(index) {
+            showSlide(index);
+            resetTimer();
+        }
+
+        window.currentSlide = currentSlide; // Make global for onclick
+
+        function resetTimer() {
+            clearInterval(slideInterval);
+            slideInterval = setInterval(() => moveSlide(1), 5000);
+        }
+
+        // Initialize
+        if (slides.length > 0) {
+            slideInterval = setInterval(() => moveSlide(1), 5000);
+        }
+    });
+</script>
 
 <?php include 'includes/footer.php'; ?>
