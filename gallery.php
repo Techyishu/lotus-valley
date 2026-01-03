@@ -33,8 +33,8 @@ include 'includes/header.php';
         <?php if (empty($images)): ?>
             <div class="text-center" style="padding: 4rem 0;">
                 <div
-                    style="width: 8rem; height: 8rem; background: var(--border-light); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 2rem;">
-                    <i class="fas fa-images" style="font-size: 3rem; color: var(--text-muted);"></i>
+                    style="width: 5rem; height: 5rem; background: var(--border-light); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem;">
+                    <i class="fas fa-images" style="font-size: 2rem; color: var(--text-muted);"></i>
                 </div>
                 <h3 style="margin-bottom: 1rem;">No Images Found</h3>
                 <p style="color: var(--text-muted);">Check back later for new photos</p>

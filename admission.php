@@ -113,10 +113,10 @@ include 'includes/header.php';
             <p>Follow these simple steps to join the Lotus Valley family</p>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <div class="feature-card">
                 <div
-                    style="width: 4rem; height: 4rem; background: var(--color-primary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 700; margin: 0 auto 1.5rem;">
+                    style="width: 3rem; height: 3rem; background: var(--color-primary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; font-weight: 700; margin: 0 auto 1rem;">
                     1</div>
                 <h4>Inquiry Form</h4>
                 <p>Fill out the admission inquiry form below with all required details</p>
@@ -124,7 +124,7 @@ include 'includes/header.php';
 
             <div class="feature-card">
                 <div
-                    style="width: 4rem; height: 4rem; background: #F59E0B; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 700; margin: 0 auto 1.5rem;">
+                    style="width: 3rem; height: 3rem; background: #F59E0B; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; font-weight: 700; margin: 0 auto 1rem;">
                     2</div>
                 <h4>Verification</h4>
                 <p>Our team will review and contact you within 2-3 business days</p>
@@ -132,7 +132,7 @@ include 'includes/header.php';
 
             <div class="feature-card">
                 <div
-                    style="width: 4rem; height: 4rem; background: #EC4899; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 700; margin: 0 auto 1.5rem;">
+                    style="width: 3rem; height: 3rem; background: #EC4899; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; font-weight: 700; margin: 0 auto 1rem;">
                     3</div>
                 <h4>Interview</h4>
                 <p>Meet with our principal and faculty for assessment and counseling</p>
@@ -140,7 +140,7 @@ include 'includes/header.php';
 
             <div class="feature-card">
                 <div
-                    style="width: 4rem; height: 4rem; background: #10B981; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 700; margin: 0 auto 1.5rem;">
+                    style="width: 3rem; height: 3rem; background: #10B981; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; font-weight: 700; margin: 0 auto 1rem;">
                     4</div>
                 <h4>Enrollment</h4>
                 <p>Complete documentation and payment to secure admission</p>
@@ -155,13 +155,13 @@ include 'includes/header.php';
         <div style="max-width: 48rem; margin: 0 auto;">
             <div class="card" style="border: 1px solid var(--border-light);">
                 <div class="card-body" style="padding: 2.5rem;">
-                    <div class="text-center mb-8">
-                        <div class="icon-box icon-box-lg"
-                            style="margin: 0 auto 1.5rem; background: linear-gradient(135deg, #F59E0B, #D97706);">
-                            <i class="fas fa-graduation-cap"></i>
-                        </div>
+                    <div class="text-center mb-6">
+                        <div class="icon-box icon-box-md mx-auto mb-3"
+                            style="margin: 0 auto; background: linear-gradient(135deg, #F59E0B, #D97706);"><i
+                                class="fas fa-graduation-cap"></i></div>
                         <h2>Admission <span style="color: var(--color-primary);">Inquiry Form</span></h2>
-                        <p style="color: var(--text-muted);">Please provide the following information to begin the
+                        <p style="color: var(--text-muted); font-size: 0.9rem;">Please provide the following information
+                            to begin the
                             admission process</p>
                     </div>
 
@@ -286,57 +286,57 @@ include 'includes/header.php';
             <p>Discover what makes us the preferred choice for quality education</p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div class="feature-card" style="text-align: left; display: flex; gap: 1rem; align-items: flex-start;">
-                <div class="icon-box icon-box-sm" style="flex-shrink: 0;"><i class="fas fa-award"></i></div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div class="feature-card flex gap-3 p-4 items-start text-left">
+                <div class="icon-box icon-box-sm flex-shrink-0"><i class="fas fa-award"></i></div>
                 <div>
-                    <h4>Academic Excellence</h4>
-                    <p>Proven track record with 99%+ pass rates and numerous toppers</p>
+                    <h4 class="mt-0 text-base">Academic Excellence</h4>
+                    <p class="text-sm">Proven track record with 99%+ pass rates and numerous toppers</p>
                 </div>
             </div>
 
-            <div class="feature-card" style="text-align: left; display: flex; gap: 1rem; align-items: flex-start;">
-                <div class="icon-box icon-box-sm" style="flex-shrink: 0; background: #F59E0B;"><i
+            <div class="feature-card flex gap-3 p-4 items-start text-left">
+                <div class="icon-box icon-box-sm flex-shrink-0" style="background: #F59E0B;"><i
                         class="fas fa-chalkboard-teacher"></i></div>
                 <div>
-                    <h4>Experienced Faculty</h4>
-                    <p>Highly qualified teachers dedicated to student success</p>
+                    <h4 class="mt-0 text-base">Experienced Faculty</h4>
+                    <p class="text-sm">Highly qualified teachers dedicated to student success</p>
                 </div>
             </div>
 
-            <div class="feature-card" style="text-align: left; display: flex; gap: 1rem; align-items: flex-start;">
-                <div class="icon-box icon-box-sm" style="flex-shrink: 0; background: #EC4899;"><i
+            <div class="feature-card flex gap-3 p-4 items-start text-left">
+                <div class="icon-box icon-box-sm flex-shrink-0" style="background: #EC4899;"><i
                         class="fas fa-building"></i></div>
                 <div>
-                    <h4>Modern Infrastructure</h4>
-                    <p>State-of-the-art facilities including smart classrooms and labs</p>
+                    <h4 class="mt-0 text-base">Modern Infrastructure</h4>
+                    <p class="text-sm">State-of-the-art facilities including smart classrooms and labs</p>
                 </div>
             </div>
 
-            <div class="feature-card" style="text-align: left; display: flex; gap: 1rem; align-items: flex-start;">
-                <div class="icon-box icon-box-sm" style="flex-shrink: 0; background: #10B981;"><i
+            <div class="feature-card flex gap-3 p-4 items-start text-left">
+                <div class="icon-box icon-box-sm flex-shrink-0" style="background: #10B981;"><i
                         class="fas fa-futbol"></i></div>
                 <div>
-                    <h4>Sports & Activities</h4>
-                    <p>Comprehensive sports program and extracurricular activities</p>
+                    <h4 class="mt-0 text-base">Sports & Activities</h4>
+                    <p class="text-sm">Comprehensive sports program and extracurricular activities</p>
                 </div>
             </div>
 
-            <div class="feature-card" style="text-align: left; display: flex; gap: 1rem; align-items: flex-start;">
-                <div class="icon-box icon-box-sm" style="flex-shrink: 0; background: #8B5CF6;"><i
+            <div class="feature-card flex gap-3 p-4 items-start text-left">
+                <div class="icon-box icon-box-sm flex-shrink-0" style="background: #8B5CF6;"><i
                         class="fas fa-shield-alt"></i></div>
                 <div>
-                    <h4>Safe Environment</h4>
-                    <p>24/7 security with CCTV surveillance and GPS tracking</p>
+                    <h4 class="mt-0 text-base">Safe Environment</h4>
+                    <p class="text-sm">24/7 security with CCTV surveillance and GPS tracking</p>
                 </div>
             </div>
 
-            <div class="feature-card" style="text-align: left; display: flex; gap: 1rem; align-items: flex-start;">
-                <div class="icon-box icon-box-sm" style="flex-shrink: 0; background: #6366F1;"><i
+            <div class="feature-card flex gap-3 p-4 items-start text-left">
+                <div class="icon-box icon-box-sm flex-shrink-0" style="background: #6366F1;"><i
                         class="fas fa-users"></i></div>
                 <div>
-                    <h4>Holistic Development</h4>
-                    <p>Focus on overall personality and character development</p>
+                    <h4 class="mt-0 text-base">Holistic Development</h4>
+                    <p class="text-sm">Focus on overall personality and character development</p>
                 </div>
             </div>
         </div>

@@ -33,13 +33,13 @@ include 'includes/header.php';
                 <div style="position: relative;">
                     <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400'%3E%3Cdefs%3E%3ClinearGradient id='grad1' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%232563EB;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%2314B8A6;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect fill='url(%23grad1)' width='600' height='400'/%3E%3Ctext fill='%23ffffff' font-family='sans-serif' font-size='42' font-weight='bold' x='50%25' y='50%25' text-anchor='middle' dy='.3em'%3ELotus Valley%3C/text%3E%3C/svg%3E"
                         alt="School Building"
-                        style="width: 100%; height: 400px; object-fit: cover; border-radius: 1rem; box-shadow: var(--shadow-xl);">
+                        style="width: 100%; height: 320px; object-fit: cover; border-radius: 1rem; box-shadow: var(--shadow-xl);">
                     <div
-                        style="position: absolute; bottom: -1rem; right: -1rem; background: var(--color-primary); color: white; padding: 1.5rem; border-radius: 1rem; box-shadow: var(--shadow-lg);">
-                        <div style="font-size: 2rem; font-weight: 700;">
+                        style="position: absolute; bottom: -1rem; right: -1rem; background: var(--color-primary); color: white; padding: 1rem 1.5rem; border-radius: 1rem; box-shadow: var(--shadow-lg);">
+                        <div style="font-size: 1.5rem; font-weight: 700;">
                             <?php echo clean($settings['years_established'] ?? '25'); ?>+
                         </div>
-                        <div style="font-size: 0.875rem; opacity: 0.9;">Years Legacy</div>
+                        <div style="font-size: 0.75rem; opacity: 0.9;">Years Legacy</div>
                     </div>
                 </div>
             </div>
@@ -93,39 +93,39 @@ include 'includes/header.php';
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div class="card">
                 <div
-                    style="height: 250px; overflow: hidden; background: linear-gradient(135deg, #0D9488, #14B8A6); display: flex; align-items: center; justify-content: center;">
-                    <i class="fas fa-user-tie" style="font-size: 5rem; color: rgba(255,255,255,0.3);"></i>
+                    style="height: 180px; overflow: hidden; background: linear-gradient(135deg, #0D9488, #14B8A6); display: flex; align-items: center; justify-content: center;">
+                    <i class="fas fa-user-tie" style="font-size: 3.5rem; color: rgba(255,255,255,0.3);"></i>
                 </div>
                 <div class="card-body text-center">
                     <span class="badge badge-secondary mb-2">Chairman</span>
                     <h4>Mr. Sompal Rana</h4>
-                    <p style="color: var(--text-muted); font-size: 0.9375rem;">Leading with vision and dedication to
+                    <p style="color: var(--text-muted); font-size: 0.85rem;">Leading with vision and dedication to
                         nurture future leaders</p>
                 </div>
             </div>
 
             <div class="card">
-                <div style="height: 250px; overflow: hidden;">
+                <div style="height: 180px; overflow: hidden;">
                     <img src="assets/images/WhatsApp Image 2025-12-19 at 18.42.31.jpeg" alt="Director"
                         style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
                 <div class="card-body text-center">
                     <span class="badge badge-primary mb-2">Director</span>
                     <h4>Mr. Avesh Gautam</h4>
-                    <p style="color: var(--text-muted); font-size: 0.9375rem;">Driving excellence and innovation in
+                    <p style="color: var(--text-muted); font-size: 0.85rem;">Driving excellence and innovation in
                         education</p>
                 </div>
             </div>
 
             <div class="card">
                 <div
-                    style="height: 250px; overflow: hidden; background: linear-gradient(135deg, #EC4899, #DB2777); display: flex; align-items: center; justify-content: center;">
-                    <i class="fas fa-user-graduate" style="font-size: 5rem; color: rgba(255,255,255,0.3);"></i>
+                    style="height: 180px; overflow: hidden; background: linear-gradient(135deg, #EC4899, #DB2777); display: flex; align-items: center; justify-content: center;">
+                    <i class="fas fa-user-graduate" style="font-size: 3.5rem; color: rgba(255,255,255,0.3);"></i>
                 </div>
                 <div class="card-body text-center">
                     <span class="badge badge-secondary mb-2">Principal</span>
                     <h4>Mr. Narinder Rana</h4>
-                    <p style="color: var(--text-muted); font-size: 0.9375rem;">Committed to academic excellence and
+                    <p style="color: var(--text-muted); font-size: 0.85rem;">Committed to academic excellence and
                         student development</p>
                 </div>
             </div>
@@ -136,14 +136,16 @@ include 'includes/header.php';
 <!-- Mission & Vision -->
 <section class="section bg-white">
     <div class="container">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
             <div class="card"
-                style="border: 2px solid rgba(245, 158, 11, 0.2); background: linear-gradient(135deg, rgba(245, 158, 11, 0.05), rgba(245, 158, 11, 0.1));">
-                <div class="card-body" style="padding: 2rem;">
-                    <div class="icon-box icon-box-lg mb-6"
-                        style="background: linear-gradient(135deg, #F59E0B, #D97706);"><i class="fas fa-eye"></i></div>
+                style="border: 1px solid rgba(245, 158, 11, 0.2); background: linear-gradient(135deg, rgba(245, 158, 11, 0.05), rgba(245, 158, 11, 0.1));">
+                <div class="card-body">
+                    <div class="icon-box icon-box-lg mb-4"
+                        style="background: linear-gradient(135deg, #F59E0B, #D97706); width: 3.5rem; height: 3.5rem; font-size: 1.5rem;">
+                        <i class="fas fa-eye"></i>
+                    </div>
                     <h3>Our Vision</h3>
-                    <p style="color: var(--text-body); line-height: 1.8; margin-top: 1rem;">
+                    <p style="color: var(--text-body); line-height: 1.6; margin-top: 0.5rem; font-size: 0.95rem;">
                         Our vision is to nurture disciplined, ethical, confident, and creative learners who excel
                         academically while remaining deeply rooted in moral and cultural values. We strive to develop
                         globally aware individuals who are prepared to lead society with integrity, responsibility, and
@@ -153,25 +155,23 @@ include 'includes/header.php';
             </div>
 
             <div class="card"
-                style="border: 2px solid rgba(37, 99, 235, 0.2); background: linear-gradient(135deg, rgba(37, 99, 235, 0.05), rgba(37, 99, 235, 0.1));">
-                <div class="card-body" style="padding: 2rem;">
-                    <div class="icon-box icon-box-lg mb-6"><i class="fas fa-bullseye"></i></div>
+                style="border: 1px solid rgba(37, 99, 235, 0.2); background: linear-gradient(135deg, rgba(37, 99, 235, 0.05), rgba(37, 99, 235, 0.1));">
+                <div class="card-body">
+                    <div class="icon-box icon-box-lg mb-4" style="width: 3.5rem; height: 3.5rem; font-size: 1.5rem;"><i
+                            class="fas fa-bullseye"></i></div>
                     <h3>Our Mission & Objectives</h3>
-                    <p style="color: var(--text-body); line-height: 1.8; margin-top: 1rem;">
+                    <p style="color: var(--text-body); line-height: 1.6; margin-top: 0.5rem; font-size: 0.95rem;">
                         The mission of Lotus Valley International School is to ensure the holistic development of every
                         child. Our key objectives include:
                     </p>
                     <ul
-                        style="list-style-type: disc; margin-left: 1.5rem; color: var(--text-body); margin-top: 0.5rem; line-height: 1.6;">
+                        style="list-style-type: disc; margin-left: 1.5rem; color: var(--text-body); margin-top: 0.5rem; line-height: 1.5; font-size: 0.9rem;">
                         <li>Delivering high-quality, modern, and result-oriented education</li>
                         <li>Integrating moral values, discipline, and character-building with academics</li>
                         <li>Developing self-confidence, leadership skills, decision-making abilities, and creative
                             thinking</li>
                         <li>Promoting physical, mental, and emotional well-being through sports and co-curricular
                             activities</li>
-                        <li>Encouraging digital learning and technological competence</li>
-                        <li>Creating a positive learning environment through active collaboration between teachers,
-                            parents, and the community</li>
                     </ul>
                 </div>
             </div>
@@ -183,58 +183,46 @@ include 'includes/header.php';
             <p>Our commitment to educational quality</p>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-            <div class="feature-card">
-                <div class="icon-box icon-box-lg"
-                    style="margin: 0 auto 1.5rem; background: linear-gradient(135deg, #14B8A6, #0D9488);">
-                    <i class="fas fa-chalkboard-teacher"></i>
-                </div>
+        <div class="grid grid-cols-2 lg:grid-cols-5 gap-3 mb-8">
+            <div class="feature-card p-3">
+                <div class="icon-box icon-box-sm mx-auto mb-2"
+                    style="background: linear-gradient(135deg, #14B8A6, #0D9488);"><i
+                        class="fas fa-chalkboard-teacher"></i></div>
                 <h4>Expert Faculty</h4>
-                <p>Highly qualified, experienced, and dedicated teaching faculty</p>
             </div>
-            <div class="feature-card">
-                <div class="icon-box icon-box-lg"
-                    style="margin: 0 auto 1.5rem; background: linear-gradient(135deg, #F59E0B, #D97706);">
-                    <i class="fas fa-shapes"></i>
-                </div>
+            <div class="feature-card p-3">
+                <div class="icon-box icon-box-sm mx-auto mb-2"
+                    style="background: linear-gradient(135deg, #F59E0B, #D97706);"><i class="fas fa-shapes"></i></div>
                 <h4>Active Learning</h4>
-                <p>Student-centered and activity-based teaching methodologies</p>
             </div>
-            <div class="feature-card">
-                <div class="icon-box icon-box-lg"
-                    style="margin: 0 auto 1.5rem; background: linear-gradient(135deg, #EC4899, #DB2777);">
-                    <i class="fas fa-tasks"></i>
-                </div>
-                <h4>Personalized Attention</h4>
-                <p>Continuous assessment and personalized attention to every learner</p>
+            <div class="feature-card p-3">
+                <div class="icon-box icon-box-sm mx-auto mb-2"
+                    style="background: linear-gradient(135deg, #EC4899, #DB2777);"><i class="fas fa-tasks"></i></div>
+                <h4>Personalized</h4>
             </div>
-            <div class="feature-card">
-                <div class="icon-box icon-box-lg"
-                    style="margin: 0 auto 1.5rem; background: linear-gradient(135deg, #10B981, #059669);">
-                    <i class="fas fa-language"></i>
-                </div>
+            <div class="feature-card p-3">
+                <div class="icon-box icon-box-sm mx-auto mb-2"
+                    style="background: linear-gradient(135deg, #10B981, #059669);"><i class="fas fa-language"></i></div>
                 <h4>English Focus</h4>
-                <p>Strong focus on English communication skills</p>
             </div>
-            <div class="feature-card">
-                <div class="icon-box icon-box-lg"
-                    style="margin: 0 auto 1.5rem; background: linear-gradient(135deg, #8B5CF6, #7C3AED);">
-                    <i class="fas fa-heart"></i>
-                </div>
-                <h4>Values & Life Skills</h4>
-                <p>Emphasis on value education and life skills</p>
+            <div class="feature-card p-3">
+                <div class="icon-box icon-box-sm mx-auto mb-2"
+                    style="background: linear-gradient(135deg, #8B5CF6, #7C3AED);"><i class="fas fa-heart"></i></div>
+                <h4>Values</h4>
             </div>
         </div>
 
         <!-- Our Belief -->
-        <div class="card bg-light p-8 text-center rounded-xl border border-gray-200 shadow-sm mx-auto max-w-4xl">
-            <div class="icon-box icon-box-lg mx-auto mb-4"
-                style="background: linear-gradient(135deg, #6366F1, #4F46E5);"><i class="fas fa-star"></i></div>
-            <h3 class="text-2xl font-bold mb-4 text-gray-800">Our Belief</h3>
-            <p class="text-lg text-gray-600 leading-relaxed">
+        <!-- Our Belief -->
+        <div class="card bg-light p-6 text-center rounded-xl border border-gray-200 shadow-sm mx-auto max-w-3xl">
+            <div class="icon-box icon-box-md mx-auto mb-3"
+                style="background: linear-gradient(135deg, #6366F1, #4F46E5); width: 3rem; height: 3rem; font-size: 1.25rem;">
+                <i class="fas fa-star"></i>
+            </div>
+            <h3 class="text-xl font-bold mb-2 text-gray-800">Our Belief</h3>
+            <p class="text-base text-gray-600 leading-relaxed font-size-sm">
                 At Lotus Valley International School, we believe that every child is unique and full of potential. Our
-                commitment is to identify, nurture, and develop each student’s talents while preparing them to become
-                responsible, confident, and successful individuals.
+                commitment is to identify, nurture, and develop each student’s talents.
             </p>
         </div>
 
@@ -255,8 +243,8 @@ include 'includes/header.php';
                 <div class="grid grid-cols-1 lg:grid-cols-4 gap-6" style="align-items: center;">
                     <div class="text-center">
                         <div
-                            style="width: 150px; height: 150px; border-radius: 50%; border: 4px solid rgba(255,255,255,0.3); margin: 0 auto; background: rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center;">
-                            <i class="fas fa-user-tie" style="font-size: 3.5rem; color: rgba(255,255,255,0.5);"></i>
+                            style="width: 100px; height: 100px; border-radius: 50%; border: 3px solid rgba(255,255,255,0.3); margin: 0 auto; background: rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center;">
+                            <i class="fas fa-user-tie" style="font-size: 2.5rem; color: rgba(255,255,255,0.5);"></i>
                         </div>
                     </div>
                     <div style="grid-column: span 3;">
@@ -297,7 +285,7 @@ include 'includes/header.php';
                 <div class="grid grid-cols-1 lg:grid-cols-4 gap-6" style="align-items: center;">
                     <div class="text-center">
                         <img src="assets/images/WhatsApp Image 2025-12-19 at 18.42.31.jpeg" alt="Director"
-                            style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover; border: 4px solid rgba(255,255,255,0.3); margin: 0 auto;">
+                            style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 3px solid rgba(255,255,255,0.3); margin: 0 auto;">
                     </div>
                     <div style="grid-column: span 3;">
                         <div class="flex items-center gap-3 mb-4">
@@ -335,9 +323,9 @@ include 'includes/header.php';
                 <div class="grid grid-cols-1 lg:grid-cols-4 gap-6" style="align-items: center;">
                     <div class="text-center">
                         <div
-                            style="width: 150px; height: 150px; border-radius: 50%; border: 4px solid rgba(255,255,255,0.3); margin: 0 auto; background: rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center;">
+                            style="width: 100px; height: 100px; border-radius: 50%; border: 3px solid rgba(255,255,255,0.3); margin: 0 auto; background: rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center;">
                             <i class="fas fa-user-graduate"
-                                style="font-size: 3.5rem; color: rgba(255,255,255,0.5);"></i>
+                                style="font-size: 2.5rem; color: rgba(255,255,255,0.5);"></i>
                         </div>
                     </div>
                     <div style="grid-column: span 3;">
@@ -465,26 +453,26 @@ include 'includes/header.php';
                 activities</p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div class="card p-6 flex items-center gap-4 bg-white shadow-sm hover:shadow-md transition-shadow">
-                <i class="fas fa-running text-2xl text-teal-600"></i>
-                <span class="font-semibold text-lg">Sports and regular physical training</span>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div class="card p-4 flex items-center gap-3 bg-white shadow-sm hover:shadow-md transition-shadow">
+                <i class="fas fa-running text-xl text-teal-600"></i>
+                <span class="font-semibold text-base">Sports & physical training</span>
             </div>
-            <div class="card p-6 flex items-center gap-4 bg-white shadow-sm hover:shadow-md transition-shadow">
-                <i class="fas fa-paint-brush text-2xl text-teal-600"></i>
-                <span class="font-semibold text-lg">Music, dance, drawing, and painting</span>
+            <div class="card p-4 flex items-center gap-3 bg-white shadow-sm hover:shadow-md transition-shadow">
+                <i class="fas fa-paint-brush text-xl text-teal-600"></i>
+                <span class="font-semibold text-base">Music, dance & painting</span>
             </div>
-            <div class="card p-6 flex items-center gap-4 bg-white shadow-sm hover:shadow-md transition-shadow">
-                <i class="fas fa-microphone-alt text-2xl text-teal-600"></i>
-                <span class="font-semibold text-lg">Debates, speeches, and writing</span>
+            <div class="card p-4 flex items-center gap-3 bg-white shadow-sm hover:shadow-md transition-shadow">
+                <i class="fas fa-microphone-alt text-xl text-teal-600"></i>
+                <span class="font-semibold text-base">Debates & writing</span>
             </div>
-            <div class="card p-6 flex items-center gap-4 bg-white shadow-sm hover:shadow-md transition-shadow">
-                <i class="fas fa-spa text-2xl text-teal-600"></i>
-                <span class="font-semibold text-lg">Yoga, meditation, and wellness</span>
+            <div class="card p-4 flex items-center gap-3 bg-white shadow-sm hover:shadow-md transition-shadow">
+                <i class="fas fa-spa text-xl text-teal-600"></i>
+                <span class="font-semibold text-base">Yoga & wellness</span>
             </div>
-            <div class="card p-6 flex items-center gap-4 bg-white shadow-sm hover:shadow-md transition-shadow">
-                <i class="fas fa-calendar-alt text-2xl text-teal-600"></i>
-                <span class="font-semibold text-lg">Festivals and cultural events</span>
+            <div class="card p-4 flex items-center gap-3 bg-white shadow-sm hover:shadow-md transition-shadow">
+                <i class="fas fa-calendar-alt text-xl text-teal-600"></i>
+                <span class="font-semibold text-base">Cultural events</span>
             </div>
         </div>
     </div>
@@ -493,12 +481,10 @@ include 'includes/header.php';
 <!-- Message to Parents -->
 <section class="section bg-white text-center">
     <div class="container max-w-4xl">
-        <div class="icon-box icon-box-xl mx-auto mb-6"
-            style="background: linear-gradient(135deg, #F59E0B, #D97706); width: 80px; height: 80px; font-size: 2.5rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white;">
-            <i class="fas fa-envelope-open-text"></i>
-        </div>
-        <h2 class="mb-6">Message to Parents</h2>
-        <p class="text-lg text-gray-600 leading-relaxed mb-8">
+        <div class="icon-box icon-box-lg mx-auto mb-4" style="background: linear-gradient(135deg, #F59E0B, #D97706);"><i
+                class="fas fa-envelope-open-text"></i></div>
+        <h2 class="mb-4">Message to Parents</h2>
+        <p class="text-base text-gray-600 leading-relaxed mb-6">
             We warmly invite parents to partner with us in shaping a bright future for their children by choosing Lotus
             Valley International School—where education is not limited to academics but is a lifelong journey of growth
             and character building.

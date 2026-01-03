@@ -67,19 +67,19 @@ include 'includes/header.php';
         <?php if (empty($toppers)): ?>
             <div class="text-center" style="padding: 4rem 0;">
                 <div
-                    style="width: 8rem; height: 8rem; background: var(--border-light); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 2rem;">
-                    <i class="fas fa-search" style="font-size: 3rem; color: var(--text-muted);"></i>
+                    style="width: 5rem; height: 5rem; background: var(--border-light); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem;">
+                    <i class="fas fa-search" style="font-size: 2rem; color: var(--text-muted);"></i>
                 </div>
-                <h3 style="margin-bottom: 1rem;">No Toppers Found</h3>
-                <p style="color: var(--text-muted);">Try selecting a different year</p>
+                <h3 style="margin-bottom: 0.5rem; font-size: 1.25rem;">No Toppers Found</h3>
+                <p style="color: var(--text-muted); font-size: 0.875rem;">Try selecting a different year</p>
             </div>
         <?php else: ?>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 <?php foreach ($toppers as $topper): ?>
-                    <div class="card">
+                    <div class="card overflow-hidden">
                         <!-- Photo Section -->
                         <div
-                            style="height: 220px; background: linear-gradient(135deg, #F59E0B, #D97706); position: relative; overflow: hidden;">
+                            style="height: 180px; background: linear-gradient(135deg, #F59E0B, #D97706); position: relative; overflow: hidden;">
                             <?php if ($topper['photo']): ?>
                                 <img src="uploads/toppers/<?php echo clean($topper['photo']); ?>"
                                     alt="<?php echo clean($topper['name']); ?>"
@@ -87,17 +87,17 @@ include 'includes/header.php';
                             <?php else: ?>
                                 <div
                                     style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
-                                    <i class="fas fa-user-graduate" style="font-size: 4rem; color: rgba(255,255,255,0.5);"></i>
+                                    <i class="fas fa-user-graduate" style="font-size: 3rem; color: rgba(255,255,255,0.5);"></i>
                                 </div>
                             <?php endif; ?>
                             <div
-                                style="position: absolute; top: 1rem; right: 1rem; background: var(--color-primary); color: white; padding: 0.5rem 1rem; border-radius: 0.5rem; font-weight: 700; font-size: 1.25rem;">
+                                style="position: absolute; top: 0.75rem; right: 0.75rem; background: var(--color-primary); color: white; padding: 0.35rem 0.75rem; border-radius: 0.5rem; font-weight: 700; font-size: 1rem; box-shadow: var(--shadow-sm);">
                                 <?php echo clean($topper['percentage']); ?>%
                             </div>
                         </div>
 
                         <!-- Details Section -->
-                        <div class="card-body">
+                        <div class="card-body p-4">
                             <h4 style="margin-bottom: 1rem;"><?php echo clean($topper['name']); ?></h4>
 
                             <div style="display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 1rem;">
@@ -120,7 +120,8 @@ include 'includes/header.php';
                                     <div>
                                         <div style="font-size: 0.75rem; color: var(--text-muted);">Class & Board</div>
                                         <div style="font-weight: 600;"><?php echo clean($topper['class']); ?> •
-                                            <?php echo clean($topper['board']); ?></div>
+                                            <?php echo clean($topper['board']); ?>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -148,7 +149,8 @@ include 'includes/header.php';
                                                 style="font-size: 0.625rem; color: var(--text-muted); text-transform: uppercase; font-weight: 600;">
                                                 Achievement</div>
                                             <div style="font-weight: 600; color: var(--text-heading);">
-                                                <?php echo clean($topper['achievement']); ?></div>
+                                                <?php echo clean($topper['achievement']); ?>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

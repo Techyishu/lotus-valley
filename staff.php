@@ -67,20 +67,20 @@ include 'includes/header.php';
         <?php if (empty($staff)): ?>
             <div class="text-center" style="padding: 4rem 0;">
                 <div
-                    style="width: 8rem; height: 8rem; background: var(--border-light); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 2rem;">
-                    <i class="fas fa-user-slash" style="font-size: 3rem; color: var(--text-muted);"></i>
+                    style="width: 5rem; height: 5rem; background: var(--border-light); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem;">
+                    <i class="fas fa-user-slash" style="font-size: 2rem; color: var(--text-muted);"></i>
                 </div>
-                <h3 style="margin-bottom: 1rem;">No Staff Members Found</h3>
-                <p style="color: var(--text-muted);">Try selecting a different department</p>
+                <h3 style="margin-bottom: 0.5rem; font-size: 1.25rem;">No Staff Members Found</h3>
+                <p style="color: var(--text-muted); font-size: 0.875rem;">Try selecting a different department</p>
             </div>
         <?php else: ?>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
-                style="grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"
+                style="grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));">
                 <?php foreach ($staff as $member): ?>
-                    <div class="card">
+                    <div class="card overflow-hidden">
                         <!-- Photo Section -->
                         <div
-                            style="height: 220px; background: linear-gradient(135deg, #F59E0B, #D97706); position: relative; overflow: hidden;">
+                            style="height: 180px; background: linear-gradient(135deg, #F59E0B, #D97706); position: relative; overflow: hidden;">
                             <?php if ($member['photo']): ?>
                                 <img src="uploads/staff/<?php echo clean($member['photo']); ?>"
                                     alt="<?php echo clean($member['name']); ?>"
@@ -88,24 +88,27 @@ include 'includes/header.php';
                             <?php else: ?>
                                 <div
                                     style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
-                                    <i class="fas fa-user-tie" style="font-size: 4rem; color: rgba(255,255,255,0.5);"></i>
+                                    <i class="fas fa-user-tie" style="font-size: 3rem; color: rgba(255,255,255,0.5);"></i>
                                 </div>
                             <?php endif; ?>
                             <!-- Overlay with name -->
                             <div
-                                style="position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); padding: 2rem 1.5rem 1rem;">
-                                <h4 style="color: white; margin: 0;"><?php echo clean($member['name']); ?></h4>
-                                <p style="color: rgba(255,255,255,0.8); font-size: 0.875rem; margin: 0.25rem 0 0;">
-                                    <?php echo clean($member['department']); ?></p>
+                                style="position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); padding: 1.5rem 1rem 0.75rem;">
+                                <h4 style="color: white; margin: 0; font-size: 1.1rem;"><?php echo clean($member['name']); ?>
+                                </h4>
+                                <p style="color: rgba(255,255,255,0.9); font-size: 0.8rem; margin: 0.2rem 0 0;">
+                                    <?php echo clean($member['department']); ?>
+                                </p>
                             </div>
                         </div>
 
                         <!-- Details Section -->
-                        <div class="card-body">
+                        <div class="card-body p-4">
                             <span class="badge badge-secondary mb-4"><?php echo clean($member['department']); ?></span>
 
                             <h4 style="font-size: 1rem; margin-bottom: 0.5rem;">
-                                <?php echo clean($member['position'] ?? 'Teacher'); ?></h4>
+                                <?php echo clean($member['position'] ?? 'Teacher'); ?>
+                            </h4>
 
                             <p style="color: var(--text-muted); font-size: 0.875rem; margin-bottom: 1rem; line-height: 1.6;">
                                 <?php echo clean($member['bio'] ?? 'Dedicated educator committed to student success and excellence in teaching.'); ?>

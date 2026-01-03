@@ -104,20 +104,17 @@ include 'includes/header.php';
                 <div class="stat-label">Happy Students</div>
             </div>
             <div class="stat-item">
-                <div class="stat-icon" style="background-color: rgba(245, 158, 11, 0.1); color: #F59E0B;"><i
-                        class="fas fa-chalkboard-teacher"></i></div>
+                <div class="stat-icon"><i class="fas fa-chalkboard-teacher"></i></div>
                 <div class="stat-number"><?php echo clean($settings['faculty_count'] ?? '100'); ?>+</div>
                 <div class="stat-label">Qualified Teachers</div>
             </div>
             <div class="stat-item">
-                <div class="stat-icon" style="background-color: rgba(16, 185, 129, 0.1); color: #10B981;"><i
-                        class="fas fa-trophy"></i></div>
+                <div class="stat-icon"><i class="fas fa-trophy"></i></div>
                 <div class="stat-number">100%</div>
                 <div class="stat-label">Board Results</div>
             </div>
             <div class="stat-item">
-                <div class="stat-icon" style="background-color: rgba(139, 92, 246, 0.1); color: #8B5CF6;"><i
-                        class="fas fa-award"></i></div>
+                <div class="stat-icon"><i class="fas fa-award"></i></div>
                 <div class="stat-number"><?php echo clean($settings['years_established'] ?? '25'); ?>+</div>
                 <div class="stat-label">Years of Excellence</div>
             </div>
@@ -134,45 +131,32 @@ include 'includes/header.php';
             <p>Comprehensive curriculum designed for every stage of your child's educational journey</p>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <div class="feature-card">
-                <div class="icon-box" style="background: linear-gradient(135deg, #EC4899, #DB2777);">
-                    <i class="fas fa-baby"></i>
-                </div>
+                <div class="icon-box icon-box-sm"><i class="fas fa-baby"></i></div>
                 <h4>Pre-Primary</h4>
                 <p>Playful learning environment for Nursery to UKG with focus on foundational skills</p>
-                <a href="about.php" class="btn btn-outline btn-pill mt-4"
-                    style="font-size: 0.875rem; padding: 0.5rem 1rem;">View Curriculum</a>
             </div>
 
             <div class="feature-card">
-                <div class="icon-box" style="background: linear-gradient(135deg, #14B8A6, #0D9488);">
-                    <i class="fas fa-child"></i>
-                </div>
+                <div class="icon-box icon-box-sm" style="background: var(--color-primary-light);"><i
+                        class="fas fa-child"></i></div>
                 <h4>Primary</h4>
                 <p>Building strong fundamentals in Classes 1-5 with activity-based learning</p>
-                <a href="about.php" class="btn btn-outline btn-pill mt-4"
-                    style="font-size: 0.875rem; padding: 0.5rem 1rem;">View Curriculum</a>
             </div>
 
             <div class="feature-card">
-                <div class="icon-box" style="background: linear-gradient(135deg, #F59E0B, #D97706);">
-                    <i class="fas fa-book-reader"></i>
-                </div>
+                <div class="icon-box icon-box-sm" style="background: var(--color-secondary);"><i
+                        class="fas fa-book-reader"></i></div>
                 <h4>Middle School</h4>
                 <p>Developing critical thinking in Classes 6-8 through integrated curriculum</p>
-                <a href="about.php" class="btn btn-outline btn-pill mt-4"
-                    style="font-size: 0.875rem; padding: 0.5rem 1rem;">View Curriculum</a>
             </div>
 
             <div class="feature-card">
-                <div class="icon-box" style="background: linear-gradient(135deg, #10B981, #059669);">
-                    <i class="fas fa-user-graduate"></i>
-                </div>
+                <div class="icon-box icon-box-sm" style="background: var(--color-primary-dark);"><i
+                        class="fas fa-user-graduate"></i></div>
                 <h4>Senior Secondary</h4>
                 <p>Board exam preparation for Classes 9-12 with career guidance</p>
-                <a href="about.php" class="btn btn-outline btn-pill mt-4"
-                    style="font-size: 0.875rem; padding: 0.5rem 1rem;">View Curriculum</a>
             </div>
         </div>
     </div>
@@ -188,52 +172,36 @@ include 'includes/header.php';
         </div>
 
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-            <div class="feature-card" style="padding: 1.5rem;">
-                <div class="icon-box icon-box-sm"
-                    style="margin: 0 auto 1rem; background: linear-gradient(135deg, #14B8A6, #0D9488);">
-                    <i class="fas fa-flask"></i>
-                </div>
-                <h4 style="font-size: 1rem;">Science Labs</h4>
+            <div class="feature-card flex flex-col items-center justify-center p-4">
+                <div class="icon-box icon-box-sm mb-3"><i class="fas fa-flask"></i></div>
+                <h4>Science Labs</h4>
             </div>
 
-            <div class="feature-card" style="padding: 1.5rem;">
-                <div class="icon-box icon-box-sm"
-                    style="margin: 0 auto 1rem; background: linear-gradient(135deg, #F59E0B, #D97706);">
-                    <i class="fas fa-desktop"></i>
-                </div>
-                <h4 style="font-size: 1rem;">Computer Lab</h4>
+            <div class="feature-card flex flex-col items-center justify-center p-4">
+                <div class="icon-box icon-box-sm mb-3" style="background: var(--color-secondary);"><i
+                        class="fas fa-desktop"></i></div>
+                <h4>Computer Lab</h4>
             </div>
 
-            <div class="feature-card" style="padding: 1.5rem;">
-                <div class="icon-box icon-box-sm"
-                    style="margin: 0 auto 1rem; background: linear-gradient(135deg, #EC4899, #DB2777);">
-                    <i class="fas fa-book"></i>
-                </div>
-                <h4 style="font-size: 1rem;">Library</h4>
+            <div class="feature-card flex flex-col items-center justify-center p-4">
+                <div class="icon-box icon-box-sm mb-3" style="background: #db2777;"><i class="fas fa-book"></i></div>
+                <h4>Library</h4>
             </div>
 
-            <div class="feature-card" style="padding: 1.5rem;">
-                <div class="icon-box icon-box-sm"
-                    style="margin: 0 auto 1rem; background: linear-gradient(135deg, #10B981, #059669);">
-                    <i class="fas fa-futbol"></i>
-                </div>
-                <h4 style="font-size: 1rem;">Sports Ground</h4>
+            <div class="feature-card flex flex-col items-center justify-center p-4">
+                <div class="icon-box icon-box-sm mb-3" style="background: var(--color-primary-light);"><i
+                        class="fas fa-futbol"></i></div>
+                <h4>Sports Ground</h4>
             </div>
 
-            <div class="feature-card" style="padding: 1.5rem;">
-                <div class="icon-box icon-box-sm"
-                    style="margin: 0 auto 1rem; background: linear-gradient(135deg, #8B5CF6, #7C3AED);">
-                    <i class="fas fa-music"></i>
-                </div>
-                <h4 style="font-size: 1rem;">Music Room</h4>
+            <div class="feature-card flex flex-col items-center justify-center p-4">
+                <div class="icon-box icon-box-sm mb-3" style="background: #7c3aed;"><i class="fas fa-music"></i></div>
+                <h4>Music Room</h4>
             </div>
 
-            <div class="feature-card" style="padding: 1.5rem;">
-                <div class="icon-box icon-box-sm"
-                    style="margin: 0 auto 1rem; background: linear-gradient(135deg, #6366F1, #4F46E5);">
-                    <i class="fas fa-bus"></i>
-                </div>
-                <h4 style="font-size: 1rem;">Transport</h4>
+            <div class="feature-card flex flex-col items-center justify-center p-4">
+                <div class="icon-box icon-box-sm mb-3" style="background: #4f46e5;"><i class="fas fa-bus"></i></div>
+                <h4>Transport</h4>
             </div>
         </div>
     </div>
@@ -252,7 +220,7 @@ include 'includes/header.php';
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 <?php foreach ($toppers as $topper): ?>
                     <div class="card">
-                        <div style="height: 200px; background: linear-gradient(135deg, #F59E0B, #D97706); position: relative;">
+                        <div style="height: 160px; background: linear-gradient(135deg, #F59E0B, #D97706); position: relative;">
                             <?php if ($topper['photo']): ?>
                                 <img src="uploads/toppers/<?php echo clean($topper['photo']); ?>"
                                     alt="<?php echo clean($topper['name']); ?>"
@@ -260,11 +228,11 @@ include 'includes/header.php';
                             <?php else: ?>
                                 <div
                                     style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
-                                    <i class="fas fa-user-graduate" style="font-size: 4rem; color: rgba(255,255,255,0.5);"></i>
+                                    <i class="fas fa-user-graduate" style="font-size: 3rem; color: rgba(255,255,255,0.5);"></i>
                                 </div>
                             <?php endif; ?>
                             <div
-                                style="position: absolute; top: 1rem; right: 1rem; background: var(--color-primary); color: white; padding: 0.5rem 1rem; border-radius: 0.5rem; font-weight: 700; font-size: 1.25rem;">
+                                style="position: absolute; top: 0.75rem; right: 0.75rem; background: var(--color-primary); color: white; padding: 0.35rem 0.75rem; border-radius: 0.5rem; font-weight: 700; font-size: 1rem;">
                                 <?php echo clean($topper['percentage']); ?>%
                             </div>
                         </div>
@@ -341,9 +309,9 @@ include 'includes/header.php';
                             </div>
                         <?php endforeach; ?>
                     <?php else: ?>
-                        <div class="card text-center" style="padding: 3rem;">
+                        <div class="card text-center" style="padding: 2rem;">
                             <i class="fas fa-bullhorn"
-                                style="font-size: 3rem; color: var(--border-light); margin-bottom: 1rem;"></i>
+                                style="font-size: 2.5rem; color: var(--border-light); margin-bottom: 1rem;"></i>
                             <p style="color: var(--text-muted);">No announcements at the moment</p>
                         </div>
                     <?php endif; ?>
@@ -397,9 +365,9 @@ include 'includes/header.php';
                             </div>
                         <?php endforeach; ?>
                     <?php else: ?>
-                        <div class="card text-center" style="padding: 3rem;">
+                        <div class="card text-center" style="padding: 2rem;">
                             <i class="fas fa-calendar"
-                                style="font-size: 3rem; color: var(--border-light); margin-bottom: 1rem;"></i>
+                                style="font-size: 2.5rem; color: var(--border-light); margin-bottom: 1rem;"></i>
                             <p style="color: var(--text-muted);">No upcoming events</p>
                         </div>
                     <?php endif; ?>

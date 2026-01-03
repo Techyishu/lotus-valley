@@ -88,17 +88,17 @@ include 'includes/header.php';
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
             <div class="card"
                 style="background: linear-gradient(135deg, #0D9488, #0F766E); color: white; text-align: center;">
-                <div class="card-body" style="padding: 2rem;">
+                <div class="card-body" style="padding: 1.5rem;">
                     <div
-                        style="width: 4rem; height: 4rem; background: rgba(255,255,255,0.2); border-radius: 1rem; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; font-size: 1.5rem;">
+                        style="width: 3rem; height: 3rem; background: rgba(255,255,255,0.2); border-radius: 0.75rem; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-size: 1.25rem;">
                         <i class="fas fa-map-marker-alt"></i>
                     </div>
-                    <h4 style="color: white; margin-bottom: 0.75rem;">Visit Us</h4>
-                    <p style="opacity: 0.9; font-size: 0.9375rem;">
+                    <h4 style="color: white; margin-bottom: 0.5rem; font-size: 1.1rem;">Visit Us</h4>
+                    <p style="opacity: 0.9; font-size: 0.85rem;">
                         <?php echo clean($settings['school_address'] ?? 'Education City, New Delhi'); ?>
                     </p>
                     <a href="https://maps.google.com/?q=Lotus+Valley+School" target="_blank"
-                        style="display: inline-flex; align-items: center; gap: 0.5rem; color: white; opacity: 0.8; font-size: 0.875rem; margin-top: 1rem;">
+                        style="display: inline-flex; align-items: center; gap: 0.5rem; color: white; opacity: 0.8; font-size: 0.8rem; margin-top: 0.75rem;">
                         <i class="fas fa-external-link-alt"></i> Get Directions
                     </a>
                 </div>
@@ -106,17 +106,17 @@ include 'includes/header.php';
 
             <div class="card"
                 style="background: linear-gradient(135deg, #F59E0B, #D97706); color: white; text-align: center;">
-                <div class="card-body" style="padding: 2rem;">
+                <div class="card-body" style="padding: 1.5rem;">
                     <div
-                        style="width: 4rem; height: 4rem; background: rgba(255,255,255,0.2); border-radius: 1rem; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; font-size: 1.5rem;">
+                        style="width: 3rem; height: 3rem; background: rgba(255,255,255,0.2); border-radius: 0.75rem; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-size: 1.25rem;">
                         <i class="fas fa-phone"></i>
                     </div>
-                    <h4 style="color: white; margin-bottom: 0.75rem;">Call Us</h4>
+                    <h4 style="color: white; margin-bottom: 0.5rem; font-size: 1.1rem;">Call Us</h4>
                     <a href="tel:9896421785"
-                        style="display: block; color: white; font-size: 1.25rem; font-weight: 700;">9896421785</a>
+                        style="display: block; color: white; font-size: 1.1rem; font-weight: 700;">9896421785</a>
                     <a href="tel:8950081785"
-                        style="display: block; color: white; font-size: 1.25rem; font-weight: 700; margin-top: 0.25rem;">8950081785</a>
-                    <p style="opacity: 0.8; font-size: 0.875rem; margin-top: 1rem;">
+                        style="display: block; color: white; font-size: 1.1rem; font-weight: 700; margin-top: 0.1rem;">8950081785</a>
+                    <p style="opacity: 0.8; font-size: 0.8rem; margin-top: 0.75rem;">
                         <i class="fas fa-clock" style="margin-right: 0.5rem;"></i> Mon - Sat: 8:00 AM - 3:00 PM
                     </p>
                 </div>
@@ -124,17 +124,17 @@ include 'includes/header.php';
 
             <div class="card"
                 style="background: linear-gradient(135deg, #EC4899, #DB2777); color: white; text-align: center;">
-                <div class="card-body" style="padding: 2rem;">
+                <div class="card-body" style="padding: 1.5rem;">
                     <div
-                        style="width: 4rem; height: 4rem; background: rgba(255,255,255,0.2); border-radius: 1rem; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; font-size: 1.5rem;">
+                        style="width: 3rem; height: 3rem; background: rgba(255,255,255,0.2); border-radius: 0.75rem; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-size: 1.25rem;">
                         <i class="fas fa-envelope"></i>
                     </div>
-                    <h4 style="color: white; margin-bottom: 0.75rem;">Email Us</h4>
+                    <h4 style="color: white; margin-bottom: 0.5rem; font-size: 1.1rem;">Email Us</h4>
                     <a href="mailto:info@lotusvalley.edu"
-                        style="display: block; color: white; font-size: 0.9375rem;">info@lotusvalley.edu</a>
+                        style="display: block; color: white; font-size: 0.85rem;">info@lotusvalley.edu</a>
                     <a href="mailto:admissions@lotusvalley.edu"
-                        style="display: block; color: white; font-size: 0.9375rem; margin-top: 0.25rem;">admissions@lotusvalley.edu</a>
-                    <p style="opacity: 0.8; font-size: 0.875rem; margin-top: 1rem;">
+                        style="display: block; color: white; font-size: 0.85rem; margin-top: 0.1rem;">admissions@lotusvalley.edu</a>
+                    <p style="opacity: 0.8; font-size: 0.8rem; margin-top: 0.75rem;">
                         <i class="fas fa-info-circle" style="margin-right: 0.5rem;"></i> Reply within 24 hours
                     </p>
                 </div>
@@ -210,7 +210,7 @@ include 'includes/header.php';
                             <div class="icon-box icon-box-sm"><i class="fas fa-map-marked-alt"></i></div>
                             Find Us on Map
                         </h4>
-                        <div style="height: 250px; border-radius: 0.75rem; overflow: hidden;">
+                        <div style="height: 180px; border-radius: 0.5rem; overflow: hidden;">
                             <iframe
                                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3502.1339866799387!2d77.2090212!3d28.6139391!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjjCsDM2JzUwLjIiTiA3N8KwMTInMjUuNSJF!5e0!3m2!1sen!2sin!4v1234567890"
                                 width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
