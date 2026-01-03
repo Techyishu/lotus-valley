@@ -6,20 +6,20 @@ global $pdo;
 
 // Handle delete
 if (isset($_GET['delete']) && isset($_GET['token']) && verifyCSRFToken($_GET['token'])) {
-    $id = (int)$_GET['delete'];
-    
+    $id = (int) $_GET['delete'];
+
     try {
         $stmt = $pdo->prepare("SELECT photo FROM staff WHERE id = ?");
         $stmt->execute([$id]);
         $staff = $stmt->fetch();
-        
+
         if ($staff && $staff['photo']) {
             deleteFile('../uploads/staff/' . $staff['photo']);
         }
-        
+
         $stmt = $pdo->prepare("DELETE FROM staff WHERE id = ?");
         $stmt->execute([$id]);
-        
+
         echo "<script>showToast('Staff member deleted successfully', 'success');</script>";
     } catch (PDOException $e) {
         echo "<script>showToast('Error deleting staff member', 'error');</script>";
@@ -34,83 +34,92 @@ try {
 }
 ?>
 
-<div class="mb-6 flex justify-between items-center">
-    <h2 class="text-2xl font-bold text-gray-800">All Staff Members</h2>
-    <a href="add_staff.php" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition">
-        <i class="fas fa-plus mr-2"></i>Add New Staff
-    </a>
-</div>
+<div class="card">
+    <div class="card-header">
+        <h3><i class="fas fa-user-tie"></i> All Staff Members</h3>
+        <a href="add_staff.php" class="btn btn-primary">
+            <i class="fas fa-plus"></i> Add New Staff
+        </a>
+    </div>
 
-<div class="bg-white rounded-xl shadow-lg overflow-hidden">
     <?php if (empty($staffMembers)): ?>
-        <div class="text-center py-16">
-            <i class="fas fa-user-tie text-gray-400 text-6xl mb-4"></i>
-            <h3 class="text-xl font-bold text-gray-600 mb-2">No Staff Members Yet</h3>
-            <p class="text-gray-500 mb-4">Start by adding your first staff member</p>
-            <a href="add_staff.php" class="inline-block bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition">
-                <i class="fas fa-plus mr-2"></i>Add Staff
+        <div class="card-body text-center py-16">
+            <div
+                style="width: 80px; height: 80px; background: #e0e7ff; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem;">
+                <i class="fas fa-user-tie text-indigo-500 text-3xl"></i>
+            </div>
+            <h3 class="text-xl font-bold text-gray-800 mb-2">No Staff Members Found</h3>
+            <p class="text-gray-500 mb-6">Start by building your team directory.</p>
+            <a href="add_staff.php" class="btn btn-primary">
+                Add Staff Member
             </a>
         </div>
     <?php else: ?>
-        <div class="overflow-x-auto">
-            <table class="w-full">
-                <thead class="bg-gray-50 border-b">
-                    <tr>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Photo</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Name</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Designation</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Department</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Experience</th>
-                        <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase">Actions</th>
-                    </tr>
-                </thead>
-                <tbody class="bg-white divide-y divide-gray-200">
-                    <?php foreach ($staffMembers as $staff): ?>
-                        <tr class="hover:bg-gray-50">
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <?php if ($staff['photo']): ?>
-                                    <img src="../uploads/staff/<?php echo clean($staff['photo']); ?>" 
-                                         alt="<?php echo clean($staff['name']); ?>" 
-                                         class="w-12 h-12 rounded-full object-cover">
-                                <?php else: ?>
-                                    <div class="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center">
-                                        <i class="fas fa-user text-gray-400"></i>
-                                    </div>
-                                <?php endif; ?>
-                            </td>
-                            <td class="px-6 py-4">
-                                <div class="font-medium text-gray-900"><?php echo clean($staff['name']); ?></div>
-                                <div class="text-sm text-gray-500"><?php echo clean($staff['email'] ?? ''); ?></div>
-                            </td>
-                            <td class="px-6 py-4">
-                                <span class="text-sm text-gray-900"><?php echo clean($staff['designation']); ?></span>
-                            </td>
-                            <td class="px-6 py-4">
-                                <span class="px-2 py-1 text-xs font-semibold rounded-full bg-purple-100 text-purple-800">
-                                    <?php echo clean($staff['department']); ?>
-                                </span>
-                            </td>
-                            <td class="px-6 py-4">
-                                <span class="text-sm text-gray-600"><?php echo clean($staff['experience'] ?? 'N/A'); ?></span>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                <a href="edit_staff.php?id=<?php echo $staff['id']; ?>" 
-                                   class="text-blue-600 hover:text-blue-900 mr-3">
-                                    <i class="fas fa-edit"></i> Edit
-                                </a>
-                                <a href="?delete=<?php echo $staff['id']; ?>&token=<?php echo generateCSRFToken(); ?>" 
-                                   class="text-red-600 hover:text-red-900"
-                                   onclick="return confirmDelete('Are you sure you want to delete this staff member?')">
-                                    <i class="fas fa-trash"></i> Delete
-                                </a>
-                            </td>
+        <div class="card-body" style="padding: 0;">
+            <div class="table-responsive" style="border: none; border-radius: 0;">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Staff Member</th>
+                            <th>Designation</th>
+                            <th>Department</th>
+                            <th>Experience</th>
+                            <th class="text-right">Actions</th>
                         </tr>
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($staffMembers as $staff): ?>
+                            <tr>
+                                <td>
+                                    <div class="flex items-center gap-4">
+                                        <?php if ($staff['photo']): ?>
+                                            <img src="../uploads/staff/<?php echo clean($staff['photo']); ?>"
+                                                alt="<?php echo clean($staff['name']); ?>"
+                                                class="w-10 h-10 rounded-full object-cover border border-gray-200">
+                                        <?php else: ?>
+                                            <div
+                                                class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center border border-gray-200">
+                                                <i class="fas fa-user text-gray-400"></i>
+                                            </div>
+                                        <?php endif; ?>
+                                        <div>
+                                            <div class="font-medium text-gray-900"><?php echo clean($staff['name']); ?></div>
+                                            <div class="text-xs text-gray-500"><?php echo clean($staff['email'] ?? ''); ?></div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="text-gray-700 font-medium"><?php echo clean($staff['designation']); ?></span>
+                                </td>
+                                <td>
+                                    <span class="badge badge-info">
+                                        <?php echo clean($staff['department']); ?>
+                                    </span>
+                                </td>
+                                <td class="text-gray-600">
+                                    <?php echo clean($staff['experience'] ?? 'N/A'); ?>
+                                </td>
+                                <td class="text-right">
+                                    <div class="flex items-center justify-end gap-2">
+                                        <a href="edit_staff.php?id=<?php echo $staff['id']; ?>"
+                                            class="btn btn-sm btn-outline text-blue-600" title="Edit">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <a href="?delete=<?php echo $staff['id']; ?>&token=<?php echo generateCSRFToken(); ?>"
+                                            class="btn btn-sm btn-outline text-red-600"
+                                            onclick="return confirmDelete('Are you sure you want to delete this staff member?')"
+                                            title="Delete">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
         </div>
     <?php endif; ?>
 </div>
 
 <?php require_once 'includes/admin_footer.php'; ?>
-

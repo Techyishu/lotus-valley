@@ -43,48 +43,85 @@ $stmt = $pdo->query("SELECT * FROM gallery ORDER BY uploaded_at DESC");
 $images = $stmt->fetchAll();
 ?>
 
-<div class="mb-6 flex justify-between items-center">
-    <h2 class="text-2xl font-bold text-gray-800">Gallery Images</h2>
-    <button onclick="document.getElementById('uploadModal').classList.remove('hidden')"
-        class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700">
-        <i class="fas fa-plus mr-2"></i>Upload Images
-    </button>
-</div>
+<div class="card">
+    <div class="card-header">
+        <h3><i class="fas fa-images"></i> Gallery Images</h3>
+        <button onclick="document.getElementById('uploadModal').classList.remove('hidden')" class="btn btn-primary">
+            <i class="fas fa-plus"></i> Upload Images
+        </button>
+    </div>
 
-<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
-    <?php foreach ($images as $image): ?>
-        <div class="relative group">
-            <img src="../uploads/gallery/<?php echo clean($image['image']); ?>" class="w-full h-32 object-cover rounded-lg">
-            <div
-                class="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
-                <a href="?delete=<?php echo $image['id']; ?>&token=<?php echo generateCSRFToken(); ?>"
-                    onclick="return confirmDelete()" class="text-white hover:text-red-300">
-                    <i class="fas fa-trash text-xl"></i>
-                </a>
+    <div class="card-body">
+        <?php if (empty($images)): ?>
+            <div class="text-center py-16">
+                <div
+                    style="width: 80px; height: 80px; background: #fce7f3; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem;">
+                    <i class="fas fa-images text-pink-500 text-3xl"></i>
+                </div>
+                <h3 class="text-xl font-bold text-gray-800 mb-2">No Images Found</h3>
+                <p class="text-gray-500 mb-6">Start by uploading photos to your gallery.</p>
+                <button onclick="document.getElementById('uploadModal').classList.remove('hidden')" class="btn btn-primary">
+                    Upload First Image
+                </button>
             </div>
-
-        </div>
-    <?php endforeach; ?>
+        <?php else: ?>
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
+                <?php foreach ($images as $image): ?>
+                    <div class="relative group rounded-lg overflow-hidden shadow-sm border border-gray-200">
+                        <img src="../uploads/gallery/<?php echo clean($image['image']); ?>"
+                            class="w-full h-40 object-cover transition transform group-hover:scale-105 duration-300">
+                        <div
+                            class="absolute inset-0 bg-black bg-opacity-60 opacity-0 group-hover:opacity-100 transition duration-200 flex items-center justify-center">
+                            <a href="?delete=<?php echo $image['id']; ?>&token=<?php echo generateCSRFToken(); ?>"
+                                onclick="return confirmDelete()"
+                                class="btn btn-sm btn-danger rounded-full w-10 h-10 flex items-center justify-center"
+                                title="Delete Image">
+                                <i class="fas fa-trash"></i>
+                            </a>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        <?php endif; ?>
+    </div>
 </div>
 
 <!-- Upload Modal -->
-<div id="uploadModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-    <div class="bg-white rounded-xl p-8 max-w-md w-full">
-        <h3 class="text-xl font-bold mb-4">Upload Images</h3>
-        <form method="POST" enctype="multipart/form-data" class="space-y-4">
-            <input type="hidden" name="csrf_token" value="<?php echo generateCSRFToken(); ?>">
-            <input type="hidden" name="upload" value="1">
+<div id="uploadModal"
+    class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 backdrop-blur-sm">
+    <div class="bg-white rounded-xl shadow-2xl p-0 max-w-md w-full overflow-hidden scale-100 transition-transform">
+        <div class="p-6 border-b border-gray-100 flex justify-between items-center bg-gray-50">
+            <h3 class="text-lg font-bold text-gray-800 m-0">Upload Images</h3>
+            <button onclick="document.getElementById('uploadModal').classList.add('hidden')"
+                class="text-gray-400 hover:text-gray-600">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="p-6">
+            <form method="POST" enctype="multipart/form-data">
+                <input type="hidden" name="csrf_token" value="<?php echo generateCSRFToken(); ?>">
+                <input type="hidden" name="upload" value="1">
 
-            <div><label class="block font-medium mb-2">Images</label>
-                <input type="file" name="images[]" multiple accept="image/*" required
-                    class="w-full px-4 py-2 border rounded-lg">
-            </div>
-            <div class="flex space-x-4">
-                <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded-lg">Upload</button>
-                <button type="button" onclick="document.getElementById('uploadModal').classList.add('hidden')"
-                    class="bg-gray-300 text-gray-700 px-6 py-2 rounded-lg">Cancel</button>
-            </div>
-        </form>
+                <div class="form-group">
+                    <label class="block font-semibold mb-2 text-gray-700">Select Images</label>
+                    <div
+                        class="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:bg-gray-50 transition cursor-pointer relative">
+                        <input type="file" name="images[]" multiple accept="image/*" required
+                            class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
+                        <i class="fas fa-cloud-upload-alt text-4xl text-gray-300 mb-2"></i>
+                        <p class="text-sm text-gray-500 font-medium">Click to upload or drag and drop</p>
+                        <p class="text-xs text-gray-400 mt-1">SVG, PNG, JPG or GIF</p>
+                    </div>
+                </div>
+                <div class="flex justify-end gap-3 mt-6">
+                    <button type="button" onclick="document.getElementById('uploadModal').classList.add('hidden')"
+                        class="btn btn-outline">Cancel</button>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-upload"></i> Upload
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 

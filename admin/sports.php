@@ -4,7 +4,7 @@ require_once 'includes/admin_header.php';
 
 // Handle Delete
 if (isset($_GET['delete'])) {
-    $id = (int)$_GET['delete'];
+    $id = (int) $_GET['delete'];
 
     try {
         $stmt = $pdo->prepare("DELETE FROM sports WHERE id = ?");
@@ -20,11 +20,11 @@ if (isset($_GET['delete'])) {
 
 // Handle Add/Edit
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $id = isset($_POST['id']) ? (int)$_POST['id'] : 0;
+    $id = isset($_POST['id']) ? (int) $_POST['id'] : 0;
     $title = trim($_POST['title']);
     $description = trim($_POST['description']);
     $icon = trim($_POST['icon']);
-    $display_order = (int)$_POST['display_order'];
+    $display_order = (int) $_POST['display_order'];
 
     try {
         if ($id > 0) {
@@ -55,7 +55,7 @@ try {
 // Get edit data if editing
 $editData = null;
 if (isset($_GET['edit'])) {
-    $editId = (int)$_GET['edit'];
+    $editId = (int) $_GET['edit'];
     try {
         $editStmt = $pdo->prepare("SELECT * FROM sports WHERE id = ?");
         $editStmt->execute([$editId]);
@@ -66,141 +66,158 @@ if (isset($_GET['edit'])) {
 }
 ?>
 
-    <?php if (isset($_SESSION['success'])): ?>
-        <div class="alert alert-success">
-            <i class="fas fa-check-circle"></i> <?php echo $_SESSION['success']; unset($_SESSION['success']); ?>
-        </div>
-    <?php endif; ?>
 
-    <?php if (isset($_SESSION['error'])): ?>
-        <div class="alert alert-error">
-            <i class="fas fa-exclamation-circle"></i> <?php echo $_SESSION['error']; unset($_SESSION['error']); ?>
-        </div>
-    <?php endif; ?>
+<?php if (isset($_SESSION['success'])): ?>
+    <div class="mb-6 p-4 rounded-lg bg-green-50 text-green-800 border border-green-200 flex items-center gap-3">
+        <i class="fas fa-check-circle text-green-500"></i> <?php echo $_SESSION['success'];
+        unset($_SESSION['success']); ?>
+    </div>
+<?php endif; ?>
 
-    <!-- Add/Edit Form -->
-    <div class="card" style="margin-bottom: 2rem;">
-        <div class="card-header">
-            <h3><i class="fas fa-<?php echo $editData ? 'edit' : 'plus'; ?>"></i>
-                <?php echo $editData ? 'Edit Sports Activity' : 'Add Sports Activity'; ?>
-            </h3>
-        </div>
-        <div class="card-body">
-            <form method="POST">
-                <?php if ($editData): ?>
-                    <input type="hidden" name="id" value="<?php echo $editData['id']; ?>">
-                <?php endif; ?>
+<?php if (isset($_SESSION['error'])): ?>
+    <div class="mb-6 p-4 rounded-lg bg-red-50 text-red-800 border border-red-200 flex items-center gap-3">
+        <i class="fas fa-exclamation-circle text-red-500"></i> <?php echo $_SESSION['error'];
+        unset($_SESSION['error']); ?>
+    </div>
+<?php endif; ?>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div class="form-group">
-                        <label for="title">Title *</label>
-                        <input type="text" id="title" name="title" class="form-control"
-                               value="<?php echo $editData ? htmlspecialchars($editData['title']) : ''; ?>"
-                               required placeholder="e.g., Cricket, Football, Basketball">
-                    </div>
+<div class="card mb-6">
+    <div class="card-header">
+        <h3><i class="fas fa-running"></i> Manage Sports</h3>
+    </div>
+</div>
 
-                    <div class="form-group">
-                        <label for="icon">Icon (Font Awesome class)</label>
-                        <input type="text" id="icon" name="icon" class="form-control"
-                               value="<?php echo $editData ? htmlspecialchars($editData['icon']) : 'fa-trophy'; ?>"
-                               placeholder="e.g., fa-futbol, fa-basketball-ball, fa-trophy">
-                        <small style="color: var(--text-muted); font-size: 0.875rem; display: block; margin-top: 0.5rem;">
-                            Use Font Awesome icon class (without "fas fa-")
-                        </small>
-                    </div>
-
-                    <div class="form-group" style="grid-column: 1 / -1;">
-                        <label for="description">Description *</label>
-                        <textarea id="description" name="description" class="form-control" rows="5"
-                                  required placeholder="Detailed description of the sports activity"><?php echo $editData ? htmlspecialchars($editData['description']) : ''; ?></textarea>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="display_order">Display Order</label>
-                        <input type="number" id="display_order" name="display_order" class="form-control"
-                               value="<?php echo $editData ? $editData['display_order'] : '0'; ?>"
-                               min="0" placeholder="0">
-                        <small style="color: var(--text-muted); font-size: 0.875rem; display: block; margin-top: 0.5rem;">
-                            Lower numbers appear first
-                        </small>
-                    </div>
-                </div>
-
-                <div style="display: flex; gap: 1rem; margin-top: 1.5rem;">
-                    <button type="submit" class="btn btn-primary">
-                        <i class="fas fa-<?php echo $editData ? 'save' : 'plus'; ?>"></i>
-                        <?php echo $editData ? 'Update Activity' : 'Add Activity'; ?>
-                    </button>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+    <!-- Form Section -->
+    <div class="lg:col-span-1">
+        <div class="card h-fit sticky top-6">
+            <div class="card-header border-b border-gray-100">
+                <h3><i class="fas fa-<?php echo $editData ? 'edit' : 'plus'; ?>"></i>
+                    <?php echo $editData ? 'Edit Sports Activity' : 'Add New Activity'; ?>
+                </h3>
+            </div>
+            <div class="card-body">
+                <form method="POST" class="space-y-4">
                     <?php if ($editData): ?>
-                        <a href="sports.php" class="btn btn-outline">
-                            <i class="fas fa-times"></i> Cancel
-                        </a>
+                        <input type="hidden" name="id" value="<?php echo $editData['id']; ?>">
                     <?php endif; ?>
-                </div>
-            </form>
+
+                    <div class="form-group">
+                        <label class="block text-gray-700 font-semibold mb-2">Title <span
+                                class="text-red-500">*</span></label>
+                        <input type="text" name="title" class="form-control"
+                            value="<?php echo $editData ? htmlspecialchars($editData['title']) : ''; ?>" required
+                            placeholder="e.g. Cricket Team">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="block text-gray-700 font-semibold mb-2">Icon Class</label>
+                        <div class="relative">
+                            <span class="absolute left-3 top-3 text-gray-400"><i class="fas fa-icons"></i></span>
+                            <input type="text" name="icon" class="form-control pl-10"
+                                value="<?php echo $editData ? htmlspecialchars($editData['icon']) : 'futbol'; ?>"
+                                placeholder="e.g. futbol, basketball-ball">
+                        </div>
+                        <p class="text-xs text-gray-500 mt-1">Font Awesome icon name (without 'fa-')</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="block text-gray-700 font-semibold mb-2">Display Order</label>
+                        <input type="number" name="display_order" class="form-control"
+                            value="<?php echo $editData ? $editData['display_order'] : '0'; ?>" min="0" placeholder="0">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="block text-gray-700 font-semibold mb-2">Description <span
+                                class="text-red-500">*</span></label>
+                        <textarea name="description" class="form-control" rows="4" required
+                            placeholder="Detailed description..."><?php echo $editData ? htmlspecialchars($editData['description']) : ''; ?></textarea>
+                    </div>
+
+                    <div class="flex items-center gap-3 pt-2">
+                        <button type="submit" class="btn btn-primary w-full justify-center">
+                            <i class="fas fa-save"></i> <?php echo $editData ? 'Update' : 'Save'; ?>
+                        </button>
+                        <?php if ($editData): ?>
+                            <a href="sports.php" class="btn btn-outline w-full justify-center">
+                                Cancel
+                            </a>
+                        <?php endif; ?>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 
-    <!-- Sports List -->
-    <div class="card">
-        <div class="card-header">
-            <h3><i class="fas fa-list"></i> All Sports Activities</h3>
-        </div>
-        <div class="card-body">
-            <?php if (count($sportsResult) > 0): ?>
+    <!-- List Section -->
+    <div class="lg:col-span-2 space-y-6">
+        <?php if (empty($sportsResult)): ?>
+            <div class="card">
+                <div class="card-body text-center py-16">
+                    <i class="fas fa-basketball-ball text-gray-300 text-5xl mb-4"></i>
+                    <p class="text-gray-500">No sports activities found.</p>
+                </div>
+            </div>
+        <?php else: ?>
+            <div class="card overflow-hidden">
+                <div class="card-header border-b border-gray-100 flex justify-between items-center">
+                    <h3 class="text-gray-800"><i class="fas fa-list"></i> All Activities</h3>
+                    <span class="badge badge-secondary shadow-sm"><?php echo count($sportsResult); ?> items</span>
+                </div>
                 <div class="table-responsive">
-                    <table class="table">
+                    <table class="table w-full">
                         <thead>
-                            <tr>
-                                <th>Title</th>
-                                <th>Icon</th>
-                                <th>Description</th>
-                                <th>Order</th>
-                                <th>Actions</th>
+                            <tr class="bg-gray-50 text-gray-600 uppercase text-xs tracking-wider text-left">
+                                <th class="px-6 py-3 font-semibold w-16 text-center">Icon</th>
+                                <th class="px-6 py-3 font-semibold">Activity Details</th>
+                                <th class="px-6 py-3 font-semibold w-20 text-center">Order</th>
+                                <th class="px-6 py-3 font-semibold text-right">Actions</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="divide-y divide-gray-100">
                             <?php foreach ($sportsResult as $sport): ?>
-                            <tr>
-                                <td><strong><?php echo htmlspecialchars($sport['title']); ?></strong></td>
-                                <td>
-                                    <?php if ($sport['icon']): ?>
-                                        <i class="fas fa-<?php echo htmlspecialchars($sport['icon']); ?>"></i>
-                                        <?php echo htmlspecialchars($sport['icon']); ?>
-                                    <?php else: ?>
-                                        -
-                                    <?php endif; ?>
-                                </td>
-                                <td>
-                                    <small><?php echo htmlspecialchars(substr($sport['description'], 0, 100)); ?>...</small>
-                                </td>
-                                <td><?php echo $sport['display_order']; ?></td>
-                                <td>
-                                    <div style="display: flex; gap: 0.5rem;">
-                                        <a href="?edit=<?php echo $sport['id']; ?>"
-                                           class="btn btn-sm btn-primary" title="Edit">
-                                            <i class="fas fa-edit"></i>
-                                        </a>
-                                        <a href="?delete=<?php echo $sport['id']; ?>"
-                                           class="btn btn-sm btn-danger"
-                                           onclick="return confirm('Are you sure you want to delete this sports activity?')"
-                                           title="Delete">
-                                            <i class="fas fa-trash"></i>
-                                        </a>
-                                    </div>
-                                </td>
-                            </tr>
+                                <tr class="hover:bg-gray-50 transition">
+                                    <td class="px-6 py-4 text-center">
+                                        <div
+                                            class="w-10 h-10 rounded-full bg-primary-50 text-primary-600 flex items-center justify-center text-lg mx-auto">
+                                            <i class="fas fa-<?php echo htmlspecialchars($sport['icon'] ?: 'trophy'); ?>"></i>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        <div class="font-bold text-gray-800 text-base mb-1">
+                                            <?php echo htmlspecialchars($sport['title']); ?></div>
+                                        <div class="text-sm text-gray-500 line-clamp-2 leading-relaxed">
+                                            <?php echo htmlspecialchars($sport['description']); ?></div>
+                                    </td>
+                                    <td class="px-6 py-4 text-center">
+                                        <span
+                                            class="inline-flex items-center justify-center w-6 h-6 rounded bg-gray-100 text-gray-600 text-xs font-bold">
+                                            <?php echo $sport['display_order']; ?>
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-4 text-right">
+                                        <div class="flex items-center justify-end gap-2">
+                                            <a href="?edit=<?php echo $sport['id']; ?>"
+                                                class="w-8 h-8 rounded-full flex items-center justify-center text-blue-600 hover:bg-blue-50 transition"
+                                                title="Edit">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                            <a href="?delete=<?php echo $sport['id']; ?>"
+                                                class="w-8 h-8 rounded-full flex items-center justify-center text-red-600 hover:bg-red-50 transition"
+                                                onclick="return confirm('Are you sure you want to delete this activity?')"
+                                                title="Delete">
+                                                <i class="fas fa-trash"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
                             <?php endforeach; ?>
                         </tbody>
                     </table>
                 </div>
-            <?php else: ?>
-                <div class="text-center" style="padding: 3rem;">
-                    <i class="fas fa-running" style="font-size: 4rem; color: var(--border-light); margin-bottom: 1rem;"></i>
-                    <p style="color: var(--text-muted);">No sports activities added yet. Add your first activity above.</p>
-                </div>
-            <?php endif; ?>
-        </div>
+            </div>
+        <?php endif; ?>
     </div>
+</div>
 
 <?php include 'includes/admin_footer.php'; ?>
